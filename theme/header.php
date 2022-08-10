@@ -22,7 +22,8 @@
 
 <?php wp_body_open(); ?>
 
-<div id="page">
-	<a href="#primary"><?php esc_html_e( 'Skip to content', 'xperto-ams' ); ?></a>
+<a href="#primary" class="screen-reader-text"><?php esc_html_e( 'Skip to content', 'xperto-ams' ); ?></a>
+
+<div id="page" class="flex">
 
 	<?php get_template_part( 'template-parts/layout/header', 'content' ); ?>

@@ -50,7 +50,9 @@ if ( ! function_exists( 'xperto_ams_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'xperto-ams' ),
+				'xperto-sidebar-menu' => esc_html__( 'Sidebar Menu', 'xperto-ams' ),
+				'xperto-orgadmin-menu' => esc_html__( 'Org Admin Menu', 'xperto-ams' ),
+				'xperto-primary-menu' => esc_html__( 'Content Menu', 'xperto-ams' ),
 			)
 		);
 
@@ -180,3 +182,9 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+
+/**
+ * Require custom walker
+ */
+
+require get_template_directory() . '/util/XpertoCustomNavWalker.php';

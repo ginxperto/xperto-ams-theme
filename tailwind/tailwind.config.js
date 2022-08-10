@@ -14,8 +14,24 @@ module.exports = {
 	theme: {
 		// Extend the default Tailwind theme.
 		extend: {
-
+			colors: {
+				xpertoOrange: '	hsl(26, 100%, 53%)',
+				xpertoNavyBlue: 'hsl(201, 66%, 27%)',
+				xpertoOrangeLight90: 'hsl(25, 100%, 95%)',
+				xpertoNeutralDark1: 'hsl(0, 0%, 15%)',
+				xpertoNeutralMid1: 'hsl(0, 0%, 65%)',
+				xpertoSuccessLight80: 'hsl(87, 53%, 93%)'
+			},
+			boxShadow: {
+				'left': '1px 0px 0px rgba(229, 229, 229, 1)'
+			}
 		},
+		screen: {
+			sm: '480px',
+			md: '768px',
+			lg: '976px',
+			xl: '1440px'
+		}
 	},
 	corePlugins: {
 		// Disable Preflight base styles in CSS targeting the editor.

@@ -14,7 +14,7 @@
 
 get_header();
 ?>
-
+<h2> This is commnuity page</h2>
 		<?php
 		while ( have_posts() ) :
 			the_post();
