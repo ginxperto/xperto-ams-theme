@@ -16,10 +16,10 @@
 get_header();
 ?>
 
-<main id="primary" class="container flex flex-col items-center p-4 mx-auto space-y-0 md:p-8">
-	<section id="custom-header" class="flex flex-col space-y-4 xl:flex-row xl:space-y-0 xl:space-x-6">
+<main id="primary" class="container flex flex-col items-center p-4 space-y-6 max-w-[1200px] md:p-8 xl:mx-auto">
+	<section id="custom-header" class="flex flex-col w-full space-y-4 lg:flex-row lg:space-y-0 lg:space-x-6">
 		<!-- lock the aspect ratio on higher resolution -->
-		<div id="site-header" class="bg-xperto-custom-header flex flex-col relative w-full aspect-3/1 rounded-lg xl:h-[300px] xl:w-[900px]">
+		<div id="site-header" class="bg-xperto-custom-header flex flex-col relative w-full aspect-3/1 rounded-lg lg:w-2/3">
 			<img src="<?php header_image(); ?>" alt="custom header" class="absolute w-full h-full object-cover mix-blend-overlay rounded-lg" />
 			<div class="mt-auto p-6">
 				<span class="text-4xl text-white"><?php bloginfo('name'); ?></span>
@@ -27,7 +27,7 @@ get_header();
 		</div><!-- $site-header -->
 
 		<!-- Make this same height on higher resolution -->
-		<div id="org-admin-menu" class="flex flex-col items-center w-full bg-xperto-orange-light-90 border border-xperto-orange p-6 rounded-lg xl:self-stretch">
+		<div id="org-admin-menu" class="flex flex-col items-center w-full bg-xperto-orange-light-90 border border-xperto-orange p-6 rounded-lg lg:w-1/3 lg:self-stretch">
 			<span class="w-full text-xperto-neutral-dark-1 font-bold text-2xl">
 				<?php esc_html_e('Org Admin Tools', 'xperto-ams'); ?>
 			</span>

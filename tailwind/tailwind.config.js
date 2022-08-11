@@ -34,7 +34,7 @@ module.exports = {
 				'xperto-custom-header': 'linear-gradient(360deg, #262626 0%, rgba(38, 38, 38, 60%) 43.96%)'
 			}
 		},
-		screen: {
+		screens: {
 			sm: '576px',
 			md: '768px',
 			lg: '992px',

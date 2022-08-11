@@ -56,7 +56,7 @@ if (!class_exists('XpertoCustomOrgAdminNavWalker')) {
                 $output .= '<span>';
             }
             // create span container
-            $output .= '<span class="flex-1 ml-2 whitespace-nowrap text-xperto-orange font-semibold">';
+            $output .= '<span class="flex-1 ml-2 text-xperto-orange font-semibold">';
             $output .= $item->title;
             $output .= '</span>';
 
