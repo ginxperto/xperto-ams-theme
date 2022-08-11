@@ -5,21 +5,21 @@ if (!class_exists('XpertoCustomNavWalker')) {
     {
         function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
         {
-            $output .= "<li class='" .  implode(" ", $item->classes) . "'>";
+            $output .= "<li class='" .  implode(" ", $item->classes) . " group'>";
 
             $is_active = in_array("current_page_item", $item->classes);
 
             if ($item->url && $item->url != '#') {
 
-                $tw_anchor_class = 'group flex items-center p-3 rounded-lg';
-                $tw_img_css = 'flex-shrink-0 w-6 h-6 text-xpertoNeutralMid1 transition duration-75';
+                $tw_anchor_class = 'flex items-center p-3 rounded-lg';
+                $tw_img_css = 'flex-shrink-0 w-6 h-6 text-xperto-neutral-mid-1 transition duration-75';
 
                 if ($is_active) {
-                    $tw_anchor_class .= ' bg-xpertoOrangeLight90';
-                    $tw_img_css .= ' fill-xpertoOrange';
+                    $tw_anchor_class .= ' bg-xperto-orange-light-90';
+                    $tw_img_css .= ' fill-xperto-orange';
                 } else {
-                    $tw_anchor_class .= ' hover:bg-xpertoOrangeLight90';
-                    $tw_img_css .= ' group-hover:fill-xpertoOrange';
+                    $tw_anchor_class .= ' hover:bg-xperto-orange-light-90';
+                    $tw_img_css .= ' group-hover:fill-xperto-orange';
                 }
                 $output .= '<a href="' . $item->url . '" class="' . $tw_anchor_class . '">';
 
@@ -57,9 +57,9 @@ if (!class_exists('XpertoCustomNavWalker')) {
             }
             // create span container
             if ($is_active) {
-                $output .= '<span class="flex-1 ml-2 whitespace-nowrap text-xpertoOrange">';
+                $output .= '<span class="flex-1 ml-2 whitespace-nowrap text-xperto-orange font-bold">';
             } else {
-                $output .= '<span class="flex-1 ml-2 whitespace-nowrap text-xpertoNeutralMid1 hover:text-xpertoOrange">';
+                $output .= '<span class="flex-1 ml-2 whitespace-nowrap text-xperto-neutral-mid-1 group-hover:text-xperto-orange">';
             }
             $output .= $item->title;
             $output .= '</span>';

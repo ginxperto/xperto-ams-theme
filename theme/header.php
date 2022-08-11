@@ -18,12 +18,12 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class('bg-xperto-neutral-light-2 xperto-auto w-full'); ?>>
 
 <?php wp_body_open(); ?>
 
 <a href="#primary" class="screen-reader-text"><?php esc_html_e( 'Skip to content', 'xperto-ams' ); ?></a>
 
-<div id="page" class="flex">
+<div id="page" class="relative min-h-screen flex">
 
 	<?php get_template_part( 'template-parts/layout/header', 'content' ); ?>

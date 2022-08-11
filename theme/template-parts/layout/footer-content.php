@@ -10,11 +10,11 @@
 ?>
 
 <footer id="colophon">
-	<div>
-		<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'xperto-ams' ) ); ?>">
+	<div class="flex justify-center">
+		<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'xperto-ams' ) ); ?>" class="text-center">
 			<?php
 			/* translators: %s: CMS name, i.e. WordPress. */
-			printf( esc_html__( 'Proudly powered by %s', 'xperto-ams' ), 'WordPress' );
+			printf( esc_html__( 'All rights reserved by %s', 'xperto-ams' ), 'XPERTO' );
 			?>
 		</a>
 	</div>
