@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying all pages
  *
@@ -14,21 +15,23 @@
 
 get_header();
 ?>
-<h2> This is commnuity page</h2>
-		<?php
-		while ( have_posts() ) :
-			the_post();
+<main id="primary" class="container flex flex-col items-center p-4 space-y-6 max-w-[1200px] md:p-8 xl:mx-auto">
+	<h2> This is commnuity page 8</h2>
+	<?php
+	while (have_posts()) :
+		the_post();
 
-			get_template_part( 'template-parts/content/content', 'page' );
+		get_template_part('template-parts/content/content', 'page');
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+		// If comments are open or we have at least one comment, load up the comment template.
+		if (comments_open() || get_comments_number()) :
+			comments_template();
+		endif;
 
-		endwhile; // End of the loop.
-		?>
+	endwhile; // End of the loop.
+	?>
+</main>
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();
