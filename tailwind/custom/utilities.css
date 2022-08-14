@@ -24,3 +24,15 @@
 	margin-top: auto;
 	margin-bottom: auto;
 }
+
+.community-nav {
+	@apply w-full;
+}
+
+.community-nav .nav-links {
+	@apply flex flex-row items-center justify-center space-x-4 md:justify-end;
+}
+
+.community-nav .nav-links div {
+	@apply text-xperto-neutral-mid-1 hover:text-xperto-orange;
+}

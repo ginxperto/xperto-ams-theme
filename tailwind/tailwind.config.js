@@ -20,6 +20,7 @@ module.exports = {
 				"xperto-orange-base-20": "hsl(26, 100%, 63%)",
 				"xperto-orange-base-plus-10": "hsl(26, 88%, 48%)",
 				"xperto-orange-light-90": "hsl(25, 100%, 95%)",
+				"xperto-secondary-base": "hsl(219, 32%, 46%)",
 				"xperto-neutral-light-2": "hsl(0, 0%, 96%)",
 				"xperto-neutral-mid-1": "hsl(0, 0%, 65%)",
 				"xperto-neutral-dark-1": "hsl(0, 0%, 15%)",

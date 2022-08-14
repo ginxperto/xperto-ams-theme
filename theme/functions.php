@@ -53,8 +53,7 @@ if (!function_exists('xperto_ams_setup')) :
 		register_nav_menus(
 			array(
 				'xperto-sidebar-menu' => esc_html__('Sidebar Menu', 'xperto-ams'),
-				'xperto-orgadmin-menu' => esc_html__('Org Admin Menu', 'xperto-ams'),
-				'xperto-primary-menu' => esc_html__('Content Menu', 'xperto-ams'),
+				'xperto-orgadmin-menu' => esc_html__('Org Admin Menu', 'xperto-ams')
 			)
 		);
 
