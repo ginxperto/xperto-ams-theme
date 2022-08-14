@@ -30,22 +30,11 @@ get_header();
 
 		<?php if (is_user_logged_in() && current_user_can('manage_options')) { ?>
 			<section class="w-full lg:hidden">
-				<?php get_template_part('template-parts/layout/orgadmincard', 'content'); ?>
+				<?php get_template_part('template-parts/layout/org-admin-card', 'content'); ?>
 			</section>
 		<?php } ?>
 
-		<section id="membership-upgrade-content" class="w-full">
-			<div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6">
-				<div class="flex flex-col w-full space-y-4">
-					<span class="text-2xl text-xperto-success-base font-semibold">Upgrade your membership!</span>
-					<p class="text-xperto-neutral-dark-1">Gold members get additional perks, such as unlocking exclusive Gold Member profile badges, exclusive invites to Gold Member-only events and seminars, and so much more!</p>
-					<a class="rounded-lg bg-xperto-orange py-3 px-4 text-white flex-none w-full text-center md:w-48 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10" href="http://localhost/dev/wordpress-theme-sbx/register/basic-bundle/">Upgrade Membership</a>
-				</div>
-				<div class="hidden mx-auto self-center md:inline">
-					<img src="<?php echo get_template_directory_uri(); ?>/images/membership_upgrade.png" />
-				</div>
-			</div>
-		</section><!-- #membership-upgrade-content -->
+		<?php get_template_part('template-parts/layout/membership-upgrade', 'content'); ?>
 
 		<section id="feature-content" class="flex flex-col lg:flex-row lg:space-x-6 lg:items-start">
 			<div class="flex flex-col space-x-0 space-y-6 xl:flex-row xl:space-x-6 xl:space-y-0">
@@ -92,7 +81,7 @@ get_header();
 	?>
 	<div class="secondary-sidebar w-full flex flex-col lg:w-1/3 xl:w-1/4 <?php echo $org_admin_sidebar; ?> ">
 		<section class="hidden w-full lg:block">
-			<?php get_template_part('template-parts/layout/orgadmincard', 'content'); ?>
+			<?php get_template_part('template-parts/layout/org-admin-card', 'content'); ?>
 		</section>
 		<?php get_template_part('template-parts/layout/about', 'content'); ?>
 	</div>

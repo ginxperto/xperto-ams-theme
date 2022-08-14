@@ -32,3 +32,21 @@ document.addEventListener("click", (event) => {
 		return;
 	}
 });
+
+/**
+ * Search Input toggles
+ */
+const searchInput = document.getElementById("search-input");
+const searchIcon = document.getElementById("search-icon-right");
+
+searchInput.addEventListener("focus", () => {
+	searchIcon.classList.add("hidden");
+});
+
+searchInput.addEventListener("input", () => {
+	searchIcon.classList.add("hidden");
+});
+
+searchInput.addEventListener("focusout", () => {
+	searchIcon.classList.remove("hidden");
+})

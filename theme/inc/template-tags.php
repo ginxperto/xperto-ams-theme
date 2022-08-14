@@ -215,3 +215,30 @@ if (!function_exists('xperto_ams_entry_tag')) :
 		}
 	}
 endif;
+
+if (!function_exists('xperto_ams_all_tag')) :
+	/**
+	 * Prints HTML with meta information for the categories, and tags.
+	 */
+	function xperto_ams_all_tag()
+	{
+		$separator = ' ';
+		$tags_list = [];
+		$post_tags =  get_tags(array(
+			'hide_empty' => false
+		));
+
+		if ($post_tags) {
+			foreach ($post_tags as $post_tag) {
+				$tw_class = "bg-xperto-neutral-light-2 text-xperto-secondary-base text-xs font-bold mr-2 px-2.5 py-0.5 rounded hover:text-xperto-orange";
+				$tags_list[] = '<a href="' . esc_url(get_category_link($post_tag)) . '" alt="' . esc_attr(sprintf(__('View all posts in %s', 'xperto-ams'), $post_tag->name)) . '"> 
+						<span class="' . $tw_class . '">' . esc_html($post_tag->name) . '</span>
+					</a>';
+			}
+		}
+
+		if ($tags_list) {
+			printf('<span>' . esc_html__(' %1$s', 'xperto-ams') . '</span>', implode($separator, $tags_list)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+	}
+endif;

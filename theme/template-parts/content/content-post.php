@@ -27,6 +27,7 @@
             if ('post' === get_post_type()) :
             ?>
                 <div class="mb-4">
+                    <span class="text-xperto-neutral-mid-2"> / </span> 
                     <?php
                     xperto_ams_posted_by();
                     xperto_ams_posted_on();

@@ -33,7 +33,7 @@
 </div><!-- #main-sidebar -->
 
 <div id="main-wrapper" class="flex-1">
-	<header id="masthead" class="w-full bg-white p-4 shadow-bottom md:px-8">
+	<header id="masthead" class="w-full bg-white p-4 shadow-bottom sticky top-0 md:px-8">
 		<div class="flex justify-between items-center md:justify-end">
 			<div class="md:hidden">
 				<button id="mobile-menu-button" class="focus:outline-none">
