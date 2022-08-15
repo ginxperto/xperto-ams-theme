@@ -22,12 +22,16 @@ module.exports = {
 				"xperto-orange-focus": "hsla(33, 100%, 53%, 0.16)",
 				"xperto-orange-light-90": "hsl(25, 100%, 95%)",
 				"xperto-secondary-base": "hsl(219, 32%, 46%)",
+				"xperto-neutral-light-1": "hsl(0, 0%, 90%)",
 				"xperto-neutral-light-2": "hsl(0, 0%, 96%)",
 				"xperto-neutral-mid-1": "hsl(0, 0%, 65%)",
 				"xperto-neutral-mid-2": "hsl(0, 0%, 76%)",
 				"xperto-neutral-dark-1": "hsl(0, 0%, 15%)",
 				"xperto-success-base": "hsl(85, 53%, 50%)",
 				"xperto-success-light-80": "hsl(87, 53%, 93%)",
+				"xperto-member-color-0": "hsl(0, 0%, 65%)",
+				"xperto-member-color-1": "hsl(36, 88%, 47%)",
+				"xperto-member-color-2": "hsl(226, 32%, 36%)"
 			},
 			boxShadow: {
 				right: "1px 0px 0px rgba(229, 229, 229, 1)",
