@@ -30,7 +30,7 @@
 		<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Recommended Topics', 'shape'); ?></h3>
 		<?php xperto_ams_all_tag(); ?>
 	</aside>
-	<aside id="meta" class="widget mt-8 space-y-3">
+	<aside id="meta" class="widget mt-8 space-y-4">
 		<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
 		<?php
 		$data;
@@ -41,7 +41,7 @@
 
 			// instantiate via reflection
 			$obj = $rc->newInstanceArgs();
-			
+
 			if ($obj instanceof MeprUser) {
 				// * we only one 3 people
 				$users = $obj::all('objects', array(), 'user_registered', 3);
@@ -82,7 +82,9 @@
 					<!-- TOOD: Add social icons here -->
 				</div>
 			</div>
-		<?php endforeach;
-		?>
+		<?php endforeach; ?>
+		<div>
+			<a href="<?php get_home_url(null, '/members') ?>" class="text-xperto-orange font-bold hover:text-xperto-orange-base-20">See more members</a>
+		</div>
 	</aside>
 </aside><!-- #secondary -->
