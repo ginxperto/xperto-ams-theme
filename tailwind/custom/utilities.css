@@ -36,3 +36,11 @@
 .community-nav .nav-links div {
 	@apply text-xperto-neutral-mid-1 hover:text-xperto-orange;
 }
+
+.page-numbers {
+	@apply text-xperto-neutral-mid-1 p-2 w-10 h-10 text-center rounded-lg hover:bg-white hover:text-xperto-orange;
+}
+
+.next.page-numbers, .prev.page-numbers{
+	@apply w-[90px];
+}
