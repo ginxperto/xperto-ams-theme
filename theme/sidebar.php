@@ -67,7 +67,7 @@
 						</a>
 					<?php } ?>
 				</div>
-				<div class="w-3/4 flex flex-col items-start space-y-1">
+				<div class="w-3/4 flex flex-col items-start space-y-2">
 					<h4>
 						<!-- TOOD: Add profile link -->
 						<a href="#" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
@@ -79,12 +79,24 @@
 							<?php echo $profile['mepr_about']; ?>
 						</p>
 					<?php } ?>
-					<!-- TOOD: Add social icons here -->
+					<div class="hidden flex-row justify-evenly sm:flex">
+						<?php if (array_key_exists('mepr_facebook', $profile) && !empty($profile['mepr_facebook'])) : ?>
+							<a href="<?php echo esc_url($profile['mepr_facebook']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_fb.png' ?>" class="w-5h -5" /></a>
+						<?php endif; ?>
+						<?php if (array_key_exists('mepr_twitter', $profile) && !empty($profile['mepr_twitter'])) : ?>
+							<a href="<?php echo esc_url($profile['mepr_twitter']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_twitter.png' ?>" class="w-5h -5" /></a>
+						<?php endif; ?>
+						<?php if (array_key_exists('mepr_linkedin', $profile) && !empty($profile['mepr_linkedin'])) : ?>
+							<a href="<?php echo esc_url($profile['mepr_linkedin']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_linkedin.png' ?>" class="w-5h -5" /></a>
+						<?php endif; ?>
+						<a href="<?php echo esc_url('mailto:' . $data->rec->user_email); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_email.png' ?>" class="w-5h -5" /></a>
+					</div>
+					<!-- Social Links -->
 				</div>
 			</div>
 		<?php endforeach; ?>
 		<div>
-			<a href="<?php get_home_url(null, '/members') ?>" class="text-xperto-orange font-bold hover:text-xperto-orange-base-20">See more members</a>
+			<a href="<?php echo home_url('/members') ?>" class="text-xperto-orange font-bold hover:text-xperto-orange-base-20">See more members</a>
 		</div>
 	</aside>
 </aside><!-- #secondary -->
