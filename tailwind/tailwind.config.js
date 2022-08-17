@@ -31,7 +31,8 @@ module.exports = {
 				"xperto-success-light-80": "hsl(87, 53%, 93%)",
 				"xperto-member-color-0": "hsl(0, 0%, 65%)",
 				"xperto-member-color-1": "hsl(36, 88%, 47%)",
-				"xperto-member-color-2": "hsl(226, 32%, 36%)"
+				"xperto-member-color-2": "hsl(226, 32%, 36%)",
+				"xperto-pop-over-shadow": "hsla(0, 0%, 65%, 0.2)"
 			},
 			boxShadow: {
 				right: "1px 0px 0px rgba(229, 229, 229, 1)",

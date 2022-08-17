@@ -33,7 +33,7 @@
 </div><!-- #main-sidebar -->
 
 <div id="main-wrapper" class="flex-1">
-	<header id="masthead" class="w-full bg-white p-4 shadow-bottom sticky top-0 md:px-8">
+	<header id="masthead" class="w-full bg-white p-4 shadow-bottom sticky top-0 md:px-8 z-10">
 		<div class="flex justify-between items-center md:justify-end">
 			<div class="md:hidden">
 				<button id="mobile-menu-button" class="focus:outline-none">
@@ -53,46 +53,63 @@
 						</svg>
 					</div>
 					<!-- notification -->
-					<a href="#" id="user-menu" class="flex items-center space-x-3">
-						<?php
-						if (is_user_logged_in()) :
-							$current_user = wp_get_current_user();
+					<div class="relative inline-block">
+						<a href="#" id="user-menu" class="flex items-center space-x-3">
+							<?php
+							if (is_user_logged_in()) :
+								$current_user = wp_get_current_user();
 
-							if (($current_user instanceof WP_User)) : ?>
-								<span class="text-xperto-neutral-dark-1 font-bold"><?php echo esc_html($current_user->display_name); ?></span>
-								<?php
-								// * Lets try to load the memberpress user details
-								$rc = new ReflectionClass('MeprUser');
+								if (($current_user instanceof WP_User)) : ?>
+									<span class="text-xperto-neutral-dark-1 font-bold"><?php echo esc_html($current_user->display_name); ?></span>
+									<?php
+									// * Lets try to load the memberpress user details
+									$rc = new ReflectionClass('MeprUser');
 
-								// instantiate via reflection
-								$mepr_user = $rc->newInstanceArgs(array($current_user->ID));
+									// instantiate via reflection
+									$mepr_user = $rc->newInstanceArgs(array($current_user->ID));
 
-								// we have a memberpress user loaded
-								if ($mepr_user instanceof MeprUser) {
-									// get custom fields
-									$profile = $mepr_user->custom_profile_values();
+									// we have a memberpress user loaded
+									if ($mepr_user instanceof MeprUser) {
+										// get custom fields
+										$profile = $mepr_user->custom_profile_values();
 
-									// load only if exists
-									if (!empty($profile['mepr_profile_picture'])) { ?>
-										<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-10 h-10" />
-								<?php
+										// load only if exists
+										if (!empty($profile['mepr_profile_picture'])) { ?>
+											<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-10 h-10" />
+									<?php
+										} else {
+											// else get default avater as fallback
+											echo get_avatar($current_user->ID, 40, '', 'avatar', array('class' => 'rounded-full'));
+										}
 									} else {
 										// else get default avater as fallback
 										echo get_avatar($current_user->ID, 40, '', 'avatar', array('class' => 'rounded-full'));
 									}
-								} else {
-									// else get default avater as fallback
-									echo get_avatar($current_user->ID, 40, '', 'avatar', array('class' => 'rounded-full'));
-								}
-								?>
-								<svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M0.865111 2.95662L5.69879 7.4785C5.86669 7.6433 6.06855 7.7745 6.29225 7.86414C6.51594 7.95378 6.75678 8 7.00013 8C7.24349 8 7.48433 7.95378 7.70802 7.86414C7.93172 7.7745 8.13364 7.6433 8.30153 7.4785L13.1352 2.95662C13.39 2.71353 13.5629 2.40584 13.6325 2.07169C13.7021 1.73753 13.6654 1.39162 13.5268 1.07682C13.3882 0.762026 13.154 0.492194 12.853 0.300779C12.5521 0.109364 12.1977 0.00478184 11.8338 0H2.16645C1.80257 0.00478184 1.4482 0.109364 1.14726 0.300779C0.846316 0.492194 0.612083 0.762026 0.473523 1.07682C0.334964 1.39162 0.298217 1.73753 0.367825 2.07169C0.437434 2.40584 0.610337 2.71353 0.865111 2.95662Z" fill="#A5A5A5" />
-								</svg>
-						<?php
+									?>
+									<svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M0.865111 2.95662L5.69879 7.4785C5.86669 7.6433 6.06855 7.7745 6.29225 7.86414C6.51594 7.95378 6.75678 8 7.00013 8C7.24349 8 7.48433 7.95378 7.70802 7.86414C7.93172 7.7745 8.13364 7.6433 8.30153 7.4785L13.1352 2.95662C13.39 2.71353 13.5629 2.40584 13.6325 2.07169C13.7021 1.73753 13.6654 1.39162 13.5268 1.07682C13.3882 0.762026 13.154 0.492194 12.853 0.300779C12.5521 0.109364 12.1977 0.00478184 11.8338 0H2.16645C1.80257 0.00478184 1.4482 0.109364 1.14726 0.300779C0.846316 0.492194 0.612083 0.762026 0.473523 1.07682C0.334964 1.39162 0.298217 1.73753 0.367825 2.07169C0.437434 2.40584 0.610337 2.71353 0.865111 2.95662Z" fill="#A5A5A5" />
+									</svg>
+							<?php
+								endif;
 							endif;
-						endif;
-						?>
-					</a><!-- #user-menu -->
+							?>
+						</a><!-- #user-menu -->
+
+						<?php if (is_user_logged_in()) { ?>
+							<ul id="user-menu-popover" class="py-4 px-2 rounded-lg flex flex-col space-y-2 bg-white shadow-xperto-pop-over-shadow origin-top-right absolute right-0 mt-5 w-56 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-100 transform opacity-0" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+								<li class=" flex flex-col px-4 py-2 rounded-lg hover:text-xperto-orange hover:bg-xperto-orange-light-90">
+									<a href="<?php echo home_url("/profile"); ?>">My Profile</a>
+								</li>
+								<li class=" flex flex-col px-4 py-2 rounded-lg hover:text-xperto-orange hover:bg-xperto-orange-light-90">
+									<a href="<?php echo home_url("/account"); ?>">Account Settings</a>
+								</li>
+								<li class=" flex flex-col px-4 py-2 rounded-lg hover:text-xperto-orange hover:bg-xperto-orange-light-90">
+									<?php wp_loginout(); ?>
+								</li>
+							</ul>
+							<!-- #user-menu-popover -->
+						<?php } ?>
+					</div>
 				</div><!-- #nav-menu -->
 			<?php } else { ?>
 				<div id="nav-menu" class="flex items-center space-x-6">

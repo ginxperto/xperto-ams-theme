@@ -27,8 +27,30 @@ document.addEventListener("click", (event) => {
 
 	// check to see if user clicks outside the sidebar
 	if (!isButtonClick && isOutsideClick) {
-		console.log("outside click");
 		sidebar.classList.add("-translate-x-full");
+		return;
+	}
+});
+
+const button = document.querySelector("#user-menu");
+const tooltip = document.querySelector("#user-menu-popover");
+
+// add our event listener for the click
+button.addEventListener("click", () => {
+	tooltip.classList.toggle("opacity-0");
+});
+
+document.addEventListener("click", (event) => {
+	const isPopupButtonClick = button === event.target || button.contains(event.target);
+	const isOutsideClick =
+		tooltip !== event.target && !tooltip.contains(event.target);
+
+	// bail out if tooltip isnt open
+	if (tooltip.classList.contains("opacity-0")) return;
+
+	// check to see if user clicks outside the tooltip
+	if (!isPopupButtonClick && isOutsideClick) {
+		tooltip.classList.add("opacity-0");
 		return;
 	}
 });

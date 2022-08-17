@@ -88,4 +88,5 @@ get_header();
 </main><!-- #main -->
 
 <?php
-// get_sidebar();
+// important to enquque footer js
+get_footer();
