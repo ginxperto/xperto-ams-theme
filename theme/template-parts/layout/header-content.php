@@ -55,18 +55,42 @@
 					<!-- notification -->
 					<a href="#" id="user-menu" class="flex items-center space-x-3">
 						<?php
-						if (is_user_logged_in()) {
+						if (is_user_logged_in()) :
 							$current_user = wp_get_current_user();
 
-							if (($current_user instanceof WP_User)) { ?>
+							if (($current_user instanceof WP_User)) : ?>
 								<span class="text-xperto-neutral-dark-1 font-bold"><?php echo esc_html($current_user->display_name); ?></span>
-								<?php echo get_avatar($current_user->ID, 40, '', 'avatar', array('class' => 'rounded-full')); ?>
+								<?php
+								// * Lets try to load the memberpress user details
+								$rc = new ReflectionClass('MeprUser');
+
+								// instantiate via reflection
+								$mepr_user = $rc->newInstanceArgs(array($current_user->ID));
+
+								// we have a memberpress user loaded
+								if ($mepr_user instanceof MeprUser) {
+									// get custom fields
+									$profile = $mepr_user->custom_profile_values();
+
+									// load only if exists
+									if (!empty($profile['mepr_profile_picture'])) { ?>
+										<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-10 h-10" />
+								<?php
+									} else {
+										// else get default avater as fallback
+										echo get_avatar($current_user->ID, 40, '', 'avatar', array('class' => 'rounded-full'));
+									}
+								} else {
+									// else get default avater as fallback
+									echo get_avatar($current_user->ID, 40, '', 'avatar', array('class' => 'rounded-full'));
+								}
+								?>
 								<svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M0.865111 2.95662L5.69879 7.4785C5.86669 7.6433 6.06855 7.7745 6.29225 7.86414C6.51594 7.95378 6.75678 8 7.00013 8C7.24349 8 7.48433 7.95378 7.70802 7.86414C7.93172 7.7745 8.13364 7.6433 8.30153 7.4785L13.1352 2.95662C13.39 2.71353 13.5629 2.40584 13.6325 2.07169C13.7021 1.73753 13.6654 1.39162 13.5268 1.07682C13.3882 0.762026 13.154 0.492194 12.853 0.300779C12.5521 0.109364 12.1977 0.00478184 11.8338 0H2.16645C1.80257 0.00478184 1.4482 0.109364 1.14726 0.300779C0.846316 0.492194 0.612083 0.762026 0.473523 1.07682C0.334964 1.39162 0.298217 1.73753 0.367825 2.07169C0.437434 2.40584 0.610337 2.71353 0.865111 2.95662Z" fill="#A5A5A5" />
 								</svg>
 						<?php
-							}
-						}
+							endif;
+						endif;
 						?>
 					</a><!-- #user-menu -->
 				</div><!-- #nav-menu -->
