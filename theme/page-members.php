@@ -45,4 +45,5 @@ get_header();
 	</div>
 </main>
 <?php
+// important to enquque footer js
 get_footer();
