@@ -44,3 +44,7 @@
 .next.page-numbers, .prev.page-numbers{
 	@apply w-[90px];
 }
+
+.entry-content > * {
+	@apply mx-0 max-w-fit w-full;
+}
