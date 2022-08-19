@@ -37,7 +37,9 @@ const tooltip = document.querySelector("#user-menu-popover");
 
 // add our event listener for the click
 button.addEventListener("click", () => {
-	tooltip.classList.toggle("opacity-0");
+	// tooltip.classList.toggle("opacity-0 -scale-100");
+	tooltip.classList.toggle("hidden");
+	tooltip.classList.toggle("flex");
 });
 
 document.addEventListener("click", (event) => {
@@ -46,11 +48,11 @@ document.addEventListener("click", (event) => {
 		tooltip !== event.target && !tooltip.contains(event.target);
 
 	// bail out if tooltip isnt open
-	if (tooltip.classList.contains("opacity-0")) return;
+	if (tooltip.classList.contains("hidden")) return;
 
 	// check to see if user clicks outside the tooltip
 	if (!isPopupButtonClick && isOutsideClick) {
-		tooltip.classList.add("opacity-0");
+		tooltip.classList.add("hidden");
 		return;
 	}
 });

@@ -96,7 +96,7 @@
 						</a><!-- #user-menu -->
 
 						<?php if (is_user_logged_in()) { ?>
-							<ul id="user-menu-popover" class="py-4 px-2 rounded-lg flex flex-col space-y-2 bg-white shadow-xperto-pop-over-shadow origin-top-right absolute right-0 mt-5 w-56 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-100 transform opacity-0 scale-100" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+							<ul id="user-menu-popover" class="py-4 px-2 rounded-lg space-y-2 bg-white shadow-xperto-pop-over-shadow origin-top-right absolute right-0 mt-5 w-56 shadow-lg ring-1 ring-black ring-opacity-5 flex-col focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
 								<li class=" flex flex-col px-4 py-2 rounded-lg hover:text-xperto-orange hover:bg-xperto-orange-light-90">
 									<a href="<?php echo home_url("/profile"); ?>">My Profile</a>
 								</li>
