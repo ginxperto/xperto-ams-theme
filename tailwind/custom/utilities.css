@@ -48,3 +48,62 @@
 .entry-content > * {
 	@apply mx-0 max-w-fit w-full;
 }
+
+/*
+* Comments
+*/
+.reply a.comment-reply-link {
+	@apply text-xperto-orange py-1 px-2 text-sm rounded-md hover:text-xperto-orange hover:bg-xperto-orange-light-90;
+}
+
+.comment .children {
+	@apply pl-3 border-l-2;
+}
+
+.comment article {
+	@apply py-6 mt-2;
+}
+
+.comment .children article {
+	@apply p-6 bg-xperto-neutral-light-2 mt-2;
+}
+
+.comment-respond {
+	@apply border-t-2;
+}
+
+.comment-respond #cancel-comment-reply-link {
+	@apply font-normal text-xperto-neutral-mid-1 ml-4 hover:text-xperto-orange;
+}
+
+.comment-respond .comment-reply-title {
+	@apply text-xl py-4 font-semibold;
+}
+
+.comment-respond .logged-in-as {
+	@apply hidden;
+}
+
+.comment-respond .logged-in-as a{
+	@apply text-xperto-orange;
+}
+
+.comment-respond .comment-form-comment{
+	@apply flex flex-col;
+}
+
+.comment-respond .comment-form-comment textarea{
+	@apply bg-white border border-xperto-neutral-light-1 rounded-lg;
+}
+
+.comment-respond .comment-form {
+	@apply flex flex-col space-y-4;
+}
+
+.comment-respond .form-submit {
+	@apply flex flex-col items-end;
+}
+
+.comment-respond .form-submit .submit {
+	@apply bg-xperto-orange text-white rounded-lg p-4 cursor-pointer hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10;
+}

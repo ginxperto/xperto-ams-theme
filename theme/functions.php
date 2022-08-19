@@ -213,3 +213,9 @@ require get_template_directory() . '/util/XpertoCustomNavWalker.php';
  */
 
 require get_template_directory() . '/util/XpertoCustomOrgAdminNavWalker.php';
+
+/**
+ * Require custom walker
+ */
+
+require get_template_directory() . '/util/XpertoCustomCommentWalker.php';
