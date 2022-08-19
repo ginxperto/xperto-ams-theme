@@ -11,7 +11,6 @@ module.exports = {
 		"./theme/**/*.php",
 		"./theme/theme.json",
 	],
-	important: true,
 	theme: {
 		// Extend the default Tailwind theme.
 		extend: {

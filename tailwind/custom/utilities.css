@@ -111,3 +111,7 @@
 .body-search {
 	@apply w-full mb-3 flex items-center max-w-none md:w-1/2 md:max-w-2xl;
 }
+
+.xperto-tab-active {
+	@apply text-xperto-orange border-b-2 border-xperto-orange;
+}
