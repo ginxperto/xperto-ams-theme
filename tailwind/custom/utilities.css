@@ -107,3 +107,7 @@
 .comment-respond .form-submit .submit {
 	@apply bg-xperto-orange text-white rounded-lg p-4 cursor-pointer hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10;
 }
+
+.body-search {
+	@apply w-full mb-3 flex items-center max-w-none md:w-1/2 md:max-w-2xl;
+}
