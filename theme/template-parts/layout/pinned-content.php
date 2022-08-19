@@ -36,7 +36,7 @@ if ($arr_posts->have_posts()) :
             <header class="entry-header xl:hidden">
                 <h1 class="entry-title text-xperto-neutral-dark-1 font-bold text-2xl m-0"><?php the_title(); ?></h1>
             </header>
-            <div class="entry-content font-normal mt-0">
+            <div class="entry-content font-normal mt-0 flex-1">
                 <p class="font-normal m-0 mb-6 xl:mb-3">
                     <?php
                     $excerpt = get_the_excerpt();

@@ -36,10 +36,9 @@ get_header();
 		?>
 	</div>
     <div class="hidden w-1/3 bg-white p-6 mt-[1px] self-stretch lg:block lg:w-1/4 md:max-w-xs">
-        <?php get_sidebar(); ?>
+        <?php get_sidebar('single'); ?>
     </div>
 </main><!-- #main -->
 
 <?php
-get_sidebar();
 get_footer();
