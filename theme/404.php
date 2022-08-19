@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying 404 pages (not found)
  *
@@ -9,52 +10,21 @@
 
 get_header();
 ?>
-
-	<main id="primary">
-
-		<section>
+<main id="primary" class="w-full flex flex-row items-start">
+	<div class="container flex flex-1 flex-col items-start p-4 space-y-6 max-w-[1200px] md:p-8 xl:mx-auto">
+		<section class="w-full">
 			<header>
-				<h1 class="entry-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'xperto-ams' ); ?></h1>
+				<h1 class="entry-title text-4xl text-xperto-neutral-dark-1 font-bold w-full"><?php esc_html_e('Oops! That page can&rsquo;t be found.', 'xperto-ams'); ?></h1>
 			</header>
 
-			<div class="entry-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'xperto-ams' ); ?></p>
-
-					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div>
-						<h2><?php esc_html_e( 'Most Used Categories', 'xperto-ams' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div>
-
-					<?php
-					/* translators: %1$s: smiley */
-					$xperto_ams_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'xperto-ams' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$xperto_ams_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
+			<div class="entry-content flex flex-col w-full items-center space-y-6 bg-white rounded-lg p-6 pb-12">
+				<img src="<?php echo get_template_directory_uri() . '/images/search_empty.png'; ?>" alt="">
+				<p><?php esc_html_e('It looks like nothing was found at this location. Maybe try a search?', 'xperto-ams'); ?></p>
+				<?php get_template_part('template-parts/content/content', 'body-search'); ?>
 			</div>
 		</section>
-
-	</main><!-- #main -->
+	</div>
+</main>
 
 <?php
 get_footer();
