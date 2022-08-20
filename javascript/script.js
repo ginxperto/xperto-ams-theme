@@ -43,7 +43,8 @@ button.addEventListener("click", () => {
 });
 
 document.addEventListener("click", (event) => {
-	const isPopupButtonClick = button === event.target || button.contains(event.target);
+	const isPopupButtonClick =
+		button === event.target || button.contains(event.target);
 	const isOutsideClick =
 		tooltip !== event.target && !tooltip.contains(event.target);
 
