@@ -50,6 +50,10 @@
 	@apply mx-0 w-full max-w-fit;
 }
 
+.post-edit-link {
+	@apply text-xperto-orange hover:text-xperto-orange-base-20;
+}
+
 /*
 * Comments
 */
@@ -181,4 +185,17 @@
 
 .mp_wrapper .mepr-account-change-password a {
 	@apply text-xperto-orange !important;
+}
+
+.mepr_error {
+	@apply rounded-lg p-0 shadow-sm shadow-xperto-error-light bg-xperto-error-light !important;
+}
+
+.mepr_error,
+.mepr_error strong {
+	@apply text-xperto-error-dark !important;
+}
+
+.mepr_error ul {
+	@apply px-6 py-4 !important;
 }

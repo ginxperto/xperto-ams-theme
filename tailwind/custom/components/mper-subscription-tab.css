@@ -68,3 +68,7 @@
 .mp_wrapper table.mepr-account-table .mepr-account-active .mepr-inactive {
 	@apply text-xperto-error-dark;
 }
+
+#mepr-subscriptions-paging a {
+	@apply text-xperto-orange no-underline hover:text-xperto-orange-base-20;
+}
