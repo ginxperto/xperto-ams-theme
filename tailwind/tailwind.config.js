@@ -14,6 +14,9 @@ module.exports = {
 	theme: {
 		// Extend the default Tailwind theme.
 		extend: {
+			fontFamily: {
+				lato: ["Lato", "sans-serif"],
+			},
 			colors: {
 				"xperto-orange": "	hsl(26, 100%, 53%)",
 				"xperto-navy-blue": "hsl(201, 66%, 27%)",
@@ -32,7 +35,7 @@ module.exports = {
 				"xperto-member-color-0": "hsl(0, 0%, 65%)",
 				"xperto-member-color-1": "hsl(36, 88%, 47%)",
 				"xperto-member-color-2": "hsl(226, 32%, 36%)",
-				"xperto-pop-over-shadow": "hsla(0, 0%, 65%, 0.2)"
+				"xperto-pop-over-shadow": "hsla(0, 0%, 65%, 0.2)",
 			},
 			boxShadow: {
 				right: "1px 0px 0px rgba(229, 229, 229, 1)",
