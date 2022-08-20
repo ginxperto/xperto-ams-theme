@@ -221,6 +221,6 @@ require get_template_directory() . '/util/XpertoCustomOrgAdminNavWalker.php';
 require get_template_directory() . '/util/XpertoCustomCommentWalker.php';
 
 /**
- * Require custom filters
+ * Require custom filters and actions
  */
-require get_template_directory() . '/util/XpertoCustomMeprFilters.php';
+require get_template_directory() . '/util/XpertoCustomMeprHooks.php';
