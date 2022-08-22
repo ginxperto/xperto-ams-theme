@@ -13,7 +13,6 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('bg-white rounded-lg p-6 w-full'); ?>>
     <?php if (is_user_logged_in()) : ?>
         <header class="w-full">
-            <span class="text-lg text-xperto-neutral-mid-1">You current plan: </span>
             <span class="text-lg">
                 <?php
                 $user_id = get_current_user_id();
@@ -37,7 +36,10 @@
                         endif;
                     endforeach;
 
-                    echo implode(", ", $subs_title);
+                    if (!empty($subs_title)) {
+                        echo '<span class="text-lg text-xperto-neutral-mid-1">You current plan: </span>';
+                        echo implode(", ", $subs_title);
+                    }
                 }
                 ?>
             </span>

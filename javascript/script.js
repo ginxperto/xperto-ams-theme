@@ -61,3 +61,29 @@ if (button) {
 		}
 	});
 }
+
+const mepr_accordion = document.querySelectorAll(".mepr-payment-method");
+const xperto_mepr_active_payment_method = "xperto-active-payment";
+
+if (mepr_accordion.length) {
+	// user click on payment method
+	for (var x = 0; x < mepr_accordion.length; x++) {
+		mepr_accordion[x].addEventListener("click", (event) => {
+			var active_payment = document.querySelectorAll(
+				"." + xperto_mepr_active_payment_method
+			);
+			for (var i = 0; i < active_payment.length; i++) {
+				// lets remove the xperto active marker
+				active_payment[i].classList.toggle(xperto_mepr_active_payment_method);
+			}
+			var parent_payment_container = event.target.closest(
+				".mepr_payment_method"
+			);
+			if (parent_payment_container) {
+				parent_payment_container.classList.add(
+					xperto_mepr_active_payment_method
+				);
+			}
+		});
+	}
+}
