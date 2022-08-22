@@ -1,0 +1,60 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `components` layer
+ *
+ * “Add more opinionated, complex classes like buttons, form controls, alerts,
+ * etc; the sort of pre-built components you often see in other frameworks that
+ * you might need to override with utility classes.”
+ *
+ * — from https://tailwindcss.com/docs/plugins#adding-components
+ */
+
+#masthead.one-col-header .custom-logo {
+	@apply w-40 !important;
+}
+
+.mepr-price-menu.xperto .mepr-price-boxes {
+	@apply flex flex-col justify-center gap-6 md:flex-row md:flex-wrap md:items-stretch !important;
+}
+
+.mepr-price-menu.xperto .mepr-price-box {
+	@apply m-0 flex w-72 flex-col rounded-lg border border-xperto-neutral-light-1 bg-white p-4 !important;
+}
+
+.mepr-price-menu.xperto .mepr-price-box-title {
+	@apply text-start text-lg !important;
+}
+
+.mepr-price-menu.xperto .mepr-price-box.highlighted {
+	@apply border-2 border-xperto-neutral-mid-2 !important;
+}
+
+.mepr-price-menu.xperto .mepr-price-box .mepr-price-box-price {
+	@apply text-start text-4xl font-bold text-xperto-secondary-base !important;
+}
+
+.mepr-price-menu.xperto .mepr-price-box .mepr-price-box-heading {
+	@apply mt-4 text-start text-base !important;
+}
+
+.mepr-price-menu.xperto .mepr-price-box .mepr-price-box-benefits {
+	@apply my-6 w-full;
+}
+
+.mepr-price-menu.xperto .mepr-price-box .mepr-price-box-benefits-list {
+	@apply flex flex-col justify-center space-y-2 !important;
+}
+
+.mepr-price-menu.xperto .mepr-price-box .mepr-price-box-benefits-item {
+	@apply text-sm text-xperto-neutral-mid-1 !important;
+}
+.mepr-price-menu.xperto .mepr-price-box .mepr-price-box-foot {
+	@apply mt-auto w-full;
+}
+
+.mepr-price-menu.xperto .mepr-price-box .mepr-price-box-button {
+	@apply my-4 flex;
+}
+
+.mepr-price-menu.xperto .mepr-price-box .mepr-price-box-button a {
+	@apply mx-auto w-fit cursor-pointer rounded-lg border border-xperto-orange bg-transparent py-3 px-4 font-bold text-xperto-orange no-underline hover:bg-xperto-orange-base-20 hover:text-white !important;
+}

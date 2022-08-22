@@ -6,6 +6,29 @@ function xperto_account_home_label($title)
 }
 add_filter('mepr-account-nav-home-label', 'xperto_account_home_label');
 
+function xperto_pricebox_templates($templates){
+    // return array_merge($tempplate, array());
+    return $templates;
+}
+add_filter('mepr_group_theme_templates_paths', 'xperto_pricebox_templates');
+
+function xperto_pricebox_themes($templates){
+    $new_temp = array_merge($templates, array(get_template_directory(). '/css/plans'));
+    return $new_temp;
+    // return $templates;
+}
+add_filter('mepr_group_themes_paths', 'xperto_pricebox_themes');
+
+function xperto_edit_post($post_id){
+    echo '<style>
+    #wpbody-content .wrap > form[name="post"]{
+        display: block !important;
+    }
+    </style>';
+}
+
+add_action('load-post.php', 'xperto_edit_post');
+
 function xperto_before_account_subscriptions($mepr_current_user)
 {
     $sub_list = null;
