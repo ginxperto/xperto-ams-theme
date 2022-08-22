@@ -15,7 +15,7 @@
 
 get_header();
 ?>
-<main id="primary" class="w-full flex flex-row items-start">
+<main id="primary" class="w-full flex flex-row items-start min-h-[calc(100vh-80px)]">
     <div class="container flex flex-1 flex-col items-start p-4 space-y-6 max-w-[1200px] md:p-8 m:w-2/3 lg:space-x-0 xl:mx-auto">
         <h3 class="text-4xl text-xperto-neutral-dark-1 font-bold w-full">Community</h3>
         <?php

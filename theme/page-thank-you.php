@@ -10,7 +10,7 @@
 
 get_header('memberpressgroup');
 ?>
-<main id="primary" class="w-full flex item-start h-[calc(100vh-160px)] md:items-center md:justify-center">
+<main id="primary" class="w-full flex item-start min-h-[calc(100vh-160px)] md:items-center md:justify-center">
 	<div class="container flex flex-col items-start p-4 space-y-6 max-w-[1200px] w-[480px] xl:mx-auto">
 		<?php
 		while (have_posts()) :

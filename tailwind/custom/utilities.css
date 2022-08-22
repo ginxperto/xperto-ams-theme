@@ -73,10 +73,6 @@
 	@apply mt-2 bg-xperto-neutral-light-2 p-6;
 }
 
-.comment-respond {
-	@apply border-t-2;
-}
-
 .comment-respond #cancel-comment-reply-link {
 	@apply ml-4 font-normal text-xperto-neutral-mid-1 hover:text-xperto-orange;
 }

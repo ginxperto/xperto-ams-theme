@@ -6,7 +6,7 @@
 
     $order_by = '';
     $offset = 0;
-    $items_per_page = 2;
+    $items_per_page = get_option('posts_per_page');
 
     if (isset($_GET['order_by'])) {
         $order_by = " ORDER BY {$_GET['order_by']}";
