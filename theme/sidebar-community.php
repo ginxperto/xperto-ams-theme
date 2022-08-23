@@ -69,7 +69,6 @@
 				</div>
 				<div class="w-3/4 flex flex-col items-start space-y-2">
 					<h4>
-						<!-- TODO: Add profile link -->
 						<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
 							<?php echo $data->first_name . ' ' . $data->last_name; ?>
 						</a>

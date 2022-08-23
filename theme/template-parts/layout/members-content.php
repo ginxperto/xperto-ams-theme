@@ -123,7 +123,6 @@
                             <?php echo $profile['mepr_about']; ?>
                         </p>
                     <?php } ?>
-                    <!-- TODO: Add social icons here -->
                 </div>
             </div>
         </div>
