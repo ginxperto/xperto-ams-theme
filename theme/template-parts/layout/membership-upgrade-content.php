@@ -63,16 +63,37 @@
         endif;
     endif; ?>
 <?php else : ?>
-    <section id="membership-upgrade-content" class="w-full">
-        <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
-            <div class="flex flex-col space-y-4 w-full md:w-2/3">
-                <span class="text-2xl text-xperto-green font-semibold">Join the <?php bloginfo(); ?></span>
-                <p class="text-xperto-neutral-dark-1">New members get additional perks, such as exclusive organization merchandise, exclusive invites to Member-only events and seminars, and so much more!</p>
-                <a class="rounded-lg bg-xperto-orange py-3 px-4 text-white flex-none w-full text-center md:w-48 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10" href="<?php echo home_url(); ?>">Become a member</a>
-            </div>
-            <div class="hidden absolute top-0 right-0 h-full md:block">
-                <img src="<?php echo get_template_directory_uri(); ?>/images/membership_signup.png" class="h-full" />
-            </div>
-        </div>
-    </section>
-<?php endif; ?>
+    <?php
+    $args = array(
+        'post_type' => 'memberpressgroup',
+        'post_status' => 'publish',
+        'posts_per_page' => 1,
+    );
+    $posts = new WP_Query($args);
+
+    while ($posts->have_posts()) : $posts->the_post();
+        $groups = new MeprGroup($posts->ID);
+    endwhile;
+
+    if ($groups instanceof MeprGroup) :
+        // get products inside the group
+        $group_products = $groups->products();
+
+        if (count($group_products) > 0) :
+
+    ?>
+            <section id="membership-upgrade-content" class="w-full">
+                <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
+                    <div class="flex flex-col space-y-4 w-full md:w-2/3">
+                        <span class="text-2xl text-xperto-green font-semibold">Join the <?php bloginfo(); ?></span>
+                        <p class="text-xperto-neutral-dark-1">New members get additional perks, such as exclusive organization merchandise, exclusive invites to Member-only events and seminars, and so much more!</p>
+                        <a class="rounded-lg bg-xperto-orange py-3 px-4 text-white flex-none w-full text-center md:w-48 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
+                    </div>
+                    <div class="hidden absolute top-0 right-0 h-full md:block">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/membership_signup.png" class="h-full" />
+                    </div>
+                </div>
+            </section>
+<?php endif;
+    endif;
+endif; ?>
