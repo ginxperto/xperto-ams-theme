@@ -116,7 +116,7 @@
                         <!-- Subscriptions -->
                     </header>
                     <?php
-                    // TODO: insert crendetialing badges here
+                    // TODO: insert crendentialing badges here
                     ?>
                     <?php if (array_key_exists('mepr_about', $profile)) { ?>
                         <p>

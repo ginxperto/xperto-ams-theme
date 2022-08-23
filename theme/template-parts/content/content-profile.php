@@ -132,10 +132,31 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                     </div>
                 <?php endif; ?>
             </div>
-        <?php else : ?>
+        <?php
+        // Credentialing Tab
+        else : ?>
             <div class="py-6 space-y-4">
-                <div class="w-full">
-                    This section is will be release soon.
+                <div class="w-full relative">
+                    <?php
+                    $current_user_id = get_current_user_id();
+
+                    // current user is viewing his own profile
+                    if ($current_user_id == $mepr_user->ID) : ?>
+                        <div class="flex flex-col items-center justify-center h-[400px]">
+                            <img src="<?php echo get_template_directory_uri() . '/images/icon_cert.png'; ?>" alt="Certificate Icon" class="w-20" />
+                            <span class="font-bold text-lg mt-6">You have no crendetials yet</span>
+                            <span>You haven't applied any credentials.</span>
+                            <a href="<?php home_url(); /* TODO: UPDATE THIS */ ?>" class="mt-4 rounded-lg py-3 px-4 bg-xperto-orange text-white hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10">Apply for Credentials</a>
+                        </div>
+                    <?php else : ?>
+                        <div class="flex flex-col min-h-[200px]">
+                            <h3 class="font-bold text-lg">User hasn't uploaded any credentials yet.</h3>
+                            <div class="flex flex-row items-center">
+                                <?php // TODO: add credentials result here 
+                                ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
