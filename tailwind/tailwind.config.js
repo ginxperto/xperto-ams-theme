@@ -32,6 +32,7 @@ module.exports = {
 				"xperto-neutral-dark-1": "hsl(0, 0%, 15%)",
 				"xperto-success-base": "hsl(85, 53%, 50%)",
 				"xperto-success-light-80": "hsl(87, 53%, 93%)",
+				"xperto-green": "hsl(144, 100%, 25%)",
 				"xperto-error-dark": "hsl(10, 68%, 43%)",
 				"xperto-error-light": "hsl(12, 94%, 87%)",
 				"xperto-member-color-0": "hsl(0, 0%, 65%)",
