@@ -38,10 +38,8 @@ if (is_user_logged_in()) :
         // get custom fields
         $profile = $mepr_user->custom_profile_values();
     else :
-        // TODO: improve this
-?>
-        <h1 class="text-2xl font-bold">Profile not found.</h1>
-<?php exit;
+        get_template_part('template-parts/content/content', 'not-found');
+        exit;
     endif;
 endif;
 
@@ -52,7 +50,7 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
 
 <section class="flex flex-col w-full bg-white rounded-lg space-y-20">
     <header class="w-full relative aspect-3/1 bg-xperto-custom-header rounded-t-lg min-w-[330px]">
-        <?php if (!empty($profile)) : ?>
+        <?php if (!empty($profile) && !empty($profile['mepr_profile_banner'])) : ?>
             <img class="rounded-t-lg absolute w-full h-full object-cover mix-blend-overlay" src="<?php echo $profile['mepr_profile_banner']; ?>" alt="Profile Banner" />
         <?php else : ?>
             <img class="rounded-t-lg absolute w-full h-full object-cover mix-blend-overlay" src="<?php echo get_template_directory_uri() . '/images/profile_banner.png' ?>" alt="Profile Banner" />
@@ -68,24 +66,26 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
             ?>
             <div class="flex-1 flex flex-col mt-6">
                 <span class="text-white font-bold"><?php echo esc_html($mepr_user->display_name); ?></span>
-                <?php
-                $subs = $mepr_user->active_product_subscriptions();
-                foreach ($subs as $sub) :
-                    $product = new MeprProduct($sub);
+                <div class="h-6">
+                    <?php
+                    $subs = $mepr_user->active_product_subscriptions();
+                    foreach ($subs as $sub) :
+                        $product = new MeprProduct($sub);
 
-                    if ($product instanceof MeprProduct) :
-                        // pick color from tailwind
-                        $color_list = array(
-                            'text-xperto-member-color-0',
-                            'text-xperto-member-color-1',
-                            'text-xperto-member-color-2'
-                        );
-                        $color = $color_list[$product->group_order]; ?>
-                        <span class="text-sm font-bold <?php echo $color; ?>">
-                            <?php echo $product->post_title; ?>
-                        </span>
-                <?php endif;
-                endforeach; ?>
+                        if ($product instanceof MeprProduct) :
+                            // pick color from tailwind
+                            $color_list = array(
+                                'text-xperto-member-color-0',
+                                'text-xperto-member-color-1',
+                                'text-xperto-member-color-2'
+                            );
+                            $color = $color_list[$product->group_order]; ?>
+                            <span class="text-sm font-bold <?php echo $color; ?>">
+                                <?php echo $product->post_title; ?>
+                            </span>
+                    <?php endif;
+                    endforeach; ?>
+                </div>
                 <div class="flex flex-row space-x-2 mt-6 min-w-[250px]">
                     <?php if (array_key_exists('mepr_facebook', $profile) && !empty($profile['mepr_facebook'])) : ?>
                         <a href="<?php echo esc_url($profile['mepr_facebook']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_fb.png' ?>" class="w-5 h-5" /></a>
