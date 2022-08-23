@@ -39,7 +39,7 @@
     // limit the results per page
     $query .= " {$order_by}{$limit}";
 
-    // var_dump($query); // TODO: uncomment if needed
+    // var_dump($query); // * uncomment if needed
 
     $results = $wpdb->get_results($query);
 
@@ -61,12 +61,13 @@
 
     foreach ($data as $data) :
         $profile = $data->custom_profile_values();
+        $profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
     ?>
         <div class="flex w-full min-w-min bg-white rounded-lg p-6">
             <div class="flex flex-row items-start space-x-4 w-full">
                 <div class="w-20">
                     <?php if (array_key_exists('mepr_profile_picture', $profile)) { ?>
-                        <a href="#" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
+                        <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
                             <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full min-w-[80px] hover:border hover:border-xperto-orange" />
                         </a>
                     <?php } ?>
@@ -75,8 +76,7 @@
                     <header class="w-full">
                         <div class="flex flex-row justify-between">
                             <h4>
-                                <!-- TOOD: Add profile link -->
-                                <a href="#" class="hover:text-xperto-orange font-bold" alt="Visit profile" title="Visit Profile">
+                                <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange font-bold" alt="Visit profile" title="Visit Profile">
                                     <?php echo $data->display_name; ?>
                                 </a>
                             </h4>
@@ -123,7 +123,7 @@
                             <?php echo $profile['mepr_about']; ?>
                         </p>
                     <?php } ?>
-                    <!-- TOOD: Add social icons here -->
+                    <!-- TODO: Add social icons here -->
                 </div>
             </div>
         </div>

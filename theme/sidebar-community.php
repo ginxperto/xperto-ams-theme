@@ -56,21 +56,21 @@
 		endif;
 
 		foreach ($data as $data) :
-			$profile = $data->custom_profile_values();
-			// print_r($profile);
+			$profile = $data->custom_profile_values();			
+			$profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
 		?>
 			<div class="flex flex-row items-start space-x-4">
 				<div class="w-1/4">
 					<?php if (array_key_exists('mepr_profile_picture', $profile)) { ?>
-						<a href="#" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
+						<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
 							<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full hover:border hover:border-xperto-orange" />
 						</a>
 					<?php } ?>
 				</div>
 				<div class="w-3/4 flex flex-col items-start space-y-2">
 					<h4>
-						<!-- TOOD: Add profile link -->
-						<a href="#" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
+						<!-- TODO: Add profile link -->
+						<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
 							<?php echo $data->first_name . ' ' . $data->last_name; ?>
 						</a>
 					</h4>

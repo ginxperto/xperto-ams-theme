@@ -34,6 +34,7 @@
 				<?php
 				// * Lets try to load the memberpress user details
 				$rc = new ReflectionClass('MeprUser');
+				$profile_link;
 
 				// instantiate via reflection
 				$mepr_user = $rc->newInstanceArgs(array($current_user->ID));
@@ -42,10 +43,13 @@
 				if ($mepr_user instanceof MeprUser) {
 					// get custom fields
 					$profile = $mepr_user->custom_profile_values();
+					$profile_link = add_query_arg("id", $mepr_user->ID, home_url('/profile'));
 
 					// load only if exists
 					if (!empty($profile['mepr_profile_picture'])) { ?>
-						<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-16 h-16" />
+						<a href="<?php echo $profile_link ?>">
+							<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-16 h-16" />
+						</a>
 				<?php
 					} else {
 						// else get default avater as fallback
@@ -57,7 +61,9 @@
 				}
 				?>
 
-				<span class="text-xperto-neutral-dark-1 font-semibold"><?php echo esc_html($current_user->display_name); ?></span>
+				<a href="<?php echo $profile_link ?>">
+					<span class="text-xperto-neutral-dark-1 font-semibold"><?php echo esc_html($current_user->display_name); ?></span>
+				</a>
 				<?php // we have a memberpress user loaded
 				if ($mepr_user instanceof MeprUser) {
 					// get custom fields
