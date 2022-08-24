@@ -1,7 +1,7 @@
 <div class="flex flex-wrap w-full space-y-6 lg:space-y-0 lg:gap-6 lg:grid lg:grid-cols-2">
     <?php
     global $wpdb;
-    $data;
+    $user_data;
     $ids;
 
     $order_by = '';
@@ -54,12 +54,12 @@
             $obj = $rc->newInstanceArgs(array($result->user_id));
 
             if ($obj instanceof MeprUser) {
-                $data[] = $obj;
+                $user_data[] = $obj;
             }
         endif;
     }
 
-    foreach ($data as $data) :
+    foreach ($user_data as $data) :
         $profile = $data->custom_profile_values();
         $profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
     ?>
@@ -106,8 +106,9 @@
                                     'text-xperto-member-color-1',
                                     'text-xperto-member-color-2'
                                 );
-                                $color = $color_list[$product->group_order]; ?>
-                                <span class="text-sm font-bold <?php echo $color; ?>">
+                                $color = $color_list[$product->group_order];
+                                ?>
+                                <span class="text-sm font-bold <?php echo $color; ?>" style="color: <?php echo get_post_custom_values('badge_color',$product->ID)[0]; ?>">
                                     <?php echo $product->post_title; ?>
                                 </span>
                         <?php endif;
