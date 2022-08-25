@@ -352,19 +352,47 @@ function xperto_auto_mepr_accounts()
     }
 }
 
+function xperto_auto_mepr_general()
+{
+    if (class_exists('MeprOptions')) {
+        $mepr_options = MeprOptions::fetch();
+
+        if (isset($mepr_options->currency_code)) {
+            // disable proration
+            $mepr_options->currency_code = "PHP";
+        }
+
+        if (isset($mepr_options->currency_symbol)) {
+            // disable proration
+            $mepr_options->currency_code = "₱";
+        }
+
+        // try to update the options
+        $mepr_options->store(false);
+    }
+}
+
+function xperto_auto_group($hook) {
+    $screen = get_current_screen();
+
+    // newly created
+    if ( $hook == 'post-new.php' && $screen->post_type != 'memberpressgroup' ) {
+        // we don't do anything here
+        return;
+    }
+    wp_enqueue_script( 'xperot-admin-script', get_template_directory_uri() . '/js/xperto_mepr_admin.js' );
+}
+add_action( 'admin_enqueue_scripts', 'xperto_auto_group' );
+
 function create_page_on_theme_activation()
 {
     // MUST BE FIRST TO USE IN MENU CREATION BELOW
     xperto_auto_pages();
-
     xperto_auto_admin_menu();
     xperto_auto_org_admin_menu();
-
     xperto_auto_categories();
-
     xperto_auto_homepage_settings();
-
     xperto_auto_mepr_custom_fields();
-
     xperto_auto_mepr_accounts();
+    xperto_auto_mepr_general();
 }
