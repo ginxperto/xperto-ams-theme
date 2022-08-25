@@ -20,7 +20,6 @@
 		<?php
 		wp_nav_menu(
 			array(
-				'menu' => 'sidebar',
 				'container' => '',
 				'theme_location' => 'xperto-sidebar-menu',
 				'items_wrap' => '<ul id="" class="space-y-2">%3$s</ul>',

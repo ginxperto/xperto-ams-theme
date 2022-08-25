@@ -5,9 +5,15 @@ if (!class_exists('XpertoCustomOrgAdminNavWalker')) {
     {
         function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
         {
-            $output .= "<li class='" .  implode(" ", $item->classes) . "'>";
+            $css_classes = array();
 
-            $is_active = in_array("current_page_item", $item->classes);
+            if (is_array($item->classes)) {
+                $css_classes = $item->classes;
+            }
+
+            $output .= "<li class='" .  implode(" ", $css_classes) . "'>";
+
+            $is_active = in_array("current_page_item", $css_classes);
 
             if ($item->url && $item->url != '#') {
 

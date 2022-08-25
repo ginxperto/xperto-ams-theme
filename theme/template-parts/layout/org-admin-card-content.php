@@ -7,7 +7,6 @@
         <?php
         wp_nav_menu(
             array(
-                'menu' => 'org-admin',
                 'container' => '',
                 'theme_location' => 'xperto-orgadmin-menu',
                 'items_wrap' => '<ul id="" class="space-y-0 mt-3 w-full">%3$s</ul>',

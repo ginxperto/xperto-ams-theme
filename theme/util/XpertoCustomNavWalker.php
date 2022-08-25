@@ -12,9 +12,15 @@ if (!class_exists('XpertoCustomNavWalker')) {
                 return;
             }
 
-            $output .= "<li class='" .  implode(" ", $item->classes) . " group'>";
+            $css_classes = array();
 
-            $is_active = in_array("current_page_item", $item->classes);
+            if (is_array($item->classes)) {
+                $css_classes = $item->classes;
+            }
+
+            $output .= "<li class='" .  implode(" ", $css_classes) . " group'>";
+
+            $is_active = in_array("current_page_item", $css_classes);
 
             if ($item->url && $item->url != '#') {
 

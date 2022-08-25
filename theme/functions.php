@@ -203,6 +203,11 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 
 /**
+ * Require onboarding functions
+ */
+require get_template_directory() . '/util/XpertoCustomOnBoarding.php';
+
+/**
  * Require custom walker
  */
 
