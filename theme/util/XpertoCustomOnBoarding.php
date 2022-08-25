@@ -193,6 +193,165 @@ function xperto_auto_homepage_settings()
     update_option('page_for_posts', $community->ID);
 }
 
+function xperto_auto_mepr_custom_fields()
+{
+    if (class_exists('MeprOptions')) {
+        $mepr_options = MeprOptions::fetch();
+
+        if (isset($mepr_options->custom_fields)) {
+            $custom_fields = $mepr_options->custom_fields;
+            $fields = array();
+
+            // profile picture
+            if (!custom_field_exists($custom_fields, 'mepr_profile_picture')) {
+                $fields[] = (object) array(
+                    'field_key' => 'mepr_profile_picture',
+                    'field_name' => 'Profile Picture',
+                    'field_type' => 'file',
+                    'default_value' => '',
+                    'show_on_signup' => true,
+                    'show_in_account' => true,
+                    'required' => true,
+                    'options' => array()
+                );
+            }
+
+            // profile banner
+            if (!custom_field_exists($custom_fields, 'mepr_profile_banner')) {
+                $fields[] = (object) array(
+                    'field_key' => 'mepr_profile_banner',
+                    'field_name' => 'Profile Banner',
+                    'field_type' => 'file',
+                    'default_value' => '',
+                    'show_on_signup' => false,
+                    'show_in_account' => true,
+                    'required' => false,
+                    'options' => array()
+                );
+            }
+
+            // about
+            if (!custom_field_exists($custom_fields, 'mepr_about')) {
+                $fields[] = (object) array(
+                    'field_key' => 'mepr_about',
+                    'field_name' => 'About',
+                    'field_type' => 'textarea',
+                    'default_value' => '',
+                    'show_on_signup' => false,
+                    'show_in_account' => true,
+                    'required' => false,
+                    'options' => array()
+                );
+            }
+
+            // phone number
+            if (!custom_field_exists($custom_fields, 'mepr_phone_number')) {
+                $fields[] = (object) array(
+                    'field_key' => 'mepr_phone_number',
+                    'field_name' => 'Phone Number',
+                    'field_type' => 'tel',
+                    'default_value' => '',
+                    'show_on_signup' => false,
+                    'show_in_account' => true,
+                    'required' => false,
+                    'options' => array()
+                );
+            }
+
+            // chapter
+            if (!custom_field_exists($custom_fields, 'mepr_chapter')) {
+                $fields[] = (object) array(
+                    'field_key' => 'mepr_chapter',
+                    'field_name' => 'Chapter',
+                    'field_type' => 'dropdown',
+                    'default_value' => '',
+                    'show_on_signup' => true,
+                    'show_in_account' => true,
+                    'required' => true,
+                    'options' => array(
+                        array(
+                            'option_name' => 'Sample Chapter',
+                            'option_value' => 'sample_chapter'
+                        )
+                    )
+                );
+            }
+
+            // facebook
+            if (!custom_field_exists($custom_fields, 'mepr_facebook')) {
+                $fields[] = (object) array(
+                    'field_key' => 'mepr_facebook',
+                    'field_name' => 'Facebook',
+                    'field_type' => 'url',
+                    'default_value' => 'https://facebook.com/',
+                    'show_on_signup' => false,
+                    'show_in_account' => true,
+                    'required' => false,
+                    'options' => array()
+                );
+            }
+
+            // twitter
+            if (!custom_field_exists($custom_fields, 'mepr_twitter')) {
+                $fields[] = (object) array(
+                    'field_key' => 'mepr_twitter',
+                    'field_name' => 'Twitter',
+                    'field_type' => 'url',
+                    'default_value' => 'https://twitter.com/',
+                    'show_on_signup' => false,
+                    'show_in_account' => true,
+                    'required' => false,
+                    'options' => array()
+                );
+            }
+
+            // linkedin
+            if (!custom_field_exists($custom_fields, 'mepr_linkedin')) {
+                $fields[] = (object) array(
+                    'field_key' => 'mepr_linkedin',
+                    'field_name' => 'LinkedIn',
+                    'field_type' => 'url',
+                    'default_value' => 'https://linkedin.com/in/',
+                    'show_on_signup' => false,
+                    'show_in_account' => true,
+                    'required' => false,
+                    'options' => array()
+                );
+            }
+
+            // merge everything
+            $mepr_options->custom_fields = array_merge($custom_fields, $fields);
+
+            // try to update the options
+            $mepr_options->store(false);
+        }
+    }
+}
+
+function custom_field_exists($custom_fields, $field_key)
+{
+    foreach ($custom_fields as $cfield) {
+        // it exists
+        if ($cfield->field_key == $field_key) return true;
+    }
+    return false;
+}
+
+function xperto_auto_mepr_accounts()
+{
+    if (class_exists('MeprOptions')) {
+        $mepr_options = MeprOptions::fetch();
+
+        if (isset($mepr_options->pro_rated_upgrades)) {
+            // disable proration
+            $mepr_options->pro_rated_upgrades = false;
+
+            // try to update the options
+            $mepr_options->store(false);
+        }
+    }
+}
+
 function create_page_on_theme_activation()
 {
     // MUST BE FIRST TO USE IN MENU CREATION BELOW
@@ -204,4 +363,8 @@ function create_page_on_theme_activation()
     xperto_auto_categories();
 
     xperto_auto_homepage_settings();
+
+    xperto_auto_mepr_custom_fields();
+
+    xperto_auto_mepr_accounts();
 }
