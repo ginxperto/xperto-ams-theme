@@ -129,28 +129,28 @@ function xperto_auto_org_admin_menu()
 
         wp_update_nav_menu_item($menu_id, 0, array(
             'menu-item-title' =>  __('Edit Org Information'),
-            'menu-item-classes' => 'edit-org-information',
+            'menu-item-classes' => 'menu-org-admin-edit-info',
             'menu-item-url' => admin_url('/admin.php?page=memberpress-options#mepr-info'),
             'menu-item-status' => 'publish'
         ));
 
         wp_update_nav_menu_item($menu_id, 0, array(
             'menu-item-title' =>  __('Modify Membership Types'),
-            'menu-item-classes' => 'modify-membership-types',
+            'menu-item-classes' => 'menu-org-admin-edit-membertypes',
             'menu-item-url' => admin_url('/edit.php?post_type=memberpressproduct'),
             'menu-item-status' => 'publish'
         ));
 
         wp_update_nav_menu_item($menu_id, 0, array(
             'menu-item-title' =>  __('Manage Org Members'),
-            'menu-item-classes' => 'manage-org-members',
+            'menu-item-classes' => 'menu-org-admin-edit-members',
             'menu-item-url' => admin_url('/admin.php?page=memberpress-members'),
             'menu-item-status' => 'publish'
         ));
 
         wp_update_nav_menu_item($menu_id, 0, array(
             'menu-item-title' =>  __('View Reports'),
-            'menu-item-classes' => 'view-reports',
+            'menu-item-classes' => 'menu-org-admin-view-reports',
             'menu-item-url' => admin_url('/admin.php?page=memberpress-reports'),
             'menu-item-status' => 'publish'
         ));
