@@ -168,6 +168,31 @@ function xperto_auto_org_admin_menu()
     set_theme_mod('nav_menu_locations', $locations);
 }
 
+function xperto_auto_categories()
+{
+    if (!term_exists('pinned')) {
+        wp_insert_term(
+            'Pinned',
+            'category',
+            array(
+                'description' => 'Pinned announcements',
+                'slug'        => 'pinned'
+            )
+        );
+    }
+}
+
+function xperto_auto_homepage_settings()
+{
+    $home = get_page_by_title("home");
+    update_option('page_on_front', $home->ID);
+    update_option('show_on_front', 'page');
+
+    // Set the blog page
+    $community = get_page_by_title("community");
+    update_option('page_for_posts', $community->ID);
+}
+
 function create_page_on_theme_activation()
 {
     // MUST BE FIRST TO USE IN MENU CREATION BELOW
@@ -175,4 +200,8 @@ function create_page_on_theme_activation()
 
     xperto_auto_admin_menu();
     xperto_auto_org_admin_menu();
+
+    xperto_auto_categories();
+
+    xperto_auto_homepage_settings();
 }
