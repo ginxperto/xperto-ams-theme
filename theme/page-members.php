@@ -13,6 +13,12 @@
  * @package xperto-ams
  */
 
+// force user to login
+if (!is_user_logged_in()) {
+	wp_redirect(wp_login_url());
+	exit();
+}
+
 get_header();
 ?>
 <main id="primary" class="w-full flex flex-col items-start">
@@ -37,7 +43,7 @@ get_header();
 				</div>
 			</form>
 		</div>
-		<!-- toolbar -->		
+		<!-- toolbar -->
 		<?php if (isset($_GET['member_name'])) : ?>
 			<h4 class="text-xl text-xperto-neutral-dark-1 w-full">Results for "<?php echo $_GET['member_name'] ?>"</h4>
 		<?php endif; ?>

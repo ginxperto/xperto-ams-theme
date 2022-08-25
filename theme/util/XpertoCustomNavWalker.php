@@ -5,6 +5,13 @@ if (!class_exists('XpertoCustomNavWalker')) {
     {
         function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
         {
+            /**
+             * do not add member on logout users
+             */
+            if (!is_user_logged_in() && str_contains(strtolower($item->title), 'members')) {
+                return;
+            }
+
             $output .= "<li class='" .  implode(" ", $item->classes) . " group'>";
 
             $is_active = in_array("current_page_item", $item->classes);
