@@ -364,7 +364,7 @@ function xperto_auto_mepr_general()
 
         if (isset($mepr_options->currency_symbol)) {
             // disable proration
-            $mepr_options->currency_code = "₱";
+            $mepr_options->currency_symbol = "₱";
         }
 
         // try to update the options
