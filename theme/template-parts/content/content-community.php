@@ -10,7 +10,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('bg-white flex flex-col rounded-lg xl:flex-row xl:rounded-none'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('bg-white flex flex-col rounded-lg xl:flex-row xl:rounded-none w-full'); ?>>
     <?php
     $attr = array(
         'class' => 'w-full rounded-t-lg self-stretch xl:rounded-none xl:w-1/3' // tailwind css
