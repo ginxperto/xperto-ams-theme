@@ -13,7 +13,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('bg-white rounded-lg p-6 w-full'); ?>>
     <?php if (is_user_logged_in()) : ?>
         <header class="w-full mb-6">
-            <span class="text-lg">
+            <span class="w-full text-lg">
                 <?php
                 $user_id = get_current_user_id();
 

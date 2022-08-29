@@ -12,7 +12,7 @@
 
 <div id="main-wrapper" class="w-full min-h-screen">
 	<header id="masthead" class="one-col-header w-full bg-white p-5 shadow-bottom top-0 z-10">
-		<div class="flex justify-center items-center h-7">
+		<div class="w-full flex justify-center items-center h-7">
 			<?php
 			the_custom_logo();
 			?>

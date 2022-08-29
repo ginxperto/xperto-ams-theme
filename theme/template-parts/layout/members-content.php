@@ -72,10 +72,10 @@
                         </a>
                     <?php } ?>
                 </div>
-                <div class="flex flex-col items-start space-y-4">
+                <div class="w-full flex flex-col items-start space-y-4">
                     <header class="w-full">
                         <div class="flex flex-row justify-between">
-                            <h4>
+                            <h4 class="">
                                 <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange font-bold" alt="Visit profile" title="Visit Profile">
                                     <?php echo $data->display_name; ?>
                                 </a>
