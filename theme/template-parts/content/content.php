@@ -10,7 +10,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('bg-white rounded-lg p-6'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('bg-white rounded-lg p-6 w-full'); ?>>
 	<header class="w-full">
 		<?php
 		if ('post' === get_post_type()) :

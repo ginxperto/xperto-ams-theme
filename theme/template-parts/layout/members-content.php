@@ -72,17 +72,17 @@
                         </a>
                     <?php } ?>
                 </div>
-                <div class="flex flex-col items-start space-y-4">
+                <div class="w-full flex flex-col items-start space-y-4">
                     <header class="w-full">
                         <div class="flex flex-row justify-between">
-                            <h4>
+                            <h4 class="">
                                 <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange font-bold" alt="Visit profile" title="Visit Profile">
                                     <?php echo $data->display_name; ?>
                                 </a>
                             </h4>
                             <div class="hidden flex-row justify-evenly sm:flex">
                                 <?php if (array_key_exists('mepr_facebook', $profile) && !empty($profile['mepr_facebook'])) : ?>
-                                    <a href="<?php echo esc_url($profile['mepr_facebook']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_fb.png' ?>" class="w-5 h-5" /></a>
+                                    <a href="<?php echo esc_url($profile['mepr_facebook']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_fb.png' ?>" class=" w-5 h-5" /></a>
                                 <?php endif; ?>
                                 <?php if (array_key_exists('mepr_twitter', $profile) && !empty($profile['mepr_twitter'])) : ?>
                                     <a href="<?php echo esc_url($profile['mepr_twitter']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_twitter.png' ?>" class="w-5 h-5" /></a>
