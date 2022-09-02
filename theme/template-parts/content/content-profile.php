@@ -58,7 +58,7 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
         <!-- Profile Banner -->
 
         <div class="absolute -bottom-12 inset-x-9 flex flex-row space-x-4">
-            <?php if (!empty($profile)) : ?>
+            <?php if (!empty($profile) && !empty($profile['mepr_profile_picture'])) : ?>
                 <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="bg-white rounded-full  border-4 border-white w-32 h-32" />
             <?php else :
                 echo get_avatar($current_user->ID, 128, '', 'avatar', array('class' => 'rounded-full'));
