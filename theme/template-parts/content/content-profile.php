@@ -10,6 +10,7 @@
 
 $profile;
 $mepr_user;
+
 $user_id = $_GET['id'];
 
 // About Me URL
@@ -29,6 +30,7 @@ $final_credentials_url = esc_url_raw(add_query_arg($profile_args, $profile_url))
 if (is_user_logged_in()) :
     // * Lets try to load the memberpress user details
     $rc = new ReflectionClass('MeprUser');
+    
 
     // instantiate via reflection
     $mepr_user = $rc->newInstanceArgs(array($user_id));

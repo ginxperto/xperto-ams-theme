@@ -35,6 +35,7 @@
 			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
 			<?php
 			$data;
+			
 
 			// if its already loaded
 			if (class_exists('MeprUser')) :
@@ -62,11 +63,13 @@
 			?>
 				<div class="flex flex-row items-start space-x-4">
 					<div class="w-1/4">
-						<?php if (array_key_exists('mepr_profile_picture', $profile)) { ?>
+						<?php if (!empty($profile['mepr_profile_picture'])) : ?>
 							<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
-								<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full hover:border hover:border-xperto-orange" />
+								<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-14 h-14" />
 							</a>
-						<?php } ?>
+						<?php else : echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14')); 
+						endif;
+						?>
 					</div>
 					<div class="w-3/4 flex flex-col items-start space-y-2">
 						<h4>
@@ -76,7 +79,7 @@
 						</h4>
 						<?php if (array_key_exists('mepr_about', $profile)) { ?>
 							<p class="text-xperto-neutral-mid-1 text-xs">
-								<?php echo $profile['mepr_about']; ?>
+								<?php echo wp_trim_words($profile['mepr_about'], 20); ?>
 							</p>
 						<?php } ?>
 						<div class="hidden flex-row justify-evenly sm:flex">

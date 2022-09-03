@@ -69,7 +69,7 @@
 				$profile = $mepr_user->custom_profile_values();
 			?>
 				<p class="text-xperto-neutral-mid-1 text-xs">
-					<?php echo $profile['mepr_about']; ?>
+					<?php echo wp_trim_words($profile['mepr_about'], 20); ?>
 				</p>
 		<?php
 			endif;

@@ -62,15 +62,18 @@
     foreach ($user_data as $data) :
         $profile = $data->custom_profile_values();
         $profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
+    
     ?>
         <div class="flex w-full min-w-min bg-white rounded-lg p-6">
             <div class="flex flex-row items-start space-x-4 w-full">
                 <div class="w-20">
-                    <?php if (array_key_exists('mepr_profile_picture', $profile)) { ?>
-                        <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
-                            <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full min-w-[80px] hover:border hover:border-xperto-orange" />
-                        </a>
-                    <?php } ?>
+                    <?php if (!empty($profile['mepr_profile_picture'])) : ?>
+							<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
+								<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-14 h-14" />
+							</a>
+						<?php else : echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14')); 
+						endif;
+                    ?>
                 </div>
                 <div class="flex flex-col items-start space-y-4">
                     <header class="w-full">
@@ -121,7 +124,7 @@
                     ?>
                     <?php if (array_key_exists('mepr_about', $profile)) { ?>
                         <p>
-                            <?php echo $profile['mepr_about']; ?>
+                             <?php echo wp_trim_words($profile['mepr_about'], 20); ?>
                         </p>
                     <?php } ?>
                 </div>
