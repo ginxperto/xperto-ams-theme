@@ -337,6 +337,23 @@ function custom_field_exists($custom_fields, $field_key)
     return false;
 }
 
+function xperto_auto_mepr_pages()
+{
+    if (class_exists('MeprOptions')) {
+        $mepr_options = MeprOptions::fetch();
+
+        if (isset($mepr_options->redirect_on_unauthorized)) {
+            // force redirect for all unauthorized
+            $mepr_options->redirect_on_unauthorized = false;
+            $mepr_options->unauthorized_redirect_url = home_url('/?loginaction=xpertoOauthLogin');
+            $mepr_options->redirect_non_singular = false;
+
+            // try to update the options
+            $mepr_options->store(false);
+        }
+    }
+}
+
 function xperto_auto_mepr_accounts()
 {
     if (class_exists('MeprOptions')) {
@@ -372,17 +389,18 @@ function xperto_auto_mepr_general()
     }
 }
 
-function xperto_auto_group($hook) {
+function xperto_auto_group($hook)
+{
     $screen = get_current_screen();
 
     // newly created
-    if ( $hook == 'post-new.php' && $screen->post_type != 'memberpressgroup' ) {
+    if ($hook == 'post-new.php' && $screen->post_type != 'memberpressgroup') {
         // we don't do anything here
         return;
     }
-    wp_enqueue_script( 'xperot-admin-script', get_template_directory_uri() . '/js/xperto_mepr_admin.js' );
+    wp_enqueue_script('xperot-admin-script', get_template_directory_uri() . '/js/xperto_mepr_admin.js');
 }
-add_action( 'admin_enqueue_scripts', 'xperto_auto_group' );
+add_action('admin_enqueue_scripts', 'xperto_auto_group');
 
 function create_page_on_theme_activation()
 {
