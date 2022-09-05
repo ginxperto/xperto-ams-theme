@@ -56,50 +56,48 @@
 					}
 				}
 			endif;
-			if (is_array($user_data) || is_object($user_data))
-    		{	
-				foreach ($data as $data) :
-					$profile = $data->custom_profile_values();
-					$profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
-				?>
-					<div class="flex flex-row items-start space-x-4">
-						<div class="w-1/4">
-							<?php if (!empty($profile['mepr_profile_picture'])) : ?>
-								<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
-									<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-14 h-14" />
-								</a>
-							<?php else : echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14')); 
-							endif;
-							?>
-						</div>
-						<div class="w-3/4 flex flex-col items-start space-y-2">
-							<h4>
-								<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
-									<?php echo $data->first_name . ' ' . $data->last_name; ?>
-								</a>
-							</h4>
-							<?php if (array_key_exists('mepr_about', $profile)) { ?>
-								<p class="text-xperto-neutral-mid-1 text-xs">
-									<?php echo wp_trim_words($profile['mepr_about'], 20); ?>
-								</p>
-							<?php } ?>
-							<div class="hidden flex-row justify-evenly sm:flex">
-								<?php if (array_key_exists('mepr_facebook', $profile) && !empty($profile['mepr_facebook'])) : ?>
-									<a href="<?php echo esc_url($profile['mepr_facebook']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_fb.png' ?>" class="w-5h -5" /></a>
-								<?php endif; ?>
-								<?php if (array_key_exists('mepr_twitter', $profile) && !empty($profile['mepr_twitter'])) : ?>
-									<a href="<?php echo esc_url($profile['mepr_twitter']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_twitter.png' ?>" class="w-5h -5" /></a>
-								<?php endif; ?>
-								<?php if (array_key_exists('mepr_linkedin', $profile) && !empty($profile['mepr_linkedin'])) : ?>
-									<a href="<?php echo esc_url($profile['mepr_linkedin']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_linkedin.png' ?>" class="w-5h -5" /></a>
-								<?php endif; ?>
-								<a href="<?php echo esc_url('mailto:' . $data->rec->user_email); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_email.png' ?>" class="w-5h -5" /></a>
-							</div>
-							<!-- Social Links -->
-						</div>
+
+			foreach ($data as $data) :
+				$profile = $data->custom_profile_values();
+				$profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
+			?>
+				<div class="flex flex-row items-start space-x-4">
+					<div class="w-1/4">
+						<?php if (!empty($profile['mepr_profile_picture'])) : ?>
+							<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
+								<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-14 h-14" />
+							</a>
+						<?php else : echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14')); 
+						endif;
+						?>
 					</div>
-				<?php endforeach; ?>
-			<?php }?>
+					<div class="w-3/4 flex flex-col items-start space-y-2">
+						<h4>
+							<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
+								<?php echo $data->first_name . ' ' . $data->last_name; ?>
+							</a>
+						</h4>
+						<?php if (array_key_exists('mepr_about', $profile)) { ?>
+							<p class="text-xperto-neutral-mid-1 text-xs">
+								<?php echo wp_trim_words($profile['mepr_about'], 20); ?>
+							</p>
+						<?php } ?>
+						<div class="hidden flex-row justify-evenly sm:flex">
+							<?php if (array_key_exists('mepr_facebook', $profile) && !empty($profile['mepr_facebook'])) : ?>
+								<a href="<?php echo esc_url($profile['mepr_facebook']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_fb.png' ?>" class="w-5h -5" /></a>
+							<?php endif; ?>
+							<?php if (array_key_exists('mepr_twitter', $profile) && !empty($profile['mepr_twitter'])) : ?>
+								<a href="<?php echo esc_url($profile['mepr_twitter']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_twitter.png' ?>" class="w-5h -5" /></a>
+							<?php endif; ?>
+							<?php if (array_key_exists('mepr_linkedin', $profile) && !empty($profile['mepr_linkedin'])) : ?>
+								<a href="<?php echo esc_url($profile['mepr_linkedin']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_linkedin.png' ?>" class="w-5h -5" /></a>
+							<?php endif; ?>
+							<a href="<?php echo esc_url('mailto:' . $data->rec->user_email); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_email.png' ?>" class="w-5h -5" /></a>
+						</div>
+						<!-- Social Links -->
+					</div>
+				</div>
+			<?php endforeach; ?>
 			<div>
 				<a href="<?php echo home_url('/members') ?>" class="text-xperto-orange font-bold hover:text-xperto-orange-base-20">See more members</a>
 			</div>
