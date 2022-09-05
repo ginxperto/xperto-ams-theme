@@ -1,25 +1,52 @@
 <?php
 
+function my_login_logo()
+{ ?>
+    <style type="text/css">
+        #login h1 a,
+        .login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/images/login_logo.png);
+            height: 65px;
+            width: auto;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        #login #nav a {
+            display: none;
+        }
+    </style>
+    <?php }
+add_action('login_enqueue_scripts', 'my_login_logo');
+
+function my_login_logo_url() {
+    return home_url();
+}
+add_filter( 'login_headerurl', 'my_login_logo_url' );
+
 function xperto_account_home_label($title)
 {
     return 'Account Details';
 }
 add_filter('mepr-account-nav-home-label', 'xperto_account_home_label');
 
-function xperto_pricebox_templates($templates){
+function xperto_pricebox_templates($templates)
+{
     // return array_merge($tempplate, array());
     return $templates;
 }
 add_filter('mepr_group_theme_templates_paths', 'xperto_pricebox_templates');
 
-function xperto_pricebox_themes($templates){
-    $new_temp = array_merge($templates, array(get_template_directory(). '/css/plans'));
+function xperto_pricebox_themes($templates)
+{
+    $new_temp = array_merge($templates, array(get_template_directory() . '/css/plans'));
     return $new_temp;
     // return $templates;
 }
 add_filter('mepr_group_themes_paths', 'xperto_pricebox_themes');
 
-function xperto_edit_post($post_id){
+function xperto_edit_post($post_id)
+{
     echo '<style>
     #wpbody-content .wrap > form[name="post"]{
         display: block !important;
