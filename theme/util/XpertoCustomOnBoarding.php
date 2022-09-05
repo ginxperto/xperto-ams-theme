@@ -411,6 +411,7 @@ function create_page_on_theme_activation()
     xperto_auto_categories();
     xperto_auto_homepage_settings();
     xperto_auto_mepr_custom_fields();
+    xperto_auto_mepr_pages();
     xperto_auto_mepr_accounts();
     xperto_auto_mepr_general();
 }
