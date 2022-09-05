@@ -344,9 +344,9 @@ function xperto_auto_mepr_pages()
 
         if (isset($mepr_options->redirect_on_unauthorized)) {
             // force redirect for all unauthorized
-            $mepr_options->redirect_on_unauthorized = false;
+            $mepr_options->redirect_on_unauthorized = true;
             $mepr_options->unauthorized_redirect_url = home_url('/?loginaction=xpertoOauthLogin');
-            $mepr_options->redirect_non_singular = false;
+            $mepr_options->redirect_non_singular = true;
 
             // try to update the options
             $mepr_options->store(false);
