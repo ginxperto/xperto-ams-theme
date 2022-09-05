@@ -112,7 +112,7 @@
 				</div><!-- #nav-menu -->
 			<?php } else { ?>
 				<div id="nav-menu" class="flex items-center space-x-6">
-					<a href="<?php echo home_url('?loginaction=xpertoOauthLogin') ?>" class="rounded-lg bg-xperto-orange text-white p-3 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10">
+					<a href="<?php echo home_url('?loginaction=xpertoOauthLogin'); ?>" class="rounded-lg bg-xperto-orange text-white p-3 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10">
 						<span class="whitespace-nowrap text-white font-bold">Login</span>
 					</a>
 				</div>
