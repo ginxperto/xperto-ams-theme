@@ -44,13 +44,18 @@
 				$obj = $rc->newInstanceArgs();
 
 				if ($obj instanceof MeprUser) {
-					// * we only one 3 people
-					$users = $obj::all('objects', array(), 'user_registered', 3);
+					// this will give all users, we still need to check if they are active
+					$users = $obj::all('objects', array(), 'user_registered', 50);
 
 					foreach ($users as $user) {
 						// display only when active
 						if ($user->is_active()) {
 							$list[] = $user;
+
+							// * we only want 3 people
+							if (count($list) > 2) {
+								break;
+							}
 						}
 					}
 				}
