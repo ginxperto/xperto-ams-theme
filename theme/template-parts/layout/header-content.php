@@ -13,7 +13,11 @@
 <div id="main-sidebar" class="bg-white shadow-right sidebar w-44 p-4 absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ease-in-out z-50 md:relative md:translate-x-0">
 	<div id="branding" class="mt-2">
 		<?php
-		the_custom_logo();
+		if (has_custom_logo()) {
+			echo the_custom_logo();
+		} else{
+			 echo '<img src="'. get_stylesheet_directory_uri() . '/images/xperto_logo_min.png' .'">';
+		}
 		?>
 	</div>
 	<nav id="site-navigation" class="mt-16">
