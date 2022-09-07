@@ -9,7 +9,10 @@
  */
 
 #masthead.one-col-header .custom-logo {
-	@apply w-40 !important;
+	@apply h-full object-contain !important; 
+}
+#masthead.one-col-header .custom-logo-link {
+	@apply h-full;
 }
 
 .mepr-price-menu.xperto .mepr-price-boxes {
