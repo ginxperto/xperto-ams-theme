@@ -193,6 +193,21 @@ function xperto_auto_homepage_settings()
     update_option('page_for_posts', $community->ID);
 }
 
+function xperto_auto_mepr_fields()
+{
+    if (class_exists('MeprOptions')) {
+        $mepr_options = MeprOptions::fetch();
+
+        if (isset($mepr_options->show_fields_logged_in_purchases)) {
+            // disable fields if user is already logged in
+            $mepr_options->show_fields_logged_in_purchases = false;
+
+            // try to update the options
+            $mepr_options->store(false);
+        }
+    }
+}
+
 function xperto_auto_mepr_custom_fields()
 {
     if (class_exists('MeprOptions')) {
@@ -337,6 +352,23 @@ function custom_field_exists($custom_fields, $field_key)
     return false;
 }
 
+function xperto_auto_mepr_pages()
+{
+    if (class_exists('MeprOptions')) {
+        $mepr_options = MeprOptions::fetch();
+
+        if (isset($mepr_options->redirect_on_unauthorized)) {
+            // force redirect for all unauthorized
+            $mepr_options->redirect_on_unauthorized = true;
+            $mepr_options->unauthorized_redirect_url = home_url('/?loginaction=xpertoOauthLogin');
+            $mepr_options->redirect_non_singular = true;
+
+            // try to update the options
+            $mepr_options->store(false);
+        }
+    }
+}
+
 function xperto_auto_mepr_accounts()
 {
     if (class_exists('MeprOptions')) {
@@ -372,17 +404,18 @@ function xperto_auto_mepr_general()
     }
 }
 
-function xperto_auto_group($hook) {
+function xperto_auto_group($hook)
+{
     $screen = get_current_screen();
 
     // newly created
-    if ( $hook == 'post-new.php' && $screen->post_type != 'memberpressgroup' ) {
+    if ($hook == 'post-new.php' && $screen->post_type != 'memberpressgroup') {
         // we don't do anything here
         return;
     }
-    wp_enqueue_script( 'xperot-admin-script', get_template_directory_uri() . '/js/xperto_mepr_admin.js' );
+    wp_enqueue_script('xperot-admin-script', get_template_directory_uri() . '/js/xperto_mepr_admin.js');
 }
-add_action( 'admin_enqueue_scripts', 'xperto_auto_group' );
+add_action('admin_enqueue_scripts', 'xperto_auto_group');
 
 function create_page_on_theme_activation()
 {
@@ -392,7 +425,9 @@ function create_page_on_theme_activation()
     xperto_auto_org_admin_menu();
     xperto_auto_categories();
     xperto_auto_homepage_settings();
+    xperto_auto_mepr_fields();
     xperto_auto_mepr_custom_fields();
+    xperto_auto_mepr_pages();
     xperto_auto_mepr_accounts();
     xperto_auto_mepr_general();
 }

@@ -14,8 +14,8 @@
  */
 
 // force user to login
-if (!is_user_logged_in()) {
-    wp_redirect(wp_login_url());
+if (!is_user_logged_in()) {    
+	wp_redirect(home_url('?loginaction=xpertoOauthLogin'));
     exit();
 }
 

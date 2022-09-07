@@ -8,6 +8,12 @@
  * @package xperto-ams
  */
 
+// force user to login
+if (!is_user_logged_in()) {    
+	wp_redirect(home_url('?action=xpertoOauthSignUp'));
+    exit();
+}
+
 get_header('memberpressproduct');
 ?>
 <main id="primary" class="w-full flex">

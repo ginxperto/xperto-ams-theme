@@ -35,6 +35,7 @@
 			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
 			<?php
 			$data;
+			
 
 			// if its already loaded
 			if (class_exists('MeprUser')) :
@@ -78,7 +79,7 @@
 						</h4>
 						<?php if (array_key_exists('mepr_about', $profile)) { ?>
 							<p class="text-xperto-neutral-mid-1 text-xs">
-								<?php echo $profile['mepr_about']; ?>
+								<?php echo wp_trim_words($profile['mepr_about'], 20); ?>
 							</p>
 						<?php } ?>
 						<div class="hidden flex-row justify-evenly sm:flex">

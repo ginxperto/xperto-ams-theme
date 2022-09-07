@@ -12,7 +12,7 @@
     // we have a memberpress user loaded
     if ($mepr_user instanceof MeprUser) :
         $subs_title;
-        $highest_tier = null;
+        $highest_tier;
         $show_upgrade = true;
         $group_products = array();
         $group_url = home_url();

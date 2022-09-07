@@ -27,7 +27,7 @@
 	</aside>
 	<aside id="org-summary" class="widget flex flex-col space-y-2">
 		<?php
-		$current_user = get_user_by('id', get_the_author_meta('id'));
+		$current_user = get_user_by('id', get_the_author_meta('ID'));
 
 		if (($current_user instanceof WP_User)) : ?>
 			<?php
@@ -69,7 +69,7 @@
 				$profile = $mepr_user->custom_profile_values();
 			?>
 				<p class="text-xperto-neutral-mid-1 text-xs">
-					<?php echo $profile['mepr_about']; ?>
+					<?php echo wp_trim_words($profile['mepr_about'], 20); ?>
 				</p>
 		<?php
 			endif;
@@ -82,7 +82,7 @@
 		<ul>
 			<?php
 			$categories = get_the_category();
-			$category;
+			$category = '';
 
 			if (!empty($categories)) {
 				$category = $categories[0]->name;
