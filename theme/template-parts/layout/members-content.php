@@ -59,7 +59,7 @@
         endif;
     }
 
-    
+    // bug on line 63
     if (is_array($user_data) || is_object($user_data))
     {
         foreach ($user_data as $data) :
