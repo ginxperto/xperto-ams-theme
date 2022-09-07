@@ -59,7 +59,8 @@ if (!class_exists('XpertoCustomCommentWalker')) {
                         <div class="comment-author vcard flex items-center space-x-4">
                             <div class="flex-shrink-0">
                                 <?php
-                                // * OUR ENHANCEMENT 
+                                // * OUR ENHANCEMENT
+                                // $current_user = wp_get_current_user();
 
                                 // we have a memberpress user loaded
                                 if ($mepr_user instanceof MeprUser) {
@@ -71,7 +72,7 @@ if (!class_exists('XpertoCustomCommentWalker')) {
                                     <?php
                                     } else {
                                         // else get default avater as fallback
-                                        echo get_avatar($current_user->ID, 56, '', 'avatar', array('class' => 'rounded-full inline-block'));
+                                        echo get_avatar($mepr_user->ID, 56, '', 'avatar', array('class' => 'rounded-full inline-block'));
                                     }
                                 } else {
                                     // else get default avater as fallback

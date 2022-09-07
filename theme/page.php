@@ -13,6 +13,11 @@
  * @package xperto-ams
  */
 
+if (is_page('login')) {
+	wp_redirect(home_url('?loginaction=xpertoOauthLogin'));
+	exit();
+}
+
 get_header();
 ?>
 <main id="primary" class="w-full flex flex-row items-start">

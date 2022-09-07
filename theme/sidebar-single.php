@@ -27,7 +27,7 @@
 	</aside>
 	<aside id="org-summary" class="widget flex flex-col space-y-2">
 		<?php
-		$current_user = get_user_by('id', get_the_author_meta('id'));
+		$current_user = get_user_by('id', get_the_author_meta('ID'));
 
 		if (($current_user instanceof WP_User)) : ?>
 			<?php
@@ -82,7 +82,7 @@
 		<ul>
 			<?php
 			$categories = get_the_category();
-			$category;
+			$category = '';
 
 			if (!empty($categories)) {
 				$category = $categories[0]->name;
