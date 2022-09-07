@@ -34,8 +34,7 @@
 		<aside id="meta" class="widget mt-8 space-y-4">
 			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
 			<?php
-			$data;
-			
+			$list;
 
 			// if its already loaded
 			if (class_exists('MeprUser')) :
@@ -51,13 +50,13 @@
 					foreach ($users as $user) {
 						// display only when active
 						if ($user->is_active()) {
-							$data[] = $user;
+							$list[] = $user;
 						}
 					}
 				}
 			endif;
 
-			foreach ($data as $data) :
+			foreach ($list as $data) :
 				$profile = $data->custom_profile_values();
 				$profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
 			?>
@@ -67,7 +66,7 @@
 							<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
 								<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-14 h-14" />
 							</a>
-						<?php else : echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14')); 
+						<?php else : echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14'));
 						endif;
 						?>
 					</div>
