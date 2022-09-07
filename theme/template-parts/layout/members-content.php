@@ -59,76 +59,82 @@
         endif;
     }
 
-    foreach ($user_data as $data) :
-        $profile = $data->custom_profile_values();
-        $profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
+
+    if (is_array($user_data) || is_object($user_data))
+    {
+        foreach ($user_data as $data) :
+            $profile = $data->custom_profile_values();
+            $profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
+    
     ?>
         <div class="flex w-full min-w-min bg-white rounded-lg p-6">
             <div class="flex flex-row items-start space-x-4 w-full">
                 <div class="w-20">
-                    <?php if (array_key_exists('mepr_profile_picture', $profile)) { ?>
-                        <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
-                            <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full min-w-[80px] hover:border hover:border-xperto-orange" />
-                        </a>
-                    <?php } ?>
+                    <?php if (!empty($profile['mepr_profile_picture'])) : ?>
+                            <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
+                                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-14 h-14" />
+                            </a>
+                        <?php else : echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14')); 
+                        endif; ?>
                 </div>
-                <div class="w-full flex flex-col items-start space-y-4">
-                    <header class="w-full">
-                        <div class="flex flex-row justify-between">
-                            <h4 class="">
-                                <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange font-bold" alt="Visit profile" title="Visit Profile">
-                                    <?php echo $data->display_name; ?>
-                                </a>
-                            </h4>
-                            <div class="hidden flex-row justify-evenly sm:flex">
-                                <?php if (array_key_exists('mepr_facebook', $profile) && !empty($profile['mepr_facebook'])) : ?>
-                                    <a href="<?php echo esc_url($profile['mepr_facebook']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_fb.png' ?>" class=" w-5 h-5" /></a>
-                                <?php endif; ?>
-                                <?php if (array_key_exists('mepr_twitter', $profile) && !empty($profile['mepr_twitter'])) : ?>
-                                    <a href="<?php echo esc_url($profile['mepr_twitter']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_twitter.png' ?>" class="w-5 h-5" /></a>
-                                <?php endif; ?>
-                                <?php if (array_key_exists('mepr_linkedin', $profile) && !empty($profile['mepr_linkedin'])) : ?>
-                                    <a href="<?php echo esc_url($profile['mepr_linkedin']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_linkedin.png' ?>" class="w-5 h-5" /></a>
-                                <?php endif; ?>
-                                <a href="<?php echo esc_url('mailto:' . $data->rec->user_email); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_email.png' ?>" class="w-5 h-5" /></a>
+                    <div class="flex flex-col items-start space-y-4">
+                        <header class="w-full">
+                            <div class="flex flex-row justify-between">
+                                <h4>
+                                    <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange font-bold" alt="Visit profile" title="Visit Profile">
+                                        <?php echo $data->display_name; ?>
+                                    </a>
+                                </h4>
+                                <div class="hidden flex-row justify-evenly sm:flex">
+                                    <?php if (array_key_exists('mepr_facebook', $profile) && !empty($profile['mepr_facebook'])) : ?>
+                                        <a href="<?php echo esc_url($profile['mepr_facebook']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_fb.png' ?>" class="w-5 h-5" /></a>
+                                    <?php endif; ?>
+                                    <?php if (array_key_exists('mepr_twitter', $profile) && !empty($profile['mepr_twitter'])) : ?>
+                                        <a href="<?php echo esc_url($profile['mepr_twitter']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_twitter.png' ?>" class="w-5 h-5" /></a>
+                                    <?php endif; ?>
+                                    <?php if (array_key_exists('mepr_linkedin', $profile) && !empty($profile['mepr_linkedin'])) : ?>
+                                        <a href="<?php echo esc_url($profile['mepr_linkedin']); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_linkedin.png' ?>" class="w-5 h-5" /></a>
+                                    <?php endif; ?>
+                                    <a href="<?php echo esc_url('mailto:' . $data->rec->user_email); ?>" target="_blank"><img src="<?php echo get_template_directory_uri() . '/images/icon_email.png' ?>" class="w-5 h-5" /></a>
+                                </div>
+                                <!-- Social Links -->
                             </div>
-                            <!-- Social Links -->
-                        </div>
-                        <?php
-                        $subs = $data->active_product_subscriptions();
-                        foreach ($subs as $sub) :
-                            $product = new MeprProduct($sub);
+                            <?php
+                            $subs = $data->active_product_subscriptions();
+                            foreach ($subs as $sub) :
+                                $product = new MeprProduct($sub);
 
-                            if ($product instanceof MeprProduct) :
-                                // pick color from tailwind
-                                $color_list = array(
-                                    'text-xperto-member-color-0',
-                                    'text-xperto-member-color-1',
-                                    'text-xperto-member-color-2'
-                                );
-                                $color = $color_list[$product->group_order];
-                                ?>
-                                <span class="text-sm font-bold <?php echo $color; ?>" style="color: <?php echo get_post_custom_values('badge_color',$product->ID)[0]; ?>">
-                                    <?php echo $product->post_title; ?>
-                                </span>
-                        <?php endif;
-                        endforeach;
+                                if ($product instanceof MeprProduct) :
+                                    // pick color from tailwind
+                                    $color_list = array(
+                                        'text-xperto-member-color-0',
+                                        'text-xperto-member-color-1',
+                                        'text-xperto-member-color-2'
+                                    );
+                                    $color = $color_list[$product->group_order];
+                                    ?>
+                                    <span class="text-sm font-bold <?php echo $color; ?>" style="color: <?php echo get_post_custom_values('badge_color',$product->ID)[0]; ?>">
+                                        <?php echo $product->post_title; ?>
+                                    </span>
+                            <?php endif;
+                            endforeach;
+                            ?>
+                            <!-- Subscriptions -->
+                        </header>
+                        <?php
+                        // TODO: insert crendentialing badges here
                         ?>
-                        <!-- Subscriptions -->
-                    </header>
-                    <?php
-                    // TODO: insert crendentialing badges here
-                    ?>
-                    <?php if (array_key_exists('mepr_about', $profile)) { ?>
-                        <p>
-                            <?php echo $profile['mepr_about']; ?>
-                        </p>
-                    <?php } ?>
+                        <?php if (array_key_exists('mepr_about', $profile)) { ?>
+                            <p>
+                                <?php echo wp_trim_words($profile['mepr_about'], 20); ?>
+                            </p>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Card -->
-    <?php endforeach; ?>
+            <!-- Card -->
+        <?php endforeach; ?>
+        <?php }?>
 </div>
 <div class="flex flex-row w-full space-x-0 items-center">
     <?php
