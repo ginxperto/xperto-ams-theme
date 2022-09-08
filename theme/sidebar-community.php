@@ -35,6 +35,7 @@
 			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
 			<?php
 			$data;
+			$current_user = wp_get_current_user();
 			
 
 			// if its already loaded
