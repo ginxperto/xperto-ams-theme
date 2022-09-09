@@ -74,7 +74,7 @@
                             echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full min-w-[80px] hover:border hover:border-xperto-orange'));
                         endif; ?>
                     </div>
-                    <div class="flex flex-col items-start space-y-4">
+                    <div class="flex-1 flex flex-col items-start space-y-4">
                         <header class="w-full">
                             <div class="flex flex-row justify-between">
                                 <h4>
