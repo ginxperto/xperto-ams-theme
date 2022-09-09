@@ -110,3 +110,50 @@ function xperto_before_account_subscriptions($mepr_current_user)
 }
 
 add_action('mepr_before_account_subscriptions', 'xperto_before_account_subscriptions');
+
+function xperto_acf_add_local_field_groups()
+{
+    acf_add_local_field_group(array(
+        'key' => 'group_63062fadb1321',
+        'title' => 'Membership Badge',
+        'fields' => array(
+            array(
+                'key' => 'field_63062fd0e6189',
+                'label' => 'Badge Color',
+                'name' => 'badge_color',
+                'type' => 'color_picker',
+                'instructions' => '',
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '#A5A5A5',
+                'enable_opacity' => 0,
+                'return_format' => 'string',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'memberpressproduct',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+        'show_in_rest' => 0,
+    ));
+}
+
+add_action('acf/init', 'xperto_acf_add_local_field_groups');
