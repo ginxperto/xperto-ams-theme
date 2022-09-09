@@ -128,9 +128,9 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                     </div>
                 <?php endif; ?>
             </div>
-        <?php
-        // Credentialing Tab
-        else : ?>
+        <?php else :
+            // Credentialing Tab
+        ?>
             <div class="py-6 space-y-4">
                 <div class="w-full relative">
                     <?php
@@ -142,11 +142,11 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                             <img src="<?php echo get_template_directory_uri() . '/images/icon_cert.png'; ?>" alt="Certificate Icon" class="w-20" />
                             <span class="font-bold text-lg mt-6">You have no crendetials yet</span>
                             <span>You haven't applied any credentials.</span>
-                            <a href="<?php home_url(); /* TODO: UPDATE THIS */ ?>" class="mt-4 rounded-lg py-3 px-4 bg-xperto-orange text-white hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10">Apply for Credentials</a>
+                            <a href="<?php home_url(); /* TODO: UPDATE THIS */ ?>" class="mt-4 xperto-button-contained">Apply for Credentials</a>
                         </div>
                     <?php else : ?>
                         <div class="flex flex-col min-h-[200px]">
-                            <h3 class="font-bold text-lg">User hasn't uploaded any credentials yet.</h3>
+                            <h3 class="text-lg">User hasn't uploaded any credentials yet.</h3>
                             <div class="flex flex-row items-center">
                                 <?php // TODO: add credentials result here 
                                 ?>

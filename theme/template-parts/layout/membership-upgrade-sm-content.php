@@ -52,7 +52,7 @@
                     <div class="flex flex-col w-full space-y-4">
                         <span class="text-2xl text-xperto-green font-semibold">Upgrade your account!</span>
                         <p class="text-xperto-neutral-dark-1"><?php echo $highest_tier->post_title; ?> get additional perks, such as unlocking exclusive <?php echo $highest_tier->post_title; ?> profile badges, exclusive invites to <?php echo $highest_tier->post_title; ?>-only events and seminars, and so much more!</p>
-                        <a class="rounded-lg border border-xperto-orange py-3 px-4 text-xperto-orange flex-none text-center hover:bg-xperto-orange-base-20 hover:text-white active:bg-xperto-orange-base-plus-10" href="<?php echo $group_url; ?>">Upgrade</a>
+                        <a class=" flex-none text-center xperto-button-outlined md:max-w-fit" href="<?php echo $group_url; ?>">Upgrade</a>
                     </div>
                 </div>
             </section><!-- #membership-upgrade-content -->
@@ -82,7 +82,7 @@
                     <div class="flex flex-col space-y-4 w-full">
                         <span class="text-2xl text-xperto-green font-semibold">Join the <?php bloginfo(); ?></span>
                         <p class="text-xperto-neutral-dark-1">New members get additional perks, such as exclusive organization merchandise, exclusive invites to Member-only events and seminars, and so much more!</p>
-                        <a class="rounded-lg bg-xperto-orange py-3 px-4 text-white flex-none w-full text-center md:w-48 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
+                        <a class="flex-none w-full text-center xperto-button-contained md:max-w-fit" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
                     </div>
                 </div>
             </section>

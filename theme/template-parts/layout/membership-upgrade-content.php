@@ -52,7 +52,7 @@
                     <div class="flex flex-col w-full space-y-4">
                         <span class="text-2xl text-xperto-green font-semibold">Upgrade your membership!</span>
                         <p class="text-xperto-neutral-dark-1"><?php echo $highest_tier->post_title; ?> get additional perks, such as unlocking exclusive <?php echo $highest_tier->post_title; ?> profile badges, exclusive invites to <?php echo $highest_tier->post_title; ?>-only events and seminars, and so much more!</p>
-                        <a class="rounded-lg bg-xperto-orange py-3 px-4 text-white flex-none w-full text-center md:w-48 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10" href="<?php echo $group_url; ?>">Upgrade Membership</a>
+                        <a class="flex-none w-full text-center xperto-button-contained md:w-48" href="<?php echo $group_url; ?>">Upgrade Membership</a>
                     </div>
                     <div class="hidden mx-auto self-center md:inline">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/membership_upgrade.png" />
@@ -79,15 +79,13 @@
         // get products inside the group
         $group_products = $groups->products();
 
-        if (count($group_products) > 0) :
-
-    ?>
+        if (count($group_products) > 0) : ?>
             <section id="membership-upgrade-content" class="w-full">
                 <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
                     <div class="flex flex-col space-y-4 w-full md:w-2/3">
                         <span class="text-2xl text-xperto-green font-semibold">Join the <?php bloginfo(); ?></span>
                         <p class="text-xperto-neutral-dark-1">New members get additional perks, such as exclusive organization merchandise, exclusive invites to Member-only events and seminars, and so much more!</p>
-                        <a class="rounded-lg bg-xperto-orange py-3 px-4 text-white flex-none w-full text-center md:w-48 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
+                        <a class="flex-none w-full text-center xperto-button-contained md:w-48" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
                     </div>
                     <div class="hidden absolute top-0 right-0 h-full md:block">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/membership_signup.png" class="h-full" />
