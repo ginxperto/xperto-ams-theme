@@ -62,9 +62,14 @@ function xperto_before_account_subscriptions($mepr_current_user)
     $sub_list = null;
     $subs = $mepr_current_user->active_product_subscriptions();
     foreach ($subs as $sub) {
-        $product = new MeprProduct($sub);
+        // * Lets try to load the memberpress details
+        $rc = new ReflectionClass('MeprProduct');
 
-        if ($product instanceof MeprProduct) {
+        // instantiate via reflection
+        // get 1 product
+        $product = $rc->newInstanceArgs(array($sub));
+
+        if (get_class($product) === MeprProduct::class) {
             $sub_list[] = $product->post_title;
         }
     }
@@ -84,11 +89,10 @@ function xperto_before_account_subscriptions($mepr_current_user)
     endif;
 
     // Query the posts
-    $group_perma_link = null;
     $group_query = new WP_Query($args);
     $group_query->have_posts();
 
-    // Loop through the obituaries:
+    // Loop through the posts:
     while ($group_query->have_posts()) : $group_query->the_post();
     ?>
         <div class="mb-4">

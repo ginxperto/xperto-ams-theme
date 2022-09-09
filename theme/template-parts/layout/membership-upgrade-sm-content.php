@@ -10,7 +10,7 @@
     $mepr_user = $rc->newInstanceArgs(array($user_id));
 
     // we have a memberpress user loaded
-    if ($mepr_user instanceof MeprUser) :
+    if (get_class($mepr_user) === MeprUser::class) :
         $subs_title;
         $highest_tier;
         $show_upgrade = true;
@@ -19,15 +19,23 @@
         $subs = $mepr_user->active_product_subscriptions();
 
         foreach ($subs as $sub) :
-            //get 1 product
-            $product = new MeprProduct($sub);
+            // * Lets try to load the memberpress details
+            $rc = new ReflectionClass('MeprProduct');
+
+            // instantiate via reflection
+            // get 1 product
+            $product = $rc->newInstanceArgs(array($sub));
 
             // we haven't retrieve all product inside the group
             if (empty($group_products)) {
-                // get the group of product
-                $group = new MeprGroup($product->group_id);
+                // * Lets try to load the memberpress details
+                $rc = new ReflectionClass('MeprGroup');
 
-                if ($group instanceof MeprGroup) {
+                // instantiate via reflection                
+                // get the group of product
+                $group = $rc->newInstanceArgs(array($product->group_id));
+
+                if (get_class($group) === MeprGroup::class) {
                     // get products inside the group
                     $group_products = $group->products();
 
@@ -45,7 +53,7 @@
         }
 
         // failsafe
-        if ($highest_tier instanceof MeprProduct) :
+        if (get_class($highest_tier) === MeprProduct::class) :
     ?>
             <section id="membership-upgrade-content" class="w-full <?php echo (!$show_upgrade) ? 'hidden' : ''; ?>">
                 <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
@@ -59,7 +67,9 @@
     <?php
         endif;
     endif; ?>
-<?php else : ?>
+<?php else :
+    // user is not logged in 
+?>
     <?php
     $args = array(
         'post_type' => 'memberpressgroup',
@@ -69,10 +79,14 @@
     $posts = new WP_Query($args);
 
     while ($posts->have_posts()) : $posts->the_post();
-        $groups = new MeprGroup($posts->ID);
+        // * Lets try to load the memberpress details
+        $rc = new ReflectionClass('MeprGroup');
+
+        // get the group of product
+        $groups = $rc->newInstanceArgs(array($posts->ID));
     endwhile;
 
-    if ($groups instanceof MeprGroup) :
+    if (get_class($groups) === MeprGroup::class) :
         // get products inside the group
         $group_products = $groups->products();
 

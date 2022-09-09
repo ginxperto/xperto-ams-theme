@@ -20,9 +20,7 @@
 		}
 		?>
 		</header>
-
 		<?php xperto_ams_post_thumbnail(); ?>
-
 		<div class="entry-content bg-white rounded-lg p-6">
 			<?php
 			the_content();
@@ -35,7 +33,6 @@
 			);
 			?>
 		</div>
-
 		<?php if (get_edit_post_link()) : ?>
 			<footer class="my-4">
 				<?php

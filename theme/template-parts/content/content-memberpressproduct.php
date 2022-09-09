@@ -15,9 +15,7 @@
             <span class="text-2xl font-bold text-xperto-neutral-dark-1"><?php the_title(); ?></span>
         </header>
     <?php endif; ?>
-
     <?php xperto_ams_post_thumbnail(); ?>
-
     <div class="entry-content w-full flex flex-col items-start justify-center">
         <?php
         the_content(

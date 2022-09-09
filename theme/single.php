@@ -16,7 +16,7 @@ get_header();
 		<?php
 		while (have_posts()) :
 			the_post();
-			
+
 			get_template_part('template-parts/content/content', get_post_type());
 
 			// * we don't need it for AMS
@@ -35,9 +35,9 @@ get_header();
 		endwhile; // End of the loop.
 		?>
 	</div>
-    <div class="hidden w-1/3 bg-white p-6 mt-[1px] self-stretch lg:block lg:w-1/4 md:max-w-xs">
-        <?php get_sidebar('single'); ?>
-    </div>
+	<div class="hidden w-1/3 bg-white p-6 mt-[1px] self-stretch lg:block lg:w-1/4 md:max-w-xs">
+		<?php get_sidebar('single'); ?>
+	</div>
 </main><!-- #main -->
 
 <?php

@@ -9,13 +9,14 @@
  */
 
 // force user to login
-if (!is_user_logged_in()) {    
+if (!is_user_logged_in()) {
 	wp_redirect(home_url('?action=xpertoOauthSignUp'));
-    exit();
+	exit();
 }
 
 get_header('memberpressproduct');
 ?>
+
 <main id="primary" class="w-full flex">
 	<div class="xperto-memberpressproduct container flex flex-1 flex-col items-start p-4 space-y-6 max-w-[1200px] md:p-8 lg:space-x-0 xl:mx-auto">
 		<?php

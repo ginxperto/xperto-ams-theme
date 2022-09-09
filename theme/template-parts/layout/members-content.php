@@ -1,64 +1,65 @@
+<?php
+global $wpdb;
+$user_data = null;
+$ids;
+
+$order_by = '';
+$offset = 0;
+$items_per_page = get_option('posts_per_page');
+
+if (isset($_GET['order_by'])) {
+    $order_by = " ORDER BY {$_GET['order_by']}";
+}
+$page = isset($_GET['member_page']) ? abs((int) $_GET['member_page']) : 1;
+$offset = ($page * $items_per_page) - $items_per_page;
+$limit = " LIMIT {$offset},{$items_per_page}";
+$where = " WHERE active_sub_count > 0 ";
+$members_table = $wpdb->prefix . 'mepr_members';
+
+// Query All
+$query = "SELECT user_id FROM {$members_table}
+    {$where}";
+
+// Query by Name
+if (isset($_GET['member_name'])) {
+    $name = $_GET['member_name'];
+
+    $users_table = $wpdb->prefix . 'users';
+    $query = "SELECT user_id FROM {$members_table} 
+        LEFT JOIN {$users_table} 
+        ON {$members_table}.user_id = {$users_table}.ID 
+        WHERE active_sub_count > 0 
+            AND {$users_table}.display_name LIKE '%{$name}%'";
+}
+
+// get total count
+$total = $wpdb->get_var("SELECT COUNT(1) FROM (${query}) AS combined_table");
+
+// limit the results per page
+$query .= " {$order_by}{$limit}";
+
+// var_dump($query); // * uncomment if needed
+
+$results = $wpdb->get_results($query);
+
+foreach ($results as $result) {
+    $ids[] = $result->user_id;
+
+    // if its already loaded
+    if (class_exists('MeprUser')) :
+        $rc = new ReflectionClass('MeprUser');
+
+        // instantiate via reflection
+        $mepr_user = $rc->newInstanceArgs(array($result->user_id));
+
+        if (get_class($mepr_user) === MeprUser::class) {
+            $user_data[] = $mepr_user;
+        }
+    endif;
+}
+?>
 <div class="flex flex-wrap w-full space-y-6 lg:space-y-0 lg:gap-6 lg:grid lg:grid-cols-2">
     <?php
-    global $wpdb;
-    $user_data = null;
-    $ids;
-
-    $order_by = '';
-    $offset = 0;
-    $items_per_page = get_option('posts_per_page');
-
-    if (isset($_GET['order_by'])) {
-        $order_by = " ORDER BY {$_GET['order_by']}";
-    }
-    $page = isset($_GET['member_page']) ? abs((int) $_GET['member_page']) : 1;
-    $offset = ($page * $items_per_page) - $items_per_page;
-    $limit = " LIMIT {$offset},{$items_per_page}";
-    $where = " WHERE active_sub_count > 0 ";
-    $members_table = $wpdb->prefix . 'mepr_members';
-
-    // Query All
-    $query = "SELECT user_id FROM {$members_table}
-        {$where}";
-
-    // Query by Name
-    if (isset($_GET['member_name'])) {
-        $name = $_GET['member_name'];
-
-        $users_table = $wpdb->prefix . 'users';
-        $query = "SELECT user_id FROM {$members_table} 
-            LEFT JOIN {$users_table} 
-            ON {$members_table}.user_id = {$users_table}.ID 
-            WHERE active_sub_count > 0 
-                AND {$users_table}.display_name LIKE '%{$name}%'";
-    }
-
-    // get total count
-    $total = $wpdb->get_var("SELECT COUNT(1) FROM (${query}) AS combined_table");
-
-    // limit the results per page
-    $query .= " {$order_by}{$limit}";
-
-    // var_dump($query); // * uncomment if needed
-
-    $results = $wpdb->get_results($query);
-
-    foreach ($results as $result) {
-        $ids[] = $result->user_id;
-
-        // if its already loaded
-        if (class_exists('MeprUser')) :
-            $rc = new ReflectionClass('MeprUser');
-
-            // instantiate via reflection
-            $obj = $rc->newInstanceArgs(array($result->user_id));
-
-            if ($obj instanceof MeprUser) {
-                $user_data[] = $obj;
-            }
-        endif;
-    }
-
     if (is_array($user_data) || is_object($user_data)) {
         foreach ($user_data as $data) :
             $profile = $data->custom_profile_values();
@@ -99,9 +100,12 @@
                             <?php
                             $subs = $data->active_product_subscriptions();
                             foreach ($subs as $sub) :
-                                $product = new MeprProduct($sub);
+                                $reflectionClass = new ReflectionClass('MeprProduct');
 
-                                if ($product instanceof MeprProduct) : ?>
+                                // instantiate via reflection
+                                $product = $reflectionClass->newInstanceArgs(array($sub));
+
+                                if (get_class($product) === MeprProduct::class) : ?>
                                     <span class="text-sm font-bold" style="color: <?php echo empty(get_post_custom_values('badge_color', $product->ID)) ? '#262626' : get_post_custom_values('badge_color', $product->ID)[0]; ?>">
                                         <?php echo $product->post_title; ?>
                                     </span>

@@ -45,9 +45,7 @@
             </span>
         </header>
     <?php endif; ?>
-
     <?php xperto_ams_post_thumbnail(); ?>
-
     <div class="entry-content w-full flex flex-col items-center justify-center">
         <?php
         the_content(

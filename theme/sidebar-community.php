@@ -44,7 +44,7 @@
 				// instantiate via reflection
 				$obj = $rc->newInstanceArgs();
 
-				if ($obj instanceof MeprUser) {
+				if (get_class($obj) === MeprUser::class) {
 					// this will give all users, we still need to check if they are active
 					$users = $obj::all('objects', array(), 'user_registered', 50);
 

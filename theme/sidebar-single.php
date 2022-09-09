@@ -39,7 +39,7 @@
 			$mepr_user = $rc->newInstanceArgs(array($current_user->ID));
 
 			// we have a memberpress user loaded
-			if ($mepr_user instanceof MeprUser) {
+			if (get_class($mepr_user) === MeprUser::class) {
 				// get custom fields
 				$profile = $mepr_user->custom_profile_values();
 				$profile_link = add_query_arg("id", $mepr_user->ID, home_url('/profile'));
@@ -64,7 +64,7 @@
 				<span class="text-xperto-neutral-dark-1 font-semibold"><?php echo esc_html($current_user->display_name); ?></span>
 			</a>
 			<?php // we have a memberpress user loaded
-			if ($mepr_user instanceof MeprUser) :
+			if (get_class($mepr_user) === MeprUser::class) :
 				// get custom fields
 				$profile = $mepr_user->custom_profile_values();
 			?>
@@ -101,7 +101,7 @@
 			?>
 					<li class="py-2">
 						<a href="<?php echo get_permalink($post_item->ID); ?>" class="flex items-center">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-xperto-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-fit text-xperto-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
 							</svg>
 							<span class="text-xperto-orange ml-2"><?php echo $post_item->post_title; ?></span>
