@@ -30,7 +30,7 @@ $final_credentials_url = esc_url_raw(add_query_arg($profile_args, $profile_url))
 if (is_user_logged_in()) :
     // * Lets try to load the memberpress user details
     $rc = new ReflectionClass('MeprUser');
-    
+
 
     // instantiate via reflection
     $mepr_user = $rc->newInstanceArgs(array($user_id));
@@ -63,7 +63,7 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
             <?php if (!empty($profile) && !empty($profile['mepr_profile_picture'])) : ?>
                 <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="bg-white rounded-full  border-4 border-white w-32 h-32" />
             <?php else :
-                echo get_avatar($current_user->ID, 128, '', 'avatar', array('class' => 'rounded-full'));
+                echo get_avatar($mepr_user->ID, 128, '', 'avatar', array('class' => 'rounded-full'));
             endif;
             ?>
             <div class="flex-1 flex flex-col mt-6">
@@ -74,16 +74,9 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                     foreach ($subs as $sub) :
                         $product = new MeprProduct($sub);
 
-                        if ($product instanceof MeprProduct) :
-                            // pick color from tailwind
-                            $color_list = array(
-                                'text-xperto-member-color-0',
-                                'text-xperto-member-color-1',
-                                'text-xperto-member-color-2'
-                            );
-                            $color = $color_list[$product->group_order]; ?>
+                        if ($product instanceof MeprProduct) : ?>
                             <!-- bug on line 87 -->
-                            <span class="text-sm font-bold <?php echo $color; ?>" style="color: <?php echo get_post_custom_values('badge_color',$product->ID) === null ?>">
+                            <span class="text-sm font-bold" style="color: <?php echo empty(get_post_custom_values('badge_color', $product->ID)) ? '#262626' : get_post_custom_values('badge_color', $product->ID)[0]; ?>">
                                 <?php echo $product->post_title; ?>
                             </span>
                     <?php endif;

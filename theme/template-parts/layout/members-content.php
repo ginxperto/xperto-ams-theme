@@ -1,7 +1,7 @@
 <div class="flex flex-wrap w-full space-y-6 lg:space-y-0 lg:gap-6 lg:grid lg:grid-cols-2">
     <?php
     global $wpdb;
-    $user_data;
+    $user_data = null;
     $ids;
 
     $order_by = '';
@@ -14,7 +14,7 @@
     $page = isset($_GET['member_page']) ? abs((int) $_GET['member_page']) : 1;
     $offset = ($page * $items_per_page) - $items_per_page;
     $limit = " LIMIT {$offset},{$items_per_page}";
-    $where = " WHERE memberships <> '' ";
+    $where = " WHERE active_sub_count > 0 ";
     $members_table = $wpdb->prefix . 'mepr_members';
 
     // Query All
@@ -29,7 +29,7 @@
         $query = "SELECT user_id FROM {$members_table} 
             LEFT JOIN {$users_table} 
             ON {$members_table}.user_id = {$users_table}.ID 
-            WHERE memberships <> '' 
+            WHERE active_sub_count > 0 
                 AND {$users_table}.display_name LIKE '%{$name}%'";
     }
 
@@ -71,7 +71,7 @@
                                 <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full min-w-[80px] hover:border hover:border-xperto-orange" />
                             </a>
                         <?php else :
-                            echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full min-w-[80px] hover:border hover:border-xperto-orange'));
+                            echo get_avatar($data->ID, 68, '', 'avatar', array('class' => 'rounded-full min-w-[80px] hover:border hover:border-xperto-orange'));
                         endif; ?>
                     </div>
                     <div class="flex-1 flex flex-col items-start space-y-4">
@@ -101,16 +101,8 @@
                             foreach ($subs as $sub) :
                                 $product = new MeprProduct($sub);
 
-                                if ($product instanceof MeprProduct) :
-                                    // pick color from tailwind
-                                    $color_list = array(
-                                        'text-xperto-member-color-0',
-                                        'text-xperto-member-color-1',
-                                        'text-xperto-member-color-2'
-                                    );
-                                    $color = $color_list[$product->group_order];
-                            ?>
-                                    <span class="text-sm font-bold <?php echo $color; ?>" style="color: <?php echo get_post_custom_values('badge_color', $product->ID) === null ?>">
+                                if ($product instanceof MeprProduct) : ?>
+                                    <span class="text-sm font-bold" style="color: <?php echo empty(get_post_custom_values('badge_color', $product->ID)) ? '#262626' : get_post_custom_values('badge_color', $product->ID)[0]; ?>">
                                         <?php echo $product->post_title; ?>
                                     </span>
                             <?php endif;

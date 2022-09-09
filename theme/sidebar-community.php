@@ -34,7 +34,7 @@
 		<aside id="meta" class="widget mt-8 space-y-4">
 			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
 			<?php
-			$list;      
+			$list;
 			$current_user = wp_get_current_user();
 
 			// if its already loaded
@@ -72,7 +72,8 @@
 							<a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
 								<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-14 h-14" />
 							</a>
-						<?php else : echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14'));
+						<?php else :
+							echo get_avatar($current_user->ID, 68, '', 'avatar', array('class' => 'rounded-full border border-xperto-neutral-light-1 w-14 h-14'));
 						endif;
 						?>
 					</div>
