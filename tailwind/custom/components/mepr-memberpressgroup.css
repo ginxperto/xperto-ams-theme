@@ -14,7 +14,6 @@
 #masthead.one-col-header .custom-logo-link {
 	@apply h-full;
 }
-
 .mepr-price-menu.xperto .mepr-price-boxes {
 	@apply flex flex-col justify-center gap-6 md:flex-row md:flex-wrap md:items-stretch !important;
 }

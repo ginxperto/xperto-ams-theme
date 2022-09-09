@@ -17,8 +17,8 @@
 				if (has_custom_logo() ){
 					the_custom_logo();
 				}else{
-				echo '<img src="'. get_stylesheet_directory_uri() . '/images/xperto_logo_min.png' .'">';
+					echo  '<a  href="<?php echo get_home_url(); ?>" class="w-full">' . '<img src="'. get_stylesheet_directory_uri() . '/images/xperto_logo_min.png' .'"">' ;
 				}
 				?>
 			</div>	
-	</header><!-- #masthead -->
+	</header><!-- #masthead --> 

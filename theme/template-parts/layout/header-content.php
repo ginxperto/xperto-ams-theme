@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /**
  * Template part for displaying the header content
@@ -49,14 +49,14 @@
 			if (is_user_logged_in()) {
 			?>
 				<div id="nav-menu" class="flex items-center self-end space-x-6">
-					<div class="hidden md:flex">
+					<div class="hidden md:flex text-xperto-orange rounded-lg font-bold hover:bg-xperto-orange-light-90 p-2">
 						<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M12.8384 26.1509C12.8384 26.1578 12.8379 26.1648 12.8379 26.1717C12.8379 27.9179 14.2534 29.3335 15.9996 29.3335C17.7458 29.3335 19.1614 27.9179 19.1614 26.1717C19.1614 26.1648 19.1609 26.1578 19.1608 26.1509H12.8384Z" fill="#A5A5A5" />
 							<path d="M26.0949 22.1984L23.2493 18.0184C23.2493 16.7388 23.2493 13.6121 23.2493 12.8033C23.2493 9.28623 20.7446 6.35457 17.4217 5.6939V4.08798C17.4216 3.30296 16.7852 2.6665 16.0001 2.6665C15.2151 2.6665 14.5787 3.30296 14.5787 4.08798V5.69396C11.2558 6.35468 8.75103 9.28635 8.75103 12.8033C8.75103 14.1802 8.75103 17.2204 8.75103 18.0184L5.90546 22.1985C5.60572 22.6388 5.57402 23.2087 5.82308 23.6795C6.07214 24.1504 6.56108 24.4448 7.09373 24.4448H24.9065C25.4392 24.4448 25.9281 24.1503 26.1772 23.6795C26.4263 23.2087 26.3945 22.6387 26.0949 22.1984Z" fill="#A5A5A5" />
 						</svg>
 					</div>
 					<!-- notification -->
-					<div class="relative inline-block">
+					<div class="relative inline-block text-xperto-orange rounded-lg font-bold hover:bg-xperto-orange-light-90 p-2">
 						<a href="#" id="user-menu" class="flex items-center space-x-3">
 							<?php
 							if (is_user_logged_in()) :
