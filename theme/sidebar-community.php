@@ -34,7 +34,8 @@
 		<aside id="meta" class="widget mt-8 space-y-4">
 			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
 			<?php
-			$list;
+			$list;      
+			$current_user = wp_get_current_user();
 
 			// if its already loaded
 			if (class_exists('MeprUser')) :

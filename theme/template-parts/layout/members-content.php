@@ -110,7 +110,7 @@
                                     );
                                     $color = $color_list[$product->group_order];
                             ?>
-                                    <span class="text-sm font-bold <?php echo $color; ?>" style="color: <?php echo get_post_custom_values('badge_color', $product->ID)[0]; ?>">
+                                    <span class="text-sm font-bold <?php echo $color; ?>" style="color: <?php echo get_post_custom_values('badge_color', $product->ID) === null ?>">
                                         <?php echo $product->post_title; ?>
                                     </span>
                             <?php endif;
