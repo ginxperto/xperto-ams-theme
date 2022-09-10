@@ -159,5 +159,12 @@ function xperto_acf_add_local_field_groups()
         'show_in_rest' => 0,
     ));
 }
-
 add_action('acf/init', 'xperto_acf_add_local_field_groups');
+
+function add_favicon(){
+    if(!get_option('site_icon', false)){
+        // Show favicon
+        echo '<link rel="shortcut icon" type="image/png" href="' . get_template_directory_uri() . '/images/xperto_favicon.png"/>';
+    }
+}
+add_action('wp_head', 'add_favicon');
