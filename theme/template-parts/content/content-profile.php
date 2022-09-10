@@ -114,7 +114,7 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
             <div class="py-6 space-y-4">
                 <?php if ($mepr_user->ID === get_current_user_id()) : ?>
                     <div class="w-full flex justify-end">
-                        <a href="<?php echo home_url('/account'); ?>" class="text-xperto-orange font-bold hover:bg-xperto-orange-light-90">Edit</a>
+                        <a href="<?php echo home_url('/account'); ?>" class="text-xperto-orange rounded-lg font-bold hover:bg-xperto-orange-light-90 p-2">Edit</a>
                     </div>
                 <?php
                 endif;
