@@ -10,7 +10,7 @@
     $mepr_user = $rc->newInstanceArgs(array($user_id));
 
     // we have a memberpress user loaded
-    if ($mepr_user instanceof MeprUser) :
+    if (get_class($mepr_user) === MeprUser::class) :
         $subs_title;
         $highest_tier;
         $show_upgrade = true;
@@ -19,15 +19,23 @@
         $subs = $mepr_user->active_product_subscriptions();
 
         foreach ($subs as $sub) :
-            //get 1 product
-            $product = new MeprProduct($sub);
+            // * Lets try to load the memberpress details
+            $rc = new ReflectionClass('MeprProduct');
+
+            // instantiate via reflection
+            // get 1 product
+            $product = $rc->newInstanceArgs(array($sub));
 
             // we haven't retrieve all product inside the group
             if (empty($group_products)) {
-                // get the group of product
-                $group = new MeprGroup($product->group_id);
+                // * Lets try to load the memberpress details
+                $rc = new ReflectionClass('MeprGroup');
 
-                if ($group instanceof MeprGroup) {
+                // instantiate via reflection                
+                // get the group of product
+                $group = $rc->newInstanceArgs(array($product->group_id));
+
+                if (get_class($group) === MeprGroup::class) {
                     // get products inside the group
                     $group_products = $group->products();
 
@@ -45,14 +53,14 @@
         }
 
         // failsafe
-        if ($highest_tier instanceof MeprProduct) :
+        if (get_class($highest_tier) === MeprProduct::class) :
     ?>
             <section id="membership-upgrade-content" class="w-full <?php echo (!$show_upgrade) ? 'hidden' : ''; ?>">
                 <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
                     <div class="flex flex-col w-full space-y-4">
                         <span class="text-2xl text-xperto-green font-semibold">Upgrade your membership!</span>
                         <p class="text-xperto-neutral-dark-1"><?php echo $highest_tier->post_title; ?> get additional perks, such as unlocking exclusive <?php echo $highest_tier->post_title; ?> profile badges, exclusive invites to <?php echo $highest_tier->post_title; ?>-only events and seminars, and so much more!</p>
-                        <a class="rounded-lg bg-xperto-orange py-3 px-4 text-white flex-none w-full text-center md:w-48 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10" href="<?php echo $group_url; ?>">Upgrade Membership</a>
+                        <a class="flex-none w-full text-center xperto-button-contained md:w-48" href="<?php echo $group_url; ?>">Upgrade Membership</a>
                     </div>
                     <div class="hidden mx-auto self-center md:inline">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/membership_upgrade.png" />
@@ -62,7 +70,9 @@
     <?php
         endif;
     endif; ?>
-<?php else : ?>
+<?php else :
+    // user is not logged in 
+?>
     <?php
     $args = array(
         'post_type' => 'memberpressgroup',
@@ -72,22 +82,24 @@
     $posts = new WP_Query($args);
 
     while ($posts->have_posts()) : $posts->the_post();
-        $groups = new MeprGroup($posts->ID);
+        // * Lets try to load the memberpress details
+        $rc = new ReflectionClass('MeprGroup');
+
+        // get the group of product
+        $groups = $rc->newInstanceArgs(array($posts->ID));
     endwhile;
 
-    if ($groups instanceof MeprGroup) :
+    if (get_class($groups) === MeprGroup::class) :
         // get products inside the group
         $group_products = $groups->products();
 
-        if (count($group_products) > 0) :
-
-    ?>
+        if (count($group_products) > 0) : ?>
             <section id="membership-upgrade-content" class="w-full">
                 <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
                     <div class="flex flex-col space-y-4 w-full md:w-2/3">
                         <span class="text-2xl text-xperto-green font-semibold">Join the <?php bloginfo(); ?></span>
                         <p class="text-xperto-neutral-dark-1">New members get additional perks, such as exclusive organization merchandise, exclusive invites to Member-only events and seminars, and so much more!</p>
-                        <a class="rounded-lg bg-xperto-orange py-3 px-4 text-white flex-none w-full text-center md:w-48 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
+                        <a class="flex-none w-full text-center xperto-button-contained md:w-48" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
                     </div>
                     <div class="hidden absolute top-0 right-0 h-full md:block">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/membership_signup.png" class="h-full" />

@@ -15,8 +15,8 @@
 		<?php
 		if (has_custom_logo()) {
 			echo the_custom_logo();
-		} else{
-			 echo '<img src="'. get_stylesheet_directory_uri() . '/images/xperto_logo_min.png' .'">';
+		} else {
+			echo '<img src="' . get_stylesheet_directory_uri() . '/images/xperto_logo_min.png' . '">';
 		}
 		?>
 	</div>
@@ -45,9 +45,7 @@
 					</svg>
 				</button>
 			</div>
-			<?php
-			if (is_user_logged_in()) {
-			?>
+			<?php if (is_user_logged_in()) : ?>
 				<div id="nav-menu" class="flex items-center self-end space-x-6">
 					<div class="hidden md:flex text-xperto-orange rounded-lg font-bold hover:bg-xperto-orange-light-90 p-2">
 						<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +70,7 @@
 									$mepr_user = $rc->newInstanceArgs(array($current_user->ID));
 
 									// we have a memberpress user loaded
-									if ($mepr_user instanceof MeprUser) {
+									if (get_class($mepr_user) === MeprUser::class) {
 										// get custom fields
 										$profile = $mepr_user->custom_profile_values();
 
@@ -98,7 +96,7 @@
 							?>
 						</a><!-- #user-menu -->
 
-						<?php if (is_user_logged_in()) { ?>
+						<?php if (is_user_logged_in()) : ?>
 							<ul id="user-menu-popover" class="py-4 px-2 rounded-lg space-y-2 bg-white shadow-xperto-pop-over-shadow origin-top-right absolute right-0 mt-5 w-56 shadow-lg ring-1 ring-black ring-opacity-5 flex-col focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
 								<li class=" flex flex-col px-4 py-2 rounded-lg hover:text-xperto-orange hover:bg-xperto-orange-light-90">
 									<a href="<?php echo home_url("/profile"); ?>">My Profile</a>
@@ -111,15 +109,15 @@
 								</li>
 							</ul>
 							<!-- #user-menu-popover -->
-						<?php } ?>
+						<?php endif; ?>
 					</div>
 				</div><!-- #nav-menu -->
-			<?php } else { ?>
+			<?php else : ?>
 				<div id="nav-menu" class="flex items-center space-x-6">
-					<a href="<?php echo home_url('?loginaction=xpertoOauthLogin'); ?>" class="rounded-lg bg-xperto-orange text-white p-3 hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10">
+					<a href="<?php echo home_url('?loginaction=xpertoOauthLogin'); ?>" class="xperto-button-contained">
 						<span class="whitespace-nowrap text-white font-bold">Login</span>
 					</a>
 				</div>
-			<?php } ?>
+			<?php endif; ?>
 		</div>
 	</header><!-- #masthead -->
