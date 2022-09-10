@@ -12,9 +12,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('bg-white rounded-lg p-6 w-full'); ?>>
 	<header class="w-full">
-		<?php
-		if ('post' === get_post_type()) :
-		?>
+		<?php if ('post' === get_post_type()) : ?>
 			<div class="mb-5 flex flex-row justify-between">
 				<div class="flex-1">
 					<span class="text-xperto-neutral-mid-2"> / </span>
@@ -36,8 +34,7 @@
 				</div>
 			</div>
 		<?php endif; ?>
-		<?php
-		if (is_singular()) :
+		<?php if (is_singular()) :
 			the_title('<h1 class="entry-title text-black text-2xl font-bold mb-4 mx-0 hover:text-xperto-orange">', '</h1>');
 		else :
 			the_title('<h2 class="entry-title text-black text-2xl font-bold mb-4 mx-0 hover:text-xperto-orange"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
@@ -47,9 +44,7 @@
 			<?php xperto_ams_entry_tag(); ?>
 		</div>
 	</header>
-
 	<?php xperto_ams_post_thumbnail(); ?>
-
 	<div class="entry-content w-full">
 		<?php
 		the_content(

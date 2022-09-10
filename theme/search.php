@@ -10,6 +10,7 @@
 
 get_header();
 ?>
+
 <main id="primary" class="w-full flex flex-row items-start">
 	<div class="container flex flex-1 flex-col items-start p-4 space-y-6 max-w-[1200px] md:p-8 xl:mx-auto">
 

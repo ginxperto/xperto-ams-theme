@@ -13,6 +13,12 @@
  * @package xperto-ams
  */
 
+// force user to login
+if (!is_user_logged_in()) {
+	wp_redirect(home_url('?loginaction=xpertoOauthLogin'));
+	exit();
+}
+
 // * Do before everything, prevent 'header already sent error'
 if (!isset($_GET['id'])) {
 	$url = home_url('/profile');
@@ -21,12 +27,6 @@ if (!isset($_GET['id'])) {
 	);
 	$final_url = esc_url_raw(add_query_arg($args, $url));
 	wp_redirect($final_url);
-	exit();
-}
-
-// force user to login
-if (!is_user_logged_in()){	
-	wp_redirect(home_url('?loginaction=xpertoOauthLogin'));
 	exit();
 }
 

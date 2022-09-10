@@ -22,7 +22,6 @@ if (post_password_required()) {
 ?>
 
 <div id="comments" class="rounded-lg bg-white px-6 py-9 w-full">
-
 	<?php
 	// You can start editing here -- including this comment!
 	if (have_comments()) :
@@ -66,7 +65,6 @@ if (post_password_required()) {
 			<p><?php esc_html_e('Comments are closed.', 'xperto-ams'); ?></p>
 	<?php
 		endif;
-
 	endif; // Check for have_comments().
 
 	$comments_args = array(

@@ -18,7 +18,6 @@
             <span class="text-2xl font-bold text-xperto-neutral-dark-1 mt-7">Payment Successful</span>
         </header>
     <?php endif; ?>
-
     <?php xperto_ams_post_thumbnail(); ?>
     <div class="entry-content w-full flex items-start justify-center">
         <?php
@@ -45,6 +44,6 @@
         ); ?>
     </div>
     <footer class="flex self-center">
-        <a href="<?php echo home_url() ?>" class="h-fit no-underline bg-xperto-orange text-white rounded-lg py-3 px-4 hover:bg-xperto-orange-base-20 hover:text-white active:bg-xperto-orange-base-plus-10">Back to home</a>
+        <a href="<?php echo home_url() ?>" class="xperto-button-contained">Back to home</a>
     </footer>
 </article><!-- #post-<?php the_ID(); ?> -->

@@ -20,6 +20,12 @@ if (!is_user_logged_in()) {
 }
 
 get_header();
+
+$search_val = '';
+
+if (isset($_GET['member_name'])) {
+	$search_val = $_GET['member_name'];
+}
 ?>
 <main id="primary" class="w-full flex flex-col items-start">
 	<div class="container flex flex-col items-start p-4 space-y-6 w-full max-w-[1200px] md:p-8 xl:mx-auto">
