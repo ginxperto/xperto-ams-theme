@@ -9,7 +9,7 @@
  */
 
 #masthead.one-col-header .custom-logo {
-	@apply h-full object-contain !important; 
+	@apply h-full object-contain !important;
 }
 #masthead.one-col-header .custom-logo-link {
 	@apply h-full;
