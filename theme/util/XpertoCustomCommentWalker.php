@@ -60,10 +60,9 @@ if (!class_exists('XpertoCustomCommentWalker')) {
                             <div class="flex-shrink-0">
                                 <?php
                                 // * OUR ENHANCEMENT
-                                // $current_user = wp_get_current_user();
 
                                 // we have a memberpress user loaded
-                                if ($mepr_user instanceof MeprUser) {
+                                if (get_class($mepr_user) === MeprUser::class) {
                                     // get custom fields
                                     $profile = $mepr_user->custom_profile_values();
                                     // load only if exists

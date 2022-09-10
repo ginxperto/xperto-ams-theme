@@ -13,14 +13,12 @@ get_header();
 <main id="primary" class="w-full flex flex-row items-start">
 	<div class="container flex flex-1 flex-col items-start p-4 space-y-6 max-w-[1200px] md:p-8 xl:mx-auto">
 		<?php if (have_posts()) : ?>
-
 			<header>
 				<?php
 				the_archive_title('<h1 class="entry-title text-4xl text-xperto-neutral-dark-1 font-bold w-full">', '</h1>');
 				the_archive_description('<div>', '</div>');
 				?>
 			</header>
-
 		<?php
 			/* Start the Loop */
 			while (have_posts()) :
