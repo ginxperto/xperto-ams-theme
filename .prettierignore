@@ -3,5 +3,3 @@
 
 # Negate the above pattern for CSS files in the `tailwind` folder:
 !tailwind/**/*.css
-!javascript/**/*.js
-!tailwind/**/*.js

@@ -39,7 +39,7 @@ $(post-title-selector) {
  * https://tailwindcss.com/docs/typography-plugin
  */
 $(post-content-selector) {
-	@apply prose prose-neutral max-w-none prose-a:text-xperto-orange;
+	@apply prose prose-neutral max-w-none prose-a:text-primary;
 }
 
 /* Content width from the `theme.json` file */

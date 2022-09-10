@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template part for displaying the footer content
  *
@@ -11,5 +10,12 @@
 ?>
 
 <footer id="colophon">
-	<!-- Nothing to display -->
+	<div>
+		<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'xperto-ams' ) ); ?>">
+			<?php
+			/* translators: %s: CMS name, i.e. WordPress. */
+			printf( esc_html__( 'Proudly powered by %s', 'xperto-ams' ), 'WordPress' );
+			?>
+		</a>
+	</div>
 </footer><!-- #colophon -->

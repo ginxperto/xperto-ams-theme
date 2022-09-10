@@ -1,12 +1,11 @@
 <?php
-
 /**
- * The template for displaying all pages
+ * The main template file
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
+ * This is the most generic template file in a WordPress theme
+ * and one of the two required files for a theme (the other being style.css).
+ * It is used to display a page when nothing more specific matches a query.
+ * E.g., it puts together the home page when no home.php file exists.
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -15,31 +14,44 @@
 
 get_header();
 ?>
-<main id="primary" class="w-full flex flex-row items-start min-h-[calc(100vh-80px)]">
-    <div class="container flex flex-1 flex-col items-start p-4 space-y-6 max-w-[1200px] md:p-8 m:w-2/3 lg:space-x-0 xl:mx-auto">
-        <?php if (get_post_type() == 'post') : ?>
-            <h3 class="text-4xl text-xperto-neutral-dark-1 font-bold w-full">Community</h3>
-        <?php endif; ?>
-        <?php
-        while (have_posts()) :
-            the_post();
 
-            get_template_part('template-parts/content/content', 'community');
+	<main id="primary">
 
-        endwhile; // End of the loop.
-        ?>
-        <?php
-        $nav_attr = array(
-            'class' => 'community-nav' // tailwind css
-        );
-        the_posts_navigation($nav_attr);
-        ?>
-    </div>
-    <div class="hidden w-1/3 bg-white p-6 mt-[1px] self-stretch lg:block lg:w-1/4 md:max-w-xs">
-        <?php get_sidebar('community'); ?>
-    </div>
-</main>
+		<?php
+		if ( have_posts() ) :
+
+			if ( is_home() && ! is_front_page() ) :
+				?>
+				<header>
+					<h1><?php single_post_title(); ?></h1>
+				</header>
+				<?php
+			endif;
+
+			/* Start the Loop */
+			while ( have_posts() ) :
+				the_post();
+
+				/*
+				 * Include the Post-Type-specific template for the content.
+				 * If you want to override this in a child theme, then include a file
+				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+				 */
+				get_template_part( 'template-parts/content/content', get_post_type() );
+
+			endwhile;
+
+			the_posts_navigation();
+
+		else :
+
+			get_template_part( 'template-parts/content/content', 'none' );
+
+		endif;
+		?>
+
+	</main><!-- #main -->
 
 <?php
-// important to enquque footer js
+get_sidebar();
 get_footer();
