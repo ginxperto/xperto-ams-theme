@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the footer
  *
@@ -11,11 +12,13 @@
 
 ?>
 
-	<?php get_template_part( 'template-parts/layout/footer', 'content' ); ?>
+<?php get_template_part('template-parts/layout/footer', 'content'); ?>
 
+</div><!-- #main-wrapper -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
 
 </body>
+
 </html>

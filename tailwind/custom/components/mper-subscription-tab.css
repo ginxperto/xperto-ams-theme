@@ -1,0 +1,74 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `components` layer
+ *
+ * “Add more opinionated, complex classes like buttons, form controls, alerts,
+ * etc; the sort of pre-built components you often see in other frameworks that
+ * you might need to override with utility classes.”
+ *
+ * — from https://tailwindcss.com/docs/plugins#adding-components
+ */
+
+.mp_wrapper table.mepr-account-table,
+.mp_wrapper table.mepr-account-table tr,
+.mp_wrapper table.mepr-account-table td {
+	@apply border-0 border-none;
+}
+
+.mp_wrapper table.mepr-account-table thead,
+.mp_wrapper table.mepr-account-table tr {
+	@apply border-b-2 border-solid border-xperto-neutral-light-1;
+}
+
+.mp_wrapper table.mepr-account-table th {
+	@apply px-4 py-3 text-sm capitalize text-xperto-neutral-mid-1;
+}
+
+.mp_wrapper table.mepr-account-table td {
+	@apply px-0 py-1 sm:px-4 sm:py-3;
+}
+
+/**
+ * Hide credit card expiry for subscription table
+ */
+.mp_wrapper
+	table#mepr-account-subscriptions-table.mepr-account-table
+	thead
+	th:nth-child(5),
+.mp_wrapper
+	table#mepr-account-subscriptions-table.mepr-account-table
+	tbody
+	td:nth-child(5) {
+	@apply hidden;
+}
+
+.mp_wrapper table.mepr-account-table thead th:last-child {
+	@apply w-72;
+}
+
+.mp_wrapper table.mepr-account-table tr.mepr-alt-row {
+	@apply bg-transparent;
+}
+
+.mp_wrapper table.mepr-account-table .mepr-account-actions {
+	@apply flex flex-col lg:flex-row;
+}
+
+.mp_wrapper table.mepr-account-table .mepr-account-actions a {
+	@apply ml-3 inline-block font-bold text-xperto-orange no-underline hover:text-xperto-orange-base-20;
+}
+
+.mp_wrapper table.mepr-account-table td > div {
+	@apply text-base font-normal not-italic;
+}
+
+.mp_wrapper table.mepr-account-table .mepr-account-active .mepr-active {
+	@apply text-xperto-success-base;
+}
+
+.mp_wrapper table.mepr-account-table .mepr-account-active .mepr-inactive {
+	@apply text-xperto-error-dark;
+}
+
+#mepr-subscriptions-paging a {
+	@apply text-xperto-orange no-underline hover:text-xperto-orange-base-20;
+}

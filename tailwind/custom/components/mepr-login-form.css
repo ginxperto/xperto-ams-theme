@@ -1,0 +1,21 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `components` layer
+ *
+ * “Add more opinionated, complex classes like buttons, form controls, alerts,
+ * etc; the sort of pre-built components you often see in other frameworks that
+ * you might need to override with utility classes.”
+ *
+ * — from https://tailwindcss.com/docs/plugins#adding-components
+ */
+
+.mepr-login-form-wrap .mp_wrapper .mp-form-row label {
+	@apply text-sm text-xperto-neutral-dark-1 !important;
+}
+
+.mepr-login-form-wrap .mp_wrapper .mp-form-row input {
+	@apply rounded-lg border border-xperto-neutral-light-1;
+}
+
+.mepr-login-form-wrap .mp_wrapper input[type="submit"] {
+	@apply cursor-pointer rounded-lg bg-xperto-orange py-3 px-4 text-white hover:bg-xperto-orange-base-20 active:bg-xperto-orange-base-plus-10 !important;
+}

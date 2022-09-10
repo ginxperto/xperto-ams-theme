@@ -1,0 +1,105 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `components` layer
+ *
+ * “Add more opinionated, complex classes like buttons, form controls, alerts,
+ * etc; the sort of pre-built components you often see in other frameworks that
+ * you might need to override with utility classes.”
+ *
+ * — from https://tailwindcss.com/docs/plugins#adding-components
+ */
+
+.xperto-memberpressproduct .entry-content > p:not(hidden) {
+	@apply mt-0;
+}
+
+.xperto-memberpressproduct .mepr_price_cell_label {
+	@apply hidden !important;
+}
+
+.xperto-memberpressproduct .mepr_price_cell {
+	@apply text-base font-bold text-xperto-secondary-base !important;
+}
+
+.xperto-memberpressproduct .mepr_coupon input.mepr-coupon-code {
+	@apply rounded-lg border border-xperto-neutral-light-1;
+}
+
+.xperto-memberpressproduct .mepr-payment-methods-wrapper {
+	@apply mt-4;
+}
+.xperto-memberpressproduct .mepr-payment-method {
+	@apply m-0 !important;
+}
+
+.xperto-memberpressproduct .mepr_payment_method > * {
+	@apply cursor-pointer !important;
+}
+
+.xperto-memberpressproduct .mp-form-row.mepr_payment_method {
+	@apply my-0 border border-xperto-neutral-light-1 bg-transparent p-6 !important;
+}
+
+.xperto-memberpressproduct .mp-form-row.mepr_payment_method .mp-checkbox-field {
+	@apply flex flex w-full items-center !important;
+}
+
+.xperto-memberpressproduct
+	.mp-form-row.mepr_payment_method
+	.mepr-payment-method-icon {
+	@apply ml-auto;
+}
+
+.xperto-memberpressproduct
+	.mp-form-row.mepr_payment_method
+	.mepr-payment-method-icon
+	img {
+	@apply my-0;
+}
+.xperto-memberpressproduct
+	.mp-form-row.mepr_payment_method
+	.mepr-payment-method-desc-text {
+	@apply mt-0 p-0 pt-6;
+}
+.xperto-memberpressproduct
+	.mp-form-row.mepr_payment_method
+	.mepr-payment-method-desc-text
+	p {
+	@apply my-0 p-0 text-xperto-neutral-mid-1;
+}
+.xperto-memberpressproduct
+	.mp-form-row.mepr_payment_method.xperto-active-payment {
+	@apply border-xperto-orange !important;
+}
+.xperto-memberpressproduct .mepr-submit {
+	@apply float-right cursor-pointer rounded-lg bg-xperto-orange py-3 px-4 text-white hover:bg-xperto-orange-base-20 hover:text-white active:bg-xperto-orange-base-plus-10;
+}
+.xperto-memberpressproduct .mp-form-submit img.mepr-loading-gif {
+	@apply m-0 w-6;
+}
+
+/**
+ * Checkout
+ */
+.xperto-memberpressproduct .mp-table,
+.xperto-memberpressproduct .mp-table thead,
+.xperto-memberpressproduct .mp-table th,
+.xperto-memberpressproduct .mp-table td {
+	@apply border-none;
+}
+
+.xperto-memberpressproduct .mp-table th,
+.xperto-memberpressproduct .mp-table td {
+	@apply border-x-0 border-t-0 border-solid border-xperto-neutral-light-1 pt-3 pb-4 !important;
+}
+
+.xperto-memberpressproduct .mp-table th {
+	@apply font-normal capitalize;
+}
+
+.xperto-memberpressproduct .mp-table th:last-child {
+	@apply text-right;
+}
+
+.xperto-memberpressproduct .mp-table tfoot .mp-currency-cell {
+	@apply font-bold;
+}
