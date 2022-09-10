@@ -229,3 +229,14 @@ require get_template_directory() . '/util/XpertoCustomCommentWalker.php';
  * Require custom filters and actions
  */
 require get_template_directory() . '/util/XpertoCustomMeprHooks.php';
+
+function add_favicon() {
+	if( ! get_option( 'site_icon', false ) ) {
+    // Show favicon
+	error_log('<link rel="shortcut icon" type="image/png" href="'.get_template_directory_uri().'/images/xperto_fav.png" />');
+	echo '<link rel="shortcut icon" type="image/png" href="'.get_template_directory_uri().'/images/xperto_favicon.png" />';
+}
+	error_log(get_option( 'site_icon', false ));
+}
+
+add_action('wp_head', 'add_favicon');
