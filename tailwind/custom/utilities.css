@@ -129,7 +129,7 @@
 }
 
 #mepr-account-nav .mepr-nav-item {
-	@apply inline-block px-4  py-3 hover:bg-xperto-orange-light-90 !important;
+	@apply inline-block hover:bg-xperto-orange-light-90 !important;
 }
 
 #mepr-account-nav .mepr-active-nav-tab {
@@ -141,7 +141,10 @@
 }
 
 #mepr-account-nav a {
-	@apply text-xperto-neutral-mid-1 no-underline hover:text-xperto-orange !important;
+	@apply p-5 text-xperto-neutral-mid-1 no-underline hover:text-xperto-orange !important;
+} 
+#mepr-account-nav span{
+	@apply p-3 !important; 	
 }
 
 #mepr-account-nav span:last-child {
