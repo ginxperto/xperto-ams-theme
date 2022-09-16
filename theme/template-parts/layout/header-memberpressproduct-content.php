@@ -7,6 +7,7 @@
  *
  * @package xperto-ams
  */
+include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 if (!is_plugin_active('memberpress/memberpress.php')) {
 	get_template_part('template-parts/content/content', 'memberpress-disabled');
