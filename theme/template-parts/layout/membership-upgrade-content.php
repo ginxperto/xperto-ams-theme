@@ -11,8 +11,8 @@
 
     // we have a memberpress user loaded
     if (get_class($mepr_user) === MeprUser::class) :
-        $subs_title;
-        $highest_tier;
+        $subs_title = '';
+        $highest_tier = null;
         $show_upgrade = true;
         $group_products = array();
         $group_url = home_url();
@@ -53,7 +53,7 @@
         }
 
         // failsafe
-        if (get_class($highest_tier) === MeprProduct::class) :
+        if ($highest_tier && (get_class($highest_tier) === MeprProduct::class)) :
     ?>
             <section id="membership-upgrade-content" class="w-full <?php echo (!$show_upgrade) ? 'hidden' : ''; ?>">
                 <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
