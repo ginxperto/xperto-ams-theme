@@ -75,7 +75,9 @@ $current_post_tags =  get_tags(array(
 				$profile = $mepr_user->custom_profile_values();
 			?>
 				<p class="text-xperto-neutral-mid-1 text-xs">
-					<?php echo wp_trim_words($profile['mepr_about'], 20); ?>
+					<?php if (array_key_exists('mepr_about', $profile)) { ?>
+						<?php echo wp_trim_words($profile['mepr_about'], 20); ?>
+					<?php } ?>
 				</p>
 		<?php
 			endif;

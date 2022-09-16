@@ -123,7 +123,9 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
 
                 if (!empty($profile)) : ?>
                     <div class="w-full">
-                        <?php echo $profile['mepr_about']; ?>
+                        <?php if (array_key_exists('mepr_about', $profile)) { ?>
+                            <?php echo $profile['mepr_about']; ?>
+                        <?php } ?>
                     </div>
                 <?php endif; ?>
             </div>
