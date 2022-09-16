@@ -7,6 +7,11 @@
  *
  * @package xperto-ams
  */
+
+$current_post_tags =  get_tags(array(
+	'hide_empty' => false
+));
+
 ?>
 
 <aside id="secondary-sidebar" class="flex flex-col space-y-6">
@@ -111,8 +116,10 @@
 			endif; ?>
 		</ul>
 	</aside>
-	<aside>
-		<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Recommended Topics', 'shape'); ?></h3>
-		<?php xperto_ams_all_tag(); ?>
-	</aside>
+	<?php if ($current_post_tags) : ?>
+		<aside>
+			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Recommended Topics', 'shape'); ?></h3>
+			<?php xperto_ams_all_tag(); ?>
+		</aside>
+	<?php endif; ?>
 </aside><!-- #secondary -->
