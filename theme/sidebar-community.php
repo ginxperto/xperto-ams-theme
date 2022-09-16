@@ -7,6 +7,10 @@
  *
  * @package xperto-ams
  */
+
+$current_post_tags =  get_tags(array(
+	'hide_empty' => false
+));
 ?>
 
 <aside id="secondary-sidebar" class="flex flex-col space-y-6">
@@ -26,15 +30,16 @@
 		<?php get_search_form(); ?>
 	</aside>
 	<?php get_template_part('template-parts/layout/membership-upgrade-sm', 'content'); ?>
-	<aside>
-		<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Recommended Topics', 'shape'); ?></h3>
-		<?php xperto_ams_all_tag(); ?>
-	</aside>
+	<?php if ($current_post_tags) : ?>
+		<aside>
+			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Recommended Topics', 'shape'); ?></h3>
+			<?php xperto_ams_all_tag(); ?>
+		</aside>
+	<?php endif; ?>
 	<?php if (is_user_logged_in() && is_user_member_of_blog()) : ?>
 		<aside id="meta" class="widget mt-8 space-y-4">
-			<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
 			<?php
-			$list;
+			$list = [];
 			$current_user = wp_get_current_user();
 
 			// if its already loaded
@@ -61,7 +66,11 @@
 					}
 				}
 			endif;
-
+			?>
+			<?php if (count($list) > 1) : ?>
+				<h3 class="widget-title text-base text-xperto-neutral-dark-1 font-bold mb-4"><?php _e('Connect with members', 'shape'); ?></h3>
+			<?php endif; ?>
+			<?php
 			foreach ($list as $data) :
 				$profile = $data->custom_profile_values();
 				$profile_link = add_query_arg("id", $data->ID, home_url('/profile'));
@@ -104,9 +113,11 @@
 					</div>
 				</div>
 			<?php endforeach; ?>
-			<div>
-				<a href="<?php echo home_url('/members') ?>" class="text-xperto-orange font-bold hover:text-xperto-orange-base-20">See more members</a>
-			</div>
+			<?php if (count($list) > 1) : ?>
+				<div>
+					<a href="<?php echo home_url('/members') ?>" class="text-xperto-orange font-bold hover:text-xperto-orange-base-20">See more members</a>
+				</div>
+			<?php endif; ?>
 		</aside>
 	<?php endif; ?>
 </aside><!-- #secondary -->
