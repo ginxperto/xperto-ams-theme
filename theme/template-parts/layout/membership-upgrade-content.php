@@ -10,7 +10,7 @@
     $mepr_user = $rc->newInstanceArgs(array($user_id));
 
     // we have a memberpress user loaded
-    if (get_class($mepr_user) === MeprUser::class) :
+    if ($mepr_user && (get_class($mepr_user) === MeprUser::class)) :
         $subs_title = '';
         $highest_tier = null;
         $show_upgrade = true;
@@ -35,7 +35,7 @@
                 // get the group of product
                 $group = $rc->newInstanceArgs(array($product->group_id));
 
-                if (get_class($group) === MeprGroup::class) {
+                if ($group && (get_class($group) === MeprGroup::class)) {
                     // get products inside the group
                     $group_products = $group->products();
 
@@ -80,6 +80,7 @@
         'posts_per_page' => 1,
     );
     $posts = new WP_Query($args);
+    $groups = null;
 
     while ($posts->have_posts()) : $posts->the_post();
         // * Lets try to load the memberpress details
@@ -89,7 +90,7 @@
         $groups = $rc->newInstanceArgs(array($posts->ID));
     endwhile;
 
-    if (get_class($groups) === MeprGroup::class) :
+    if ($groups && (get_class($groups) === MeprGroup::class)) :
         // get products inside the group
         $group_products = $groups->products();
 

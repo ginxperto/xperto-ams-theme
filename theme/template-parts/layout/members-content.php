@@ -44,6 +44,7 @@ $results = $wpdb->get_results($query);
 
 foreach ($results as $result) {
     $ids[] = $result->user_id;
+    $mepr_user = null;
 
     // if its already loaded
     if (class_exists('MeprUser')) :
@@ -52,7 +53,7 @@ foreach ($results as $result) {
         // instantiate via reflection
         $mepr_user = $rc->newInstanceArgs(array($result->user_id));
 
-        if (get_class($mepr_user) === MeprUser::class) {
+        if ($mepr_user && (get_class($mepr_user) === MeprUser::class)) {
             $user_data[] = $mepr_user;
         }
     endif;
@@ -105,7 +106,7 @@ foreach ($results as $result) {
                                 // instantiate via reflection
                                 $product = $reflectionClass->newInstanceArgs(array($sub));
 
-                                if (get_class($product) === MeprProduct::class) : ?>
+                                if ($product && (get_class($product) === MeprProduct::class)) : ?>
                                     <span class="text-sm font-bold" style="color: <?php echo empty(get_post_custom_values('badge_color', $product->ID)) ? '#262626' : get_post_custom_values('badge_color', $product->ID)[0]; ?>">
                                         <?php echo $product->post_title; ?>
                                     </span>

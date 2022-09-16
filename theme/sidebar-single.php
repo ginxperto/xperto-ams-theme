@@ -33,6 +33,7 @@ $current_post_tags =  get_tags(array(
 	<aside id="org-summary" class="widget flex flex-col space-y-2">
 		<?php
 		$current_user = get_user_by('id', get_the_author_meta('ID'));
+		$mepr_user = null;
 
 		if (($current_user instanceof WP_User)) : ?>
 			<?php
@@ -44,7 +45,7 @@ $current_post_tags =  get_tags(array(
 			$mepr_user = $rc->newInstanceArgs(array($current_user->ID));
 
 			// we have a memberpress user loaded
-			if (get_class($mepr_user) === MeprUser::class) {
+			if ($mepr_user && (get_class($mepr_user) === MeprUser::class)) {
 				// get custom fields
 				$profile = $mepr_user->custom_profile_values();
 				$profile_link = add_query_arg("id", $mepr_user->ID, home_url('/profile'));
@@ -69,7 +70,7 @@ $current_post_tags =  get_tags(array(
 				<span class="text-xperto-neutral-dark-1 font-semibold"><?php echo esc_html($current_user->display_name); ?></span>
 			</a>
 			<?php // we have a memberpress user loaded
-			if (get_class($mepr_user) === MeprUser::class) :
+			if ($mepr_user && (get_class($mepr_user) === MeprUser::class)) :
 				// get custom fields
 				$profile = $mepr_user->custom_profile_values();
 			?>

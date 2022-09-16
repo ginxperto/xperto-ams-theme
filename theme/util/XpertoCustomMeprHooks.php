@@ -61,6 +61,7 @@ function xperto_before_account_subscriptions($mepr_current_user)
 {
     $sub_list = null;
     $subs = $mepr_current_user->active_product_subscriptions();
+
     foreach ($subs as $sub) {
         // * Lets try to load the memberpress details
         $rc = new ReflectionClass('MeprProduct');
@@ -69,7 +70,7 @@ function xperto_before_account_subscriptions($mepr_current_user)
         // get 1 product
         $product = $rc->newInstanceArgs(array($sub));
 
-        if (get_class($product) === MeprProduct::class) {
+        if ($product && (get_class($product) === MeprProduct::class)) {
             $sub_list[] = $product->post_title;
         }
     }
@@ -161,8 +162,9 @@ function xperto_acf_add_local_field_groups()
 }
 add_action('acf/init', 'xperto_acf_add_local_field_groups');
 
-function add_favicon(){
-    if(!get_option('site_icon', false)){
+function add_favicon()
+{
+    if (!get_option('site_icon', false)) {
         // Show favicon
         echo '<link rel="shortcut icon" type="image/png" href="' . get_template_directory_uri() . '/images/xperto_favicon.png"/>';
     }

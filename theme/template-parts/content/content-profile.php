@@ -34,7 +34,7 @@ if (is_user_logged_in()) :
     $mepr_user = $rc->newInstanceArgs(array($user_id));
 
     // we have a memberpress user loaded
-    if (get_class($mepr_user) === MeprUser::class && !empty($mepr_user->ID)) :
+    if ($mepr_user && (get_class($mepr_user) === MeprUser::class && !empty($mepr_user->ID))) :
         // get custom fields
         $profile = $mepr_user->custom_profile_values();
     else :
@@ -66,6 +66,8 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                 <div class="h-6">
                     <?php
                     $subs = $mepr_user->active_product_subscriptions();
+                    $product = null;
+
                     foreach ($subs as $sub) :
                         // * Lets try to load the memberpress user details
                         $reflectionClass = new ReflectionClass('MeprProduct');
@@ -73,7 +75,7 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                         // instantiate via reflection
                         $product = $reflectionClass->newInstanceArgs(array($sub));
 
-                        if (get_class($product) === MeprProduct::class) : ?>
+                        if ($product && (get_class($product) === MeprProduct::class)) : ?>
                             <!-- bug on line 87 -->
                             <span class="text-sm font-bold" style="color: <?php echo empty(get_post_custom_values('badge_color', $product->ID)) ? '#262626' : get_post_custom_values('badge_color', $product->ID)[0]; ?>">
                                 <?php echo $product->post_title; ?>

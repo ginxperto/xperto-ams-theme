@@ -64,6 +64,7 @@ if (!is_plugin_active('memberpress/memberpress.php')) {
 							<?php
 							if (is_user_logged_in()) :
 								$current_user = wp_get_current_user();
+								$mepr_user = null;
 
 								if (($current_user instanceof WP_User)) : ?>
 									<span class="text-xperto-neutral-dark-1 font-bold group-hover:text-xperto-orange"><?php echo esc_html($current_user->display_name); ?></span>
@@ -75,7 +76,7 @@ if (!is_plugin_active('memberpress/memberpress.php')) {
 									$mepr_user = $rc->newInstanceArgs(array($current_user->ID));
 
 									// we have a memberpress user loaded
-									if (get_class($mepr_user) === MeprUser::class) {
+									if ($mepr_user && (get_class($mepr_user) === MeprUser::class)) {
 										// get custom fields
 										$profile = $mepr_user->custom_profile_values();
 

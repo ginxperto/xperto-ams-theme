@@ -49,7 +49,7 @@ $current_post_tags =  get_tags(array(
 				// instantiate via reflection
 				$obj = $rc->newInstanceArgs();
 
-				if (get_class($obj) === MeprUser::class) {
+				if ($obj && (get_class($obj) === MeprUser::class)) {
 					// this will give all users, we still need to check if they are active
 					$users = $obj::all('objects', array(), 'user_registered', 50);
 

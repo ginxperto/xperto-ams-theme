@@ -44,6 +44,7 @@ if (!class_exists('XpertoCustomCommentWalker')) {
         protected function html5_comment($comment, $depth, $args)
         {
             $tag = ('div' === $args['style']) ? 'div' : 'li';
+            $mepr_user = null;
 
             // if its already loaded
             if (class_exists('MeprUser')) :
@@ -62,7 +63,7 @@ if (!class_exists('XpertoCustomCommentWalker')) {
                                 // * OUR ENHANCEMENT
 
                                 // we have a memberpress user loaded
-                                if (get_class($mepr_user) === MeprUser::class) {
+                                if ($mepr_user && (get_class($mepr_user) === MeprUser::class)) {
                                     // get custom fields
                                     $profile = $mepr_user->custom_profile_values();
                                     // load only if exists
