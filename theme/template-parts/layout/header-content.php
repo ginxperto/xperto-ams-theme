@@ -18,12 +18,13 @@ if (!is_plugin_active('memberpress/memberpress.php')) {
 <div id="main-sidebar" class="bg-white shadow-right sidebar w-44 p-4 absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ease-in-out z-50 md:relative md:translate-x-0">
 	<div id="branding" class="mt-2">
 		<?php
-		if (has_custom_logo()) {
-			echo the_custom_logo();
-		} else {
-			echo '<img src="' . get_stylesheet_directory_uri() . '/images/xperto_logo_min.png' . '">';
-		}
-		?>
+			if (has_custom_logo()) :
+				the_custom_logo();
+			else : ?>
+				<a href="<?php echo get_home_url(); ?>">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/xperto_logo_min.png"/>
+				</a>
+			<?php endif; ?>
 	</div>
 	<nav id="site-navigation" class="mt-16">
 		<?php
