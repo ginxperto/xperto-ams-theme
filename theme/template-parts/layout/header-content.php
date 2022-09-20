@@ -21,8 +21,8 @@ if (!is_plugin_active('memberpress/memberpress.php')) {
 			if (has_custom_logo()) :
 				the_custom_logo();
 			else : ?>
-				<a href="<?php echo get_home_url(); ?>" class="h-full object-contain">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/xperto_logo_min.png" class="h-full" />
+				<a href="<?php echo get_home_url(); ?>">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/xperto_logo_min.png"/>
 				</a>
 			<?php endif; ?>
 	</div>
