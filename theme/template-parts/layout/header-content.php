@@ -22,7 +22,7 @@ if (!is_plugin_active('memberpress/memberpress.php')) {
 				the_custom_logo();
 			else : ?>
 				<a href="<?php echo get_home_url(); ?>">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/xperto_logo_min.png"/>
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/xperto_logo_min.png" class="w-36 h-9"/>
 				</a>
 			<?php endif; ?>
 	</div>
