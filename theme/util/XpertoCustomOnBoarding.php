@@ -362,6 +362,7 @@ function xperto_auto_mepr_pages()
             $mepr_options->redirect_on_unauthorized = true;
             $mepr_options->unauthorized_redirect_url = home_url('/?loginaction=xpertoOauthLogin');
             $mepr_options->redirect_non_singular = true;
+            $mepr_options->unauth_show_login = false;
 
             // try to update the options
             $mepr_options->store(false);
