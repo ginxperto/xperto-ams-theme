@@ -71,7 +71,7 @@
 	@apply border-xperto-orange !important;
 }
 .xperto-memberpressproduct .mepr-submit {
-	@apply float-right cursor-pointer rounded-lg bg-xperto-orange py-3 px-4 text-white hover:bg-xperto-orange-base-20 hover:text-white active:bg-xperto-orange-base-plus-10;
+	@apply float-right cursor-pointer rounded-lg bg-xperto-orange py-3 px-4 text-white hover:bg-xperto-orange-base-20 hover:text-white active:bg-xperto-orange-base-plus-10 disabled:bg-xperto-neutral-light-1 disabled:text-xperto-neutral-mid-2;
 }
 .xperto-memberpressproduct .mp-form-submit img.mepr-loading-gif {
 	@apply m-0 w-6;
