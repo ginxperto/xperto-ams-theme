@@ -401,6 +401,11 @@ function xperto_auto_mepr_general()
             $mepr_options->currency_symbol = "₱";
         }
 
+        if (isset($mepr_options->auto_updates)) {
+            // disable auto updates
+            $mepr_options->auto_updates = "none";
+        }
+
         // try to update the options
         $mepr_options->store(false);
     }
