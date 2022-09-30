@@ -201,6 +201,7 @@ function xperto_auto_mepr_fields()
         if (isset($mepr_options->show_fields_logged_in_purchases)) {
             // disable fields if user is already logged in
             $mepr_options->show_fields_logged_in_purchases = false;
+            $mepr_options->require_fname_lname = true;
 
             // try to update the options
             $mepr_options->store(false);
