@@ -21,11 +21,11 @@ if (!is_user_logged_in()) {
 
 get_header();
 
-$search_val = null;
+$search_val = "";
 
 
 if (isset($_GET['member_name'])) {
-	$search_val = $_GET['member_name'];
+	$search_val = esc_attr($_GET['member_name']);
 
 }
 ?>
