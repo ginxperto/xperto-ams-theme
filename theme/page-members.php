@@ -21,10 +21,12 @@ if (!is_user_logged_in()) {
 
 get_header();
 
-$search_val = '';
+$search_val = null;
+
 
 if (isset($_GET['member_name'])) {
 	$search_val = $_GET['member_name'];
+
 }
 ?>
 <main id="primary" class="w-full flex flex-col items-start">
