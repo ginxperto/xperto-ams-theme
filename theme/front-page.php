@@ -99,4 +99,4 @@ get_header();
 
 <?php
 // important to enquque footer js
-get_footer();
+get_footer('trademark');
