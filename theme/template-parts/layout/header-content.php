@@ -18,13 +18,13 @@ if (!is_plugin_active('memberpress/memberpress.php')) {
 <div id="main-sidebar" class="bg-white shadow-right sidebar w-44 p-4 absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ease-in-out z-50 md:relative md:translate-x-0">
 	<div id="branding" class="mt-2">
 		<?php
-			if (has_custom_logo()) :
-				the_custom_logo();
-			else : ?>
-				<a href="<?php echo get_home_url(); ?>">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/xperto_logo_min.png" class="w-36 h-9"/>
-				</a>
-			<?php endif; ?>
+		if (has_custom_logo()) :
+			the_custom_logo();
+		else : ?>
+			<a href="<?php echo get_home_url(); ?>">
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/xperto_logo_min.png" class="w-36 h-9" />
+			</a>
+		<?php endif; ?>
 	</div>
 	<nav id="site-navigation" class="mt-16">
 		<?php
@@ -43,7 +43,8 @@ if (!is_plugin_active('memberpress/memberpress.php')) {
 
 <div id="main-wrapper" class="flex-1">
 	<header id="masthead" class="w-full bg-white p-4 shadow-bottom sticky top-0 md:px-8 z-10">
-		<div class="flex justify-between items-center md:justify-end">
+		<div class="flex justify-between items-center md:justify-between">
+			<span class="hidden md:block text-2xl"><?php bloginfo('name'); ?></span>
 			<div class="md:hidden">
 				<button id="mobile-menu-button" class="focus:outline-none">
 					<svg class="h-6 w-6 text-xperto-neutral-mid-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

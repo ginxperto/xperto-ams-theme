@@ -30,9 +30,9 @@ get_header();
 			<!-- lock the aspect ratio on higher resolution -->
 			<div id="site-header" class="bg-xperto-custom-header flex flex-col relative w-full aspect-video xl:aspect-3/1 rounded-lg">
 				<img src="<?php header_image(); ?>" alt="custom header" class="absolute w-full h-full object-cover mix-blend-overlay rounded-lg" />
-				<div class="mt-auto p-6">
+				<!-- <div class="mt-auto p-6">
 					<span class="text-4xl text-white"><?php bloginfo('name'); ?></span>
-				</div>
+				</div> -->
 			</div>
 		</section><!-- #custom-header -->
 
