@@ -17,7 +17,15 @@ get_header();
 ?>
 
 <main id="primary" class="container flex flex-col items-start p-4 space-y-6 max-w-[1200px] md:p-8 lg:flex-row lg:space-y-0 lg:space-x-6 xl:mx-auto">
-	<div class="center-content flex flex-col w-full space-y-6 lg:w-2/3 xl:w-3/4">
+	<?php
+	// add spacing for cards with org admin
+	$org_admin_spacer = '';
+
+	if (current_user_can('manage_options')) {
+		$org_admin_spacer = 'lg:w-2/3 xl:w-3/4';
+	}
+	?>
+	<div class="center-content flex flex-col w-full space-y-6 <?php echo $org_admin_spacer ?>">
 		<section id="custom-header" class="flex flex-col w-full space-y-4 lg:flex-row lg:space-y-0 lg:space-x-6">
 			<!-- lock the aspect ratio on higher resolution -->
 			<div id="site-header" class="bg-xperto-custom-header flex flex-col relative w-full aspect-video xl:aspect-3/1 rounded-lg">
@@ -76,16 +84,17 @@ get_header();
 	<?php
 	// add spacing for cards with org admin
 	$org_admin_sidebar = '';
-	if (current_user_can('manage_options')) {
+
+	if (current_user_can('manage_options')) :
 		$org_admin_sidebar = 'lg:space-y-6';
-	}
 	?>
-	<div class="secondary-sidebar w-full flex flex-col lg:w-1/3 xl:w-1/4 <?php echo $org_admin_sidebar; ?> ">
-		<section class="hidden w-full lg:block">
-			<?php get_template_part('template-parts/layout/org-admin-card', 'content'); ?>
-		</section>
-		<?php get_template_part('template-parts/layout/about', 'content'); ?>
-	</div>
+		<div class="secondary-sidebar w-full flex flex-col lg:w-1/3 xl:w-1/4 <?php echo $org_admin_sidebar; ?> ">
+			<section class="hidden w-full lg:block">
+				<?php get_template_part('template-parts/layout/org-admin-card', 'content'); ?>
+			</section>
+			<!-- <?php get_template_part('template-parts/layout/about', 'content'); ?> -->
+		</div>
+	<?php endif ?>
 </main><!-- #main -->
 
 <?php
