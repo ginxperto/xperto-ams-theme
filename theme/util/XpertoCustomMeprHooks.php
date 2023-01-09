@@ -192,7 +192,7 @@ function mpdn_show_on_account($user)
 {
     ?>
     <p class="clear-both">
-        By clicking "Save Profile", you agree to our <a href="<?php echo home_url('/privacy-policy'); ?>">Privacy Statement</a>.
+        By clicking "Save Profile", you agree to our <a href="<?php echo get_privacy_policy_url(); ?>">Privacy Statement</a>.
     </p>
 <?php
 }
