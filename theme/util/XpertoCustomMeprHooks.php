@@ -104,7 +104,7 @@ function xperto_before_account_subscriptions($mepr_current_user)
                 </svg>
             </a>
         </div>
-<?php
+    <?php
 
     endwhile;
     // Reset Post Data
@@ -170,3 +170,30 @@ function add_favicon()
     }
 }
 add_action('wp_head', 'add_favicon');
+
+function mepr_account_home_before_name($user)
+{
+    if (is_user_logged_in()) {
+        $current_user = wp_get_current_user();
+    ?>
+
+        <div class="mp-form-row mepr_first_name mepr-field-required">
+            <div class="mp-form-label">
+                <label for="user_first_name">Username:*</label>
+            </div>
+            <p class="mepr-form-input"><?php echo $current_user->user_login; ?></p>
+        </div>
+    <?php
+    }
+}
+add_action('mepr-account-home-before-name', 'mepr_account_home_before_name');
+
+function mpdn_show_on_account($user)
+{
+    ?>
+    <p class="clear-both">
+        By clicking "Save Profile", you agree to our <a href="<?php echo home_url('/privacy-policy'); ?>">Privacy Statement</a>.
+    </p>
+<?php
+}
+add_action('mepr-account-home-fields', 'mpdn_show_on_account');
