@@ -137,13 +137,20 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                     <?php
                     $current_user_id = get_current_user_id();
 
-                    // current user is viewing his own profile
+                    // TODO: current user is viewing his own profile
                     if ($current_user_id == $mepr_user->ID) : ?>
-                        <div class="flex flex-col items-center justify-center h-[400px]">
+                        <!-- // TODO: temporarily removed for next release -->
+                        <!-- <div class="flex flex-col items-center justify-center h-[400px]">
                             <img src="<?php echo get_template_directory_uri() . '/images/icon_cert.png'; ?>" alt="Certificate Icon" class="w-20" />
                             <span class="font-bold text-lg mt-6">You have no crendetials yet</span>
                             <span>You haven't applied any credentials.</span>
-                            <a href="<?php home_url(); /* TODO: UPDATE THIS */ ?>" class="mt-4 xperto-button-contained">Apply for Credentials</a>
+                            <a href="<?php home_url(); ?>" class="mt-4 xperto-button-contained">Apply for Credentials</a>
+                        </div> -->
+
+                        <div class="flex flex-col items-center justify-center h-[400px] text-center">
+                            <img src="<?php echo get_template_directory_uri() . '/images/icon_cert.png'; ?>" alt="Certificate Icon" class="w-20" />
+                            <span class="font-bold text-lg mt-6">Coming Soon</span>
+                            <span>Our new offering Credentialing System<br /> will be launching soon, watch out for announcements.</span>
                         </div>
                     <?php else : ?>
                         <div class="flex flex-col min-h-[200px]">
