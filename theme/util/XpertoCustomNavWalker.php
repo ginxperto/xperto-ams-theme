@@ -8,7 +8,7 @@ if (!class_exists('XpertoCustomNavWalker')) {
             /**
              * do not add member on logout users
              */
-            if (!is_user_logged_in() && str_contains(strtolower($item->title), 'members')) {
+            if (!is_user_logged_in() && strtolower($item->title) == 'members') {
                 return;
             }
 
