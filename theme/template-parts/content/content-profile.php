@@ -8,12 +8,19 @@
  * @package xperto-ams
  */
 
+
+
+
 $profile = null;
 $mepr_user = null;
 $user_id = $_GET['id'];
 
 // About Me URL
 $profile_url = home_url('/profile');
+$certificates_url = home_url('/certificate');
+
+
+
 $profile_args = array(
     'id' => $user_id
 );
@@ -26,6 +33,13 @@ $profile_args = array(
 );
 $final_credentials_url = esc_url_raw(add_query_arg($profile_args, $profile_url));
 
+
+// Certificates Url
+$profile_args = array(
+    'id' => $user_id,
+    'tab' => 'certificates'
+);
+$final_certificates_url = esc_url_raw(add_query_arg($profile_args, $profile_url  ));
 if (is_user_logged_in()) :
     // * Lets try to load the memberpress user details
     $rc = new ReflectionClass('MeprUser');
@@ -43,8 +57,43 @@ if (is_user_logged_in()) :
     endif;
 endif;
 
+
+
+
+
+
+
 // Try to select a tab
 $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
+$tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'certificates') ? 2 : $tabIndex;        
+
+$url = 'https://b2b.sertifier.com/User/Get';
+$response = wp_remote_post( $url, array(
+	'method'      => 'POST',
+	'timeout'     => 45,
+	'blocking'    => true,
+	'headers'     => array(
+        'Content-Type' => 'application/json',
+		'api-version' => '2.3',
+        'secretKey' => '03f1edae47c94f828f3fefe3d8c1af5ae731457f50bd4266b6201967a02453281f0783341e4c4038981a7d2536b6cee181da5206f6534dd6892e9ab013582140',
+
+    ),
+	'body'        => json_encode(array(
+		'userKey' => 'mhczafra1969@gmail.com'
+	)),
+    )
+);
+// print_r($response['body']);
+
+$getData = json_decode($response['body']);
+// print_r($getData->data->items[0]->id);
+
+
+
+
+
+
+
 ?>
 
 <section class="flex flex-col w-full bg-white rounded-lg space-y-20">
@@ -108,6 +157,10 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                 <?php $active = ($tabIndex === 1) ? 'xperto-tab-active' : ''; ?>
                 <a href="<?php echo $final_credentials_url; ?>" class="inline-block p-4 text-xperto-neutral-mid-1 hover:bg-xperto-orange-light-90 hover:text-xperto-orange <?php echo $active; ?>">Credentials</a>
             </li>
+            <li class="mr-2">
+                <?php $active = ($tabIndex === 2) ? 'xperto-tab-active' : ''; ?>
+                <a href="<?php echo $final_certificates_url; ?>" class="inline-block p-4 text-xperto-neutral-mid-1 hover:bg-xperto-orange-light-90 hover:text-xperto-orange <?php echo $active; ?>">Certificates</a>
+            </li>
         </ul>
         <?php
         // About Me Tab
@@ -129,7 +182,9 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                     </div>
                 <?php endif; ?>
             </div>
-        <?php else :
+        <?php 
+        
+        elseif ($tabIndex === 1):
             // Credentialing Tab 
         ?>
             <div class="py-6 space-y-4">
@@ -164,6 +219,59 @@ $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
                     <?php endif; ?>
                 </div>
             </div>
+        <?php else :
+             // Certificate Tab 
+        ?>
+            <div class="py-6 space-y-4">
+                <div class="w-full relative">
+                    <?php 
+                    $current_user_id = get_current_user_id();
+                    $mapping = array();
+                    
+                    
+
+                 
+                    
+                    
+
+                    if ($current_user_id == $mepr_user->ID && !empty($getData)) :  
+                    ?>
+                     <div class="flex justify-between items-center mb-4 ml-2">
+                        <h1 class="text-2xl font-bold"><?php echo $getData->data->items ? count($getData->data->items) : 0; ?> Certificates</h1>
+                        </div>  
+                        <div class="flex flex-wrap ">
+                            <?php
+                            foreach($getData->data->items as $item) :
+                                $item -> is
+                            ?>
+                            <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                                <div class="xperto-certificates">
+                                    <div class="flex flex-col items-center">
+                                        <img src="<?php echo get_template_directory_uri() . '/images/icon_certificate_blue'; ?>" alt="Certificate Icon" class="w-20" />
+                                        <span class="font-bold text-lg text-center mt-6 color"><?php echo $item->title; ?></span>
+                                        <span class="text-black text-center mt-2"><?php echo $item->issueDate = date('F d, Y', strtotime($item->issueDate)); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+
+                    <?php else : ?>
+                        <div class="flex flex-col min-h-[200px]">
+                        <div class="flex flex-col items-center justify-center h-[400px] text-center">
+                            <img src="<?php echo get_template_directory_uri() . '/images/icon_cert.png'; ?>" alt="Certificate Icon" class="w-20" />
+                            <span class="font-bold text-lg mt-6">User doesn't have any certificates yet.</span>
+                            <span>Enroll now to get your first certificate.</span>
+                        </div>
+                                <?php
+                                // TODO: add credentials result here 
+                                ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+        
+
+
         <?php endif; ?>
     </div>
 </section>
