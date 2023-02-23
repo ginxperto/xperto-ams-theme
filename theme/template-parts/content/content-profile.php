@@ -79,7 +79,7 @@ $response = wp_remote_post( $url, array(
 
     ),
 	'body'        => json_encode(array(
-		'userKey' => 'mhczafra1969@gmail.com'
+		'userKey' => $mepr_user->user_email
 	)),
     )
 );
@@ -234,7 +234,7 @@ $getData = json_decode($response['body']);
                     
                     
 
-                    if ($current_user_id == $mepr_user->ID && !empty($getData)) :  
+                    if ($current_user_id == $mepr_user->ID && !empty($getData->data->items)) :
                     ?>
                      <div class="flex justify-between items-center mb-4 ml-2">
                         <h1 class="text-2xl font-bold"><?php echo $getData->data->items ? count($getData->data->items) : 0; ?> Certificates</h1>
