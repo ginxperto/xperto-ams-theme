@@ -8,9 +8,6 @@
  * @package xperto-ams
  */
 
-
-
-
 $profile = null;
 $mepr_user = null;
 $user_id = $_GET['id'];
@@ -18,8 +15,6 @@ $user_id = $_GET['id'];
 // About Me URL
 $profile_url = home_url('/profile');
 $certificates_url = home_url('/certificate');
-
-
 
 $profile_args = array(
     'id' => $user_id
@@ -57,12 +52,6 @@ if (is_user_logged_in()) :
     endif;
 endif;
 
-
-
-
-
-
-
 // Try to select a tab
 $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 1 : 0;
 $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'certificates') ? 2 : $tabIndex;        
@@ -83,16 +72,7 @@ $response = wp_remote_post( $url, array(
 	)),
     )
 );
-// print_r($response['body']);
-
 $getData = json_decode($response['body']);
-// print_r($getData->data->items[0]->id);
-
-
-
-
-
-
 
 ?>
 
@@ -227,13 +207,7 @@ $getData = json_decode($response['body']);
                     <?php 
                     $current_user_id = get_current_user_id();
                     $mapping = array();
-                    
-                    
-
-                 
-                    
-                    
-
+   
                     if ($current_user_id == $mepr_user->ID && !empty($getData->data->items)) :
                     ?>
                      <div class="flex justify-between items-center mb-4 ml-2">
@@ -268,10 +242,6 @@ $getData = json_decode($response['body']);
                             </div>
                         </div>
                     <?php endif; ?>
-
-        
-
-
         <?php endif; ?>
     </div>
 </section>
