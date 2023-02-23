@@ -28,7 +28,7 @@ get_header();
 	<div class="center-content flex flex-col w-full space-y-6 <?php echo $org_admin_spacer ?>">
 		<section id="custom-header" class="flex flex-col w-full space-y-4 lg:flex-row lg:space-y-0 lg:space-x-6">
 			<!-- lock the aspect ratio on higher resolution -->
-			<div id="site-header" class="bg-xperto-custom-header flex flex-col relative w-full aspect-video xl:aspect-3/1 rounded-lg">
+			<div id="site-header" class="bg-xperto-custom-header flex flex-col relative w-full aspect-video xl:aspect-3/1 rounded-lg object-cover object-left">
 				<img src="<?php header_image(); ?>" alt="custom header" class="absolute w-full h-full object-cover mix-blend-overlay rounded-lg" />
 				<!-- <div class="mt-auto p-6">
 					<span class="text-4xl text-white"><?php bloginfo('name'); ?></span>
