@@ -173,11 +173,20 @@ $getData = json_decode($response['body']);
                     <?php 
                     $current_user_id = get_current_user_id();
                     $mapping = array();
-   
+                    $counting = count($getData->data->items);
+                    
+
                     if ($current_user_id == $mepr_user->ID && !empty($getData->data->items)) :
                     ?>
                      <div class="flex justify-between items-center mb-4 ml-2">
-                        <h1 class="text-2xl font-bold"><?php echo $getData->data->items ? count($getData->data->items) : 0; ?> Certificates</h1>
+                        <h1 class="text-2xl font-bold"><?php 
+                        if($counting == 1){
+                            echo $counting . ' Certificate';
+                        }
+                        else{
+                            echo $counting .  ' Certificates';
+                        }
+                        ?> </h1>
                         </div>  
                         <div class="flex flex-wrap ">
                             <?php
@@ -186,7 +195,7 @@ $getData = json_decode($response['body']);
                             <div class="w-full md:w-1/2 lg:w-1/3 p-2">
                                 <div class="xperto-certificates">
                                     <div class="flex flex-col items-center">
-                                        <img src="<?php echo get_template_directory_uri() . '/images/icon_certificate_blue'; ?>" alt="Certificate Icon" class="w-20" />
+                                        <img src="<?php echo get_template_directory_uri() . '/images/icon_certificate_blue.png'; ?>" alt="Certificate Icon" class="w-20" />
                                         <span class="font-bold text-lg text-center mt-6 color"><?php echo $item->title; ?></span>
                                         <span class="text-black text-center mt-2"><?php echo $item->issueDate = date('F d, Y', strtotime($item->issueDate)); ?></span>
                                     </div>
