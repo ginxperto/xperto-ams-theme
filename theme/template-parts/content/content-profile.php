@@ -173,7 +173,7 @@ $getData = json_decode($response['body']);
                     <?php 
                     $current_user_id = get_current_user_id();
                     $mapping = array();
-                    $counting = count($getData->data->items);
+                    $counting = count((is_countable($getData->data->items)? $getData->data->items: []));
                     
 
                     if ($current_user_id == $mepr_user->ID && !empty($getData->data->items)) :
