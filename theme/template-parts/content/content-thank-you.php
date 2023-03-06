@@ -44,6 +44,6 @@
         ); ?>
     </div>
     <footer class="flex self-center">
-        <a href="<?php echo home_url() ?>" class="xperto-button-contained">Back to home</a>
+        <a href="<?php echo home_url('/account/?action=subscriptions') ?>" class="xperto-button-contained">Back to home</a>
     </footer>
 </article><!-- #post-<?php the_ID(); ?> -->
