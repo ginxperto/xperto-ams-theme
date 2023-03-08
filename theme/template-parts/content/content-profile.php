@@ -68,7 +68,7 @@ $response = wp_remote_post( $url, array(
 
     ),
 	'body'        => json_encode(array(
-		'userKey' => $mepr_user->user_email
+		'userKey' => 'mhczafra1969@gmail.com'
 	)),
     )
 );
@@ -193,9 +193,10 @@ $getData = json_decode($response['body']);
                             foreach($getData->data->items as $item) :
                             ?>
                             <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                                <a href="<?php echo $item->verificationLink; ?>">
                                 <div class="xperto-certificates">
                                     <div class="flex flex-col items-center">
-                                        <img src="<?php echo get_template_directory_uri() . '/images/icon_certificate_blue.png'; ?>" alt="Certificate Icon" class="w-20" />
+                                        <img src="<?php echo $item->certificateImageLink ?>" alt="<?php echo get_template_directory_uri() . '/images/icon_certificate_blue.png'; ?>" class="w-36" />
                                         <span class="font-bold text-lg text-center mt-6 color"><?php echo $item->title; ?></span>
                                         <span class="text-black text-center mt-2"><?php echo $item->issueDate = date('F d, Y', strtotime($item->issueDate)); ?></span>
                                     </div>
