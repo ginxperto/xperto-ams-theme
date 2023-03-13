@@ -170,6 +170,11 @@
 	@apply mb-2 text-sm font-bold;
 }
 
+#mepr_account_form label.mepr-checkbox-field.mepr-form-input{
+	@apply border-0 bg-transparent border-transparent;
+
+}
+
 #mepr_account_form .mepr-form-input {
 	@apply rounded border border-xperto-neutral-light-1 p-3;
 }
