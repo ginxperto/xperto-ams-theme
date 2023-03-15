@@ -173,10 +173,8 @@ $getData = json_decode($response['body']);
                     <?php 
                     $current_user_id = get_current_user_id();
                     $mapping = array();
-                    $counting = count(is_countable($getData->data->items)? $getData->data->items: []); //warning line 176 mam ruth
-                    
-
-                    if ($current_user_id == $mepr_user->ID && !empty($getData->data->items)) :
+                    if (isset($getData->data) && $current_user_id == $mepr_user->ID && !empty($getData->data->items)) :
+                        $counting = count(is_countable($getData->data->items)? $getData->data->items: []); //warning line 176 mam ruth
                     ?>
                      <div class="flex justify-between items-center mb-4 ml-2">
                         <h1 class="text-2xl font-bold"><?php 
