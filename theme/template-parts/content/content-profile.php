@@ -173,7 +173,7 @@ $getData = json_decode($response['body']);
                     <?php 
                     $current_user_id = get_current_user_id();
                     $mapping = array();
-                    $counting = count((is_countable($getData->data->items)? $getData->data->items: []));
+                    $counting = count(is_countable($getData->data->items)? $getData->data->items: []);
                     
 
                     if ($current_user_id == $mepr_user->ID && !empty($getData->data->items)) :
@@ -192,7 +192,7 @@ $getData = json_decode($response['body']);
                             <?php
                             foreach($getData->data->items as $item) :
                             ?>
-                            <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                            <div class="w-full md:w-1/2 lg:w-1/3 p-2 bg-[#E5E9F0] rounded-lg mr-2">
                                 <a href="<?php echo $item->verificationLink; ?>">
                                 <div class="xperto-certificates">
                                     <div class="flex flex-col items-center">
