@@ -81,7 +81,7 @@ foreach ($results as $result) {
                             <div class="flex flex-row justify-between">
                                 <h4>
                                     <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange font-bold" alt="Visit profile" title="Visit Profile">
-                                        <?php echo $data->display_name; ?>
+                                        <?php echo $data->first_name; ?> <?php echo $data->last_name; ?>
                                     </a>
                                 </h4>
                                 <div class="hidden flex-row justify-evenly sm:flex">
