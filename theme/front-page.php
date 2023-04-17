@@ -49,7 +49,7 @@ get_header();
 			<div class="flex flex-col space-x-0 space-y-6 xl:flex-row xl:space-x-6 xl:space-y-0 w-full">
 				<div class="bg-white rounded-lg p-6 w-full xl:w-1/2">
 					<span class="text-xperto-neutral-dark-1 font-bold text-2xl">Pinned Announcement</span>
-					<div class="mt-6 md:mt-2.5">
+					<div class="mt-6 md:mt-2.5 space-y-6">
 						<?php get_template_part('template-parts/layout/pinned', 'content'); ?>
 					</div>
 				</div>
