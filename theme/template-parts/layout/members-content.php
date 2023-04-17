@@ -71,7 +71,7 @@ foreach ($results as $result) {
                     <div class="w-20">
                         <?php if (!empty($profile['mepr_profile_picture'])) : ?>
                             <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
-                                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full min-w-[80px] hover:border hover:border-xperto-orange" />
+                                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full min-w-[80px] hover:border hover:border-xperto-orange aspect-square object-cover h-full w-full" />
                             </a>
                         <?php else :
                             echo get_avatar($data->ID, 68, '', 'avatar', array('class' => 'rounded-full min-w-[80px] hover:border hover:border-xperto-orange'));

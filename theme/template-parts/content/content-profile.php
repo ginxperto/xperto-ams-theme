@@ -88,7 +88,7 @@ $getData = json_decode($response['body']);
         <!-- Profile Banner -->
         <div class="absolute -bottom-12 inset-x-9 flex flex-row space-x-4">
             <?php if (!empty($profile) && !empty($profile['mepr_profile_picture'])) : ?>
-                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="bg-white rounded-full  border-4 border-white w-32 h-32" />
+                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="bg-white rounded-full border-4 border-white w-32 h-32 aspect-square object-cover" />
             <?php else :
                 echo get_avatar($mepr_user->ID, 128, '', 'avatar', array('class' => 'rounded-full'));
             endif; ?>
