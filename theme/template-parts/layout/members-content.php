@@ -6,13 +6,9 @@ $ids;
 $order_by = '';
 $offset = 0;
 $items_per_page = get_option('posts_per_page');
-
-$page = isset($_GET['member_page']) ? abs((int) $_GET['member_page']) : 1;
-$offset = ($page * $items_per_page) - $items_per_page;
-
 $orderby = 'name';
 $order = 'DESC';
-$paged = $offset;
+$page = isset($_GET['member_page']) ? abs((int) $_GET['member_page']) : 1;
 $search = '';
 $search_field = '';
 
@@ -31,14 +27,13 @@ if (isset($_GET['member_name'])) {
     }
 }
 
-$perpage = 10;
 // * Only get the active ones
 $params = array(
     'membership' => 'all',
     'status' => 'active',
 );
 
-$list_table  = MeprUser::list_table($orderby, $order, $paged, $search, $search_field, $perpage, $params);
+$list_table  = MeprUser::list_table($orderby, $order, $page, $search, $search_field, $items_per_page, $params);
 $total = $list_table['count'];
 $results = $list_table['results'];
 
