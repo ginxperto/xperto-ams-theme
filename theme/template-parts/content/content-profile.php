@@ -68,7 +68,7 @@ $response = wp_remote_post( $url, array(
 
     ),
 	'body'        => json_encode(array(
-		'userKey' => $mepr_user->user_email
+		'userKey' => "mhczafra1969@gmail.com"
 	)),
     )
 );
@@ -173,7 +173,7 @@ $getData = json_decode($response['body']);
                     <?php 
                     $current_user_id = get_current_user_id();
                     $mapping = array();
-                    if (isset($getData->data) && $current_user_id == $mepr_user->ID && !empty($getData->data->items)) :
+                    if (isset($getData->data) && !empty($getData->data->items)) :
                         $counting = count(is_countable($getData->data->items)? $getData->data->items: []); //warning line 176 mam ruth
                     ?>
                      <div class="flex justify-between items-center mb-4 ml-2">
@@ -186,11 +186,11 @@ $getData = json_decode($response['body']);
                         }
                         ?> </h1>
                         </div>  
-                        <div class="flex flex-wrap ">
+                        <div class="flex flex-wrap">
                             <?php
                             foreach($getData->data->items as $item) :
                             ?>
-                            <div class="w-full md:w-1/2 lg:w-1/3 p-2 bg-[#E5E9F0] rounded-lg mr-2">
+                            <div class="w-full md:w-1/2 lg:w-1/3 p-2 bg-[#E5E9F0] rounded-lg mr-2 mt-2">
                                 <a href="<?php echo $item->verificationLink; ?>">
                                 <div class="xperto-certificates">
                                     <div class="flex flex-col items-center">
