@@ -84,7 +84,7 @@ if (!is_plugin_active('memberpress/memberpress.php')) {
 
 										// load only if exists
 										if (!empty($profile['mepr_profile_picture'])) { ?>
-											<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-10 h-10" />
+											<img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full border border-xperto-neutral-light-1 w-10 h-10 aspect-square object-cover" />
 									<?php
 										} else {
 											// else get default avater as fallback

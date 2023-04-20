@@ -1,5 +1,7 @@
-<?php if (is_user_logged_in() && is_user_member_of_blog()) : ?>
-    <?php
+<?php
+
+// logged in
+if (is_user_logged_in() && is_user_member_of_blog()) :
     // lets try to get a membership from the group of memberpress
     $user_id = get_current_user_id();
 
@@ -47,14 +49,13 @@
         endforeach;
 
         // we found the group
-        if (!empty($group_products)) {
+        if (!empty($group_products)) :
             // get the highest tier
             $highest_tier = end($group_products);
-        }
+        endif;
 
         // failsafe
-        if ($highest_tier && (get_class($highest_tier) === MeprProduct::class)) :
-    ?>
+        if ($highest_tier && (get_class($highest_tier) === MeprProduct::class)) : ?>
             <section id="membership-upgrade-content" class="w-full <?php echo (!$show_upgrade) ? 'hidden' : ''; ?>">
                 <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
                     <div class="flex flex-col w-full space-y-4">
@@ -64,45 +65,60 @@
                     </div>
                 </div>
             </section><!-- #membership-upgrade-content -->
-    <?php
-        endif;
-    endif; ?>
-<?php else :
-    // user is not logged in 
-?>
-    <?php
-    $args = array(
-        'post_type' => 'memberpressgroup',
-        'post_status' => 'publish',
-        'posts_per_page' => 1,
-    );
-    $posts = new WP_Query($args);
-    $groups = null;
-    $group_products = array();
+        <?php
+            return; // hard stop, not to render below
 
-    while ($posts->have_posts()) : $posts->the_post();
+        endif; // end of highest tier
+
+    endif; // end of mepr
+
+endif; // end of login
+
+/**
+ * user is not logged in
+ */
+
+$args = array(
+    'post_type' => 'memberpressgroup',
+    'post_status' => 'publish'
+);
+$posts = new WP_Query($args);
+$groups = null;
+$group_products = array();
+
+if ($posts->have_posts()) :
+    foreach ($posts->posts as $current_post) :
         // * Lets try to load the memberpress details
         $rc = new ReflectionClass('MeprGroup');
 
+        $access_list = MeprRule::get_access_list($current_post);
+
+        // means there's an active rule
+        if (count($access_list) > 0) continue;
+
         // get the group of product
-        $groups = $rc->newInstanceArgs(array($posts->ID));
-    endwhile;
+        $groups = $rc->newInstanceArgs(array($current_post->ID));
 
-    if ($groups && (get_class($groups) === MeprGroup::class)) :
-        // get products inside the group
-        $group_products = $groups->products();
-
-        if (count($group_products) > 0) : ?>
-            <section id="membership-upgrade-content" class="w-full">
-                <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
-                    <div class="flex flex-col space-y-4 w-full">
-                        <span class="text-2xl text-xperto-green font-semibold">Join the <?php bloginfo(); ?></span>
-                        <p class="text-xperto-neutral-dark-1">New members get additional perks, such as exclusive organization merchandise, exclusive invites to Member-only events and seminars, and so much more!</p>
-                        <a class="flex-none w-full text-center xperto-button-contained md:max-w-fit" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
-                    </div>
-                </div>
-            </section>
-<?php endif;
-    endif;
+        break;
+    endforeach;
 endif;
+
+if ($groups && (get_class($groups) === MeprGroup::class)) :
+    // get products inside the group
+    $group_products = $groups->products();
+
+    if (count($group_products) > 0) : ?>
+        <section id="membership-upgrade-content" class="w-full">
+            <div class="flex flex-row rounded-lg bg-xperto-success-light-80 border border-xperto-success-base p-6 relative">
+                <div class="flex flex-col space-y-4 w-full">
+                    <span class="text-2xl text-xperto-green font-semibold">Join the <?php bloginfo(); ?></span>
+                    <p class="text-xperto-neutral-dark-1">New members get additional perks, such as exclusive organization merchandise, exclusive invites to Member-only events and seminars, and so much more!</p>
+                    <a class="flex-none w-full text-center xperto-button-contained md:max-w-fit" href="<?php echo $group_products[0]->group_url(); ?>">Become a member</a>
+                </div>
+            </div>
+        </section>
+<?php
+    endif; // end of product
+
+endif; // end of groups
 ?>

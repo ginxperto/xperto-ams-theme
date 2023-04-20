@@ -6,44 +6,39 @@ $ids;
 $order_by = '';
 $offset = 0;
 $items_per_page = get_option('posts_per_page');
-
-if (isset($_GET['order_by'])) {
-    $order_by = " ORDER BY {$_GET['order_by']}";
-}
+$orderby = 'name';
+$order = 'DESC';
 $page = isset($_GET['member_page']) ? abs((int) $_GET['member_page']) : 1;
-$offset = ($page * $items_per_page) - $items_per_page;
-$limit = " LIMIT {$offset},{$items_per_page}";
-$where = " WHERE active_sub_count > 0 ";
-$members_table = $wpdb->prefix . 'mepr_members';
+$search = '';
+$search_field = '';
 
-// Query All
-$query = "SELECT user_id FROM {$members_table}
-    {$where}";
-
-// Query by Name
+// user has filtered
 if (isset($_GET['member_name'])) {
     $name = $_GET['member_name'];
+    $search = $name;
+    $search_field = 'pm_first_name.meta_value';
 
-    $users_table = $wpdb->prefix . 'users';
-    $query = "SELECT user_id FROM {$members_table} 
-        LEFT JOIN {$users_table} 
-        ON {$members_table}.user_id = {$users_table}.ID 
-        WHERE active_sub_count > 0 
-            AND {$users_table}.display_name LIKE '%{$name}%'";
+    if (isset($_GET['search_by']) && $_GET['search_by'] == 'first_name') {
+        $search_field = 'pm_first_name.meta_value';
+    }
+
+    if (isset($_GET['search_by']) && $_GET['search_by'] == 'last_name') {
+        $search_field = 'pm_last_name.meta_value';
+    }
 }
 
-// get total count
-$total = $wpdb->get_var("SELECT COUNT(1) FROM (${query}) AS combined_table");
+// * Only get the active ones
+$params = array(
+    'membership' => 'all',
+    'status' => 'active',
+);
 
-// limit the results per page
-$query .= " {$order_by}{$limit}";
-
-// var_dump($query); // * uncomment if needed
-
-$results = $wpdb->get_results($query);
+$list_table  = MeprUser::list_table($orderby, $order, $page, $search, $search_field, $items_per_page, $params);
+$total = $list_table['count'];
+$results = $list_table['results'];
 
 foreach ($results as $result) {
-    $ids[] = $result->user_id;
+    $ids[] = $result->ID;
     $mepr_user = null;
 
     // if its already loaded
@@ -51,13 +46,14 @@ foreach ($results as $result) {
         $rc = new ReflectionClass('MeprUser');
 
         // instantiate via reflection
-        $mepr_user = $rc->newInstanceArgs(array($result->user_id));
+        $mepr_user = $rc->newInstanceArgs(array($result->ID));
 
         if ($mepr_user && (get_class($mepr_user) === MeprUser::class)) {
             $user_data[] = $mepr_user;
         }
     endif;
 }
+
 ?>
 <div class="flex flex-wrap w-full space-y-6 lg:space-y-0 lg:gap-6 lg:grid lg:grid-cols-2">
     <?php
@@ -70,7 +66,7 @@ foreach ($results as $result) {
                     <div class="w-20">
                         <?php if (!empty($profile['mepr_profile_picture'])) : ?>
                             <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange" alt="Visit profile" title="Visit Profile">
-                                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full min-w-[80px] hover:border hover:border-xperto-orange" />
+                                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="rounded-full min-w-[80px] hover:border hover:border-xperto-orange aspect-square object-cover h-full w-full" />
                             </a>
                         <?php else :
                             echo get_avatar($data->ID, 68, '', 'avatar', array('class' => 'rounded-full min-w-[80px] hover:border hover:border-xperto-orange'));
@@ -81,7 +77,7 @@ foreach ($results as $result) {
                             <div class="flex flex-row justify-between">
                                 <h4>
                                     <a href="<?php echo $profile_link; ?>" class="hover:text-xperto-orange font-bold" alt="Visit profile" title="Visit Profile">
-                                        <?php echo $data->display_name; ?>
+                                        <?php echo $data->first_name; ?> <?php echo $data->last_name; ?>
                                     </a>
                                 </h4>
                                 <div class="hidden flex-row justify-evenly sm:flex">

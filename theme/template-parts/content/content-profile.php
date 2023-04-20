@@ -34,7 +34,7 @@ $profile_args = array(
     'id' => $user_id,
     'tab' => 'certificates'
 );
-$final_certificates_url = esc_url_raw(add_query_arg($profile_args, $profile_url  ));
+$final_certificates_url = esc_url_raw(add_query_arg($profile_args, $profile_url));
 if (is_user_logged_in()) :
     // * Lets try to load the memberpress user details
     $rc = new ReflectionClass('MeprUser');
@@ -54,22 +54,24 @@ endif;
 
 // Try to select a tab
 $tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'certificates') ? 1 : 0;
-$tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 2 : $tabIndex;        
+$tabIndex = (isset($_GET['tab']) && $_GET['tab'] === 'credentials') ? 2 : $tabIndex;
 
 $url = 'https://b2b.sertifier.com/User/Get';
-$response = wp_remote_post( $url, array(
-	'method'      => 'POST',
-	'timeout'     => 45,
-	'blocking'    => true,
-	'headers'     => array(
-        'Content-Type' => 'application/json',
-		'api-version' => '2.3',
-        'secretKey' => '03f1edae47c94f828f3fefe3d8c1af5ae731457f50bd4266b6201967a02453281f0783341e4c4038981a7d2536b6cee181da5206f6534dd6892e9ab013582140',
+$response = wp_remote_post(
+    $url,
+    array(
+        'method'      => 'POST',
+        'timeout'     => 45,
+        'blocking'    => true,
+        'headers'     => array(
+            'Content-Type' => 'application/json',
+            'api-version' => '2.3',
+            'secretKey' => '03f1edae47c94f828f3fefe3d8c1af5ae731457f50bd4266b6201967a02453281f0783341e4c4038981a7d2536b6cee181da5206f6534dd6892e9ab013582140',
 
-    ),
-	'body'        => json_encode(array(
-		'userKey' => $mepr_user->user_email
-	)),
+        ),
+        'body'        => json_encode(array(
+            'userKey' => $mepr_user->user_email
+        )),
     )
 );
 $getData = json_decode($response['body']);
@@ -86,12 +88,18 @@ $getData = json_decode($response['body']);
         <!-- Profile Banner -->
         <div class="absolute -bottom-12 inset-x-9 flex flex-row space-x-4">
             <?php if (!empty($profile) && !empty($profile['mepr_profile_picture'])) : ?>
-                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="bg-white rounded-full  border-4 border-white w-32 h-32" />
+                <img src="<?php echo $profile['mepr_profile_picture']; ?>" class="bg-white rounded-full border-4 border-white w-32 h-32 aspect-square object-cover" />
             <?php else :
                 echo get_avatar($mepr_user->ID, 128, '', 'avatar', array('class' => 'rounded-full'));
             endif; ?>
             <div class="flex-1 flex flex-col mt-6">
-                <span class="text-white font-bold"><?php echo esc_html($mepr_user->display_name); ?></span>
+                <span class="text-white font-bold">
+                    <?php if (isset($mepr_user->first_name)) { ?>
+                        <?php echo $mepr_user->first_name; ?> <?php echo $mepr_user->last_name; ?>
+                    <?php } else { ?>
+                        <?php echo esc_html($mepr_user->display_name); ?>
+                    <?php } ?>
+                </span>
                 <div class="h-6">
                     <?php
                     $subs = $mepr_user->active_product_subscriptions();
@@ -141,7 +149,7 @@ $getData = json_decode($response['body']);
                 <?php $active = ($tabIndex === 2) ? 'xperto-tab-active' : ''; ?>
                 <a href="<?php echo $final_credentials_url; ?>" class="inline-block p-4 text-xperto-neutral-mid-1 hover:bg-xperto-orange-light-90 hover:text-xperto-orange <?php echo $active; ?>">Credentials</a>
             </li>
-            
+
         </ul>
         <?php
         // About Me Tab
@@ -163,14 +171,14 @@ $getData = json_decode($response['body']);
                     </div>
                 <?php endif; ?>
             </div>
-        <?php 
-        
-        elseif ($tabIndex === 1):
+        <?php
+
+        elseif ($tabIndex === 1) :
             // Certificates Tab 
         ?>
-             <div class="py-6 space-y-4">
+            <div class="py-6 space-y-4">
                 <div class="w-full relative">
-                    <?php 
+                    <?php
                     $current_user_id = get_current_user_id();
                     $mapping = array();
                     if (isset($getData->data) && !empty($getData->data->items)) :
@@ -188,7 +196,7 @@ $getData = json_decode($response['body']);
                         </div>  
                         <div class="flex flex-wrap">
                             <?php
-                            foreach($getData->data->items as $item) :
+                            foreach ($getData->data->items as $item) :
                             ?>
                             <div class="w-full md:w-1/2 lg:w-1/3 p-2 bg-[#E5E9F0] rounded-lg mr-2 mt-2">
                                 <a href="<?php echo $item->verificationLink; ?>">
@@ -199,16 +207,15 @@ $getData = json_decode($response['body']);
                                         <span class="text-black text-center mt-2"><?php echo $item->issueDate = date('F d, Y', strtotime($item->issueDate)); ?></span>
                                     </div>
                                 </div>
-                            </div>
                             <?php endforeach; ?>
 
-                    <?php else : ?>
-                        <div class="flex flex-col min-h-[200px]">
-                        <div class="flex flex-col items-center justify-center h-[400px] text-center">
-                            <img src="<?php echo get_template_directory_uri() . '/images/icon_cert.png'; ?>" alt="Certificate Icon" class="w-20" />
-                            <span class="font-bold text-lg mt-6">User doesn't have any certificates yet.</span>
-                            <span>Enroll now to get your first certificate.</span>
-                        </div>
+                        <?php else : ?>
+                            <div class="flex flex-col min-h-[200px]">
+                                <div class="flex flex-col items-center justify-center h-[400px] text-center">
+                                    <img src="<?php echo get_template_directory_uri() . '/images/icon_cert.png'; ?>" alt="Certificate Icon" class="w-20" />
+                                    <span class="font-bold text-lg mt-6">User doesn't have any certificates yet.</span>
+                                    <span>Enroll now to get your first certificate.</span>
+                                </div>
                                 <?php
                                 // TODO: add credentials result here 
                                 ?>
@@ -219,7 +226,7 @@ $getData = json_decode($response['body']);
                 </div>
             </div>
         <?php else :
-             // Credentials Tab 
+            // Credentials Tab 
         ?>
             <div class="py-6 space-y-4">
                 <div class="w-full relative">

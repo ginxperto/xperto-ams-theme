@@ -49,7 +49,7 @@ get_header();
 			<div class="flex flex-col space-x-0 space-y-6 xl:flex-row xl:space-x-6 xl:space-y-0 w-full">
 				<div class="bg-white rounded-lg p-6 w-full xl:w-1/2">
 					<span class="text-xperto-neutral-dark-1 font-bold text-2xl">Pinned Announcement</span>
-					<div class="mt-6 md:mt-2.5">
+					<div class="mt-6 md:mt-2.5 space-y-6">
 						<?php get_template_part('template-parts/layout/pinned', 'content'); ?>
 					</div>
 				</div>
@@ -66,11 +66,11 @@ get_header();
 							));
 							foreach ($recent_posts as $post_item) : ?>
 								<li class="py-2">
-									<a href="<?php echo get_permalink($post_item['ID']) ?>" class="flex items-center">
-										<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 min-w-fit text-xperto-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<a href="<?php echo get_permalink($post_item['ID']) ?>" class="flex items-start">
+										<svg xmlns="http://www.w3.org/2000/svg" class="text-xperto-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="24" height="24">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
 										</svg>
-										<span class="text-xperto-orange ml-2"><?php echo $post_item['post_title'] ?></span>
+										<span class="text-xperto-orange ml-2 flex-1"><?php echo $post_item['post_title'] ?></span>
 									</a>
 								</li>
 							<?php endforeach; ?>
