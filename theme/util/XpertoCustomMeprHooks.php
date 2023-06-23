@@ -1,3 +1,7 @@
+
+<script>
+    <?php require_once("XpertoCustomMeprHooks.js");?>
+</script>
 <?php
 
 function my_login_logo()
