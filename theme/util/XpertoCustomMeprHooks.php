@@ -194,6 +194,41 @@ function mpdn_show_on_account($user)
     <p class="clear-both">
         By clicking "Save Profile", you agree to our <a href="<?php echo get_privacy_policy_url(); ?>">Privacy Statement</a>.
     </p>
-<?php
+    <?php
 }
 add_action('mepr-account-home-fields', 'mpdn_show_on_account');
+
+function mepr_account_file_uploader_help_text()
+{
+    if (wp_script_is('jquery')) : ?>
+        <script>
+            (function($) {
+                function xpertoMeprFileChecker(e) {
+                    var maxSize = 2;
+                    var files = e.target.files;
+                    var filesLength = files.length;
+
+                    for (var i = 0; i < filesLength; i++) {
+                        var sizeMB = (files[i].size / 1024 / 1024).toFixed(4); //MB
+
+                        if (sizeMB > maxSize) {
+                            alert("File is too big, Maximum file size is 2MB.\nPlease select another file.");
+                            $(this).val("");
+                        }
+                    }
+                }
+
+                $(document).ready(function() {
+                    var $spanContent = '<div class="block mt-1"><span class="text-sm text-xperto-neutral-mid-1">Maximum File Size Upload: 2MB</span><div>';
+                    var $fileUploaders = $('.mp-form-row.mepr_custom_field .mepr-file-uploader');
+
+                    $($fileUploaders).each(function() {
+                        $(this).after($spanContent);
+                        $(this).on("change", xpertoMeprFileChecker)
+                    });
+                });
+            })(jQuery);
+        </script>
+<?php endif;
+}
+add_action('wp_head', 'mepr_account_file_uploader_help_text');
